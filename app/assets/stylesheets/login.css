@@ -1,0 +1,101 @@
+body {
+    margin: 0 0;
+}
+
+.page {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    font-family: 'Abel', sans-serif;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.left-image {
+    background-image: url('../images/bg_images/login13.jpg');
+    height: 100%;
+    flex: 1 1 50%;
+    background-position: center;
+    background-size: cover;
+}
+
+.right-half {
+    flex: 1 1 50%;
+}
+
+.welcome-message {
+    margin: 0 0 16px;
+}
+
+.login-box {
+    margin-left: 52px;
+    width: 412px;
+    display: block;
+    color: #171718;
+}
+
+label > div {
+    padding: 9px 0;
+    font-size: 16px;
+}
+
+p > a {
+    color: #21ce99;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: .3px;
+
+}
+
+.field {
+    background: #fafafa;
+    height: 48px;
+    padding: 15px 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+    letter-spacing: .3px;
+}
+
+.field:hover {
+    border-color: #cbcbcd;
+    background-color: white;
+    transition: border-color 200ms;
+}
+
+.field:focus {
+    border-color: #21ce99;
+    background-color: white;
+}
+
+.sign-in-button {
+    height: 48px;
+    border-radius: 4px;
+    min-width: 120px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    padding: 0 48px;
+    white-space: nowrap;
+    color: white;
+    background: #21ce99;
+    border-color: #21ce99;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 60px;
+}
+
+.sign-in-button:hover {
+    background: #1ae9aa;
+    border-color: #1ae9aa;
+}
