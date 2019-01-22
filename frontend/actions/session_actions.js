@@ -32,10 +32,10 @@ export const logout = () => dispatch => {
     );
 };
 
-const receiveCurrentUser = currentUser => {
+const receiveCurrentUser = user => {
     return {
         type: RECEIVE_CURRENT_USER,
-        currentUser
+        user
     };
 };
 
