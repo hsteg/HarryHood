@@ -10,5 +10,5 @@
 #
 
 class Stock < ApplicationRecord
-    
+        
 end
