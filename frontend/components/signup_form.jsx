@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { signup, clearErrors } from '../actions/session_actions';
 
-
 class SignUpForm extends React.Component {
     constructor(props) {
         super(props);
@@ -93,7 +92,10 @@ class SignUpForm extends React.Component {
                                     <button className="signup-button">Sign In</button>
                                 </div>
                                 <div className="signup-form-row">
-                                    <p>Already signed up? <a href="#">Log in here.</a></p>
+                                    <p className={"signup-form-already-signed-up"}>Already signed up? <a href="#">Log in here.</a></p>
+                                </div>
+                                <div className="signup-form-row">
+                                    <p className="signup-form-errors">{errors}</p>
                                 </div>
                             </div>
                         </form>

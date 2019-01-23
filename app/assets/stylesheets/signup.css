@@ -28,7 +28,7 @@ h2 {
     flex-grow: 1;
 }
 
-.signup-row-item > p {
+.signup-form-already-signed-up {
     color: #b1bfc4;
 }
 
@@ -73,7 +73,7 @@ h2 {
     color: #b1bfc4;
 }
 
-.signup-form-row > p {
+.signup-form-already-signed-up {
     font-size: 20px;
     letter-spacing: .6px;
 }
@@ -146,6 +146,13 @@ p > a:hover {
 
 .signup-header-container > h1 {
     margin: 0 0;
+}
+
+.signup-form-errors {
+    padding: 10px 0;
+    font-weight: 600;
+    letter-spacing: .3px;
+    color: #171718;
 }
 
 .signup-sidebar {

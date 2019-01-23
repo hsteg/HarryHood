@@ -20,7 +20,4 @@ class Api::SessionsController < ApplicationController
             render json: ["No one to sign out"], status: 404
         end
     end
-
-
-
 end
