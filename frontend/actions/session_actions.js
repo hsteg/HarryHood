@@ -47,12 +47,12 @@ const logoutCurrentUser = () => {
 
 const receiveErrors = (errors) => {
     return {
-        type: RECEIEVE_SESSION_ERRORS,
+        type: RECEIVE_SESSION_ERRORS,
         errors
     }
 }
 
-const clearErrors = () => {
+export const clearErrors = () => {
     return {
         type: CLEAR_SESSION_ERRORS,
     };

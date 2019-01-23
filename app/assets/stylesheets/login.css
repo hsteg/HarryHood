@@ -18,7 +18,7 @@ h2 {
 }
 
 .left-image {
-    background-image: url('../images/bg_images/login13.jpg');
+    background: url('/assets/bg_images/login8.jpg');
     height: 100%;
     flex: 1 1 50%;
     background-position: center;
@@ -45,12 +45,15 @@ label > div {
     font-size: 16px;
 }
 
-p > a {
-    color: #21ce99;
-    text-decoration: none;
+.login-p {
+    padding: 10px 0;
     font-weight: 600;
     letter-spacing: .3px;
+}
 
+.login-p > a {
+    color: #21ce99;
+    text-decoration: none;
 }
 
 .field {
