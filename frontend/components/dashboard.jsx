@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../actions/session_actions';
 
-
-class Splash extends React.Component {
+class Dashboard extends React.Component {
 
     render() {
         return (
             <div>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
+                <h2>Welcome to HarryHood, {this.props.currentUser.first_name}</h2>
+                <button onClick={this.props.logout}>Log Out :(</button>
             </div>
         );
     }
@@ -18,14 +17,14 @@ class Splash extends React.Component {
 
 const msp = (state) => {
     return {
-
+        currentUser: state.entities.users[state.session.id]
     };
-}
+};
 
 const mdp = (dispatch) => {
     return {
-
+        logout: () => dispatch(logout()),
     };
 }
 
-export default connect(msp, mdp)(Splash);
+export default connect(msp, mdp)(Dashboard);
