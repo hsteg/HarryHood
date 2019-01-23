@@ -1,3 +1,6 @@
+.splash {
+  font-family: abel;
+}
 
 .splash-navbar-holder {
   position: fixed;
@@ -7,12 +10,14 @@
   z-index: 2;
   top: 0;
   left: 0;
+  justify-content: center;
+  background: white;
 }
 
 .splash-navbar {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 1192px;
   height: 100%;
   align-items: center;
   background: white;
@@ -30,6 +35,11 @@
   margin-right: 48px;
 }
 
+.splash-logo-text {
+  font-size: 24px;
+  padding-left: 5px;
+}
+
 .splash-navbar-left-links-holder {
   display: flex;
   flex-direction: row;
@@ -37,15 +47,43 @@
   margin-right: auto;
 }
 
+.splash-navbar-left-link-item > a {
+  padding: 0 25px;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
+}
+.splash-navbar-left-link-item > a:hover {
+  color: #21ce99;
+}
+
+.splash-navbar-right-buttons-holder > .splash-login {
+  padding: 0 30px;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
+}
+
+
 .splash-content {
+  width: 1192px;
+  margin: 0 auto;
   margin-top: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.splash-section1 {
+  width: 1192px;
+  margin: 0 auto;
 }
 
 .splash-content-section1 {
   display: flex;
   justify-content: space-between;
   flex-flow: row nowrap;
-  padding: 0 30px;
 }
 
 .splash-content-section1-left {
@@ -53,27 +91,64 @@
   padding-top: 180px;
 }
 
+.splash-content-section1-left > h1 {
+  font-size: 50px;  
+  font-weight: 900;
+  margin-bottom: 35px;
+}
+
+.splash-content-section1-left > h3 {
+  font-size: 17px;  
+  font-weight: 400;
+  line-height: 26px;
+  margin-top: -5px;
+  letter-spacing: .2px;
+  margin-bottom: 35px;
+}
+
+.splash-content-section1-right {
+  margin-right: -130px;
+}
+
 .splash-section2 {
   width: 100%;
   background: black;
-  height: 300px;
+  height: 250px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   color: white;
+  align-items: center;
+  padding: 0 25px;
 }
 
 .splash-section2-text {
   max-width: 360px;
+  padding: 0 40px;
+  font-size: 40px;  
+  font-weight: 900;
+  line-height: 40px;
 }
 
 .splash-section2-img {
-  height: 300px;
+  height: 250px;
   width: auto;
+  padding-right: 40px;
 }
 
-.splash-section3 {
-  width: 100%;
-  background: white;
-  height: 600px;
+
+
+.splash-signup-button {
+  text-decoration: none;
+  background: #21ce99;
+  border: 0;
+  border-radius: 36px;
+  color: white;
+  padding: 0 24px;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  height: 48px;
+  font-weight: 600; 
+
 }
