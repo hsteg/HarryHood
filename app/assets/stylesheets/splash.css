@@ -1,0 +1,79 @@
+
+.splash-navbar-holder {
+  position: fixed;
+  display: flex;
+  height: 72px;
+  width: 100%;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+.splash-navbar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  background: white;
+  justify-content: space-between;
+}
+
+.splash-logo-image {
+  width: 40px;
+  height: 40px;
+}
+
+.splash-logo-name-holder{
+  display: flex;
+  align-items: center;
+  margin-right: 48px;
+}
+
+.splash-navbar-left-links-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-right: auto;
+}
+
+.splash-content {
+  margin-top: 72px;
+}
+
+.splash-content-section1 {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+  padding: 0 30px;
+}
+
+.splash-content-section1-left {
+  width: 310px;
+  padding-top: 180px;
+}
+
+.splash-section2 {
+  width: 100%;
+  background: black;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+}
+
+.splash-section2-text {
+  max-width: 360px;
+}
+
+.splash-section2-img {
+  height: 300px;
+  width: auto;
+}
+
+.splash-section3 {
+  width: 100%;
+  background: white;
+  height: 600px;
+}
