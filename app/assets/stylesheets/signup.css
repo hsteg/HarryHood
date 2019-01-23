@@ -20,7 +20,7 @@ h2 {
     font-family: abel;
 }
 
-.nav-bar {
+.signup-nav-bar {
     width: 1170px;
     display: flex;
     align-content: space-between;
@@ -28,27 +28,27 @@ h2 {
     margin-bottom: 60px;
 }
 
-.nav-bar > div {
+.signup-nav-bar > div {
     flex-grow: 1;
 }
 
-.row-item > p {
+.signup-row-item > p {
     color: #b1bfc4;
 }
 
-.below-nav {
+.signup-below-nav {
     width: 1170px;
 }
 
-.row-item {
+.signup-row-item {
     text-align: center;
 }
 
-.row-item > h3, p {
+.signup-row-item > h3, p {
     margin: 0 0;
 }
 
-.nav-bar > div > img {
+.signup-nav-bar > div > img {
     width: 80px;
     height: 80px;
 }
@@ -69,7 +69,7 @@ h2 {
     margin-bottom: 130px;
 }
 
-.form-row {
+.signup-form-row {
     padding: 18px 6px;
     text-align: center;
     font-size: 18px;
@@ -77,7 +77,7 @@ h2 {
     color: #b1bfc4;
 }
 
-.form-row > p {
+.signup-form-row > p {
     font-size: 20px;
     letter-spacing: .6px;
 }
@@ -91,16 +91,16 @@ p > a:hover {
 }
 
 
-.two-row {
+.signup-two-row {
     display: flex;
 }
 
-.two-left {
+.signup-two-left {
     width: 50%;
     padding-right: 10px;
 }
 
-.two-right {
+.signup-two-right {
     width: 50%;
     padding-left: 10px;
 }
@@ -148,48 +148,48 @@ p > a:hover {
     border-color: #199972;
 }
 
-.header-container > h1 {
+.signup-header-container > h1 {
     margin: 0 0;
 }
 
-.sidebar {
+.signup-sidebar {
     width: 34%;
     display: block;
     padding: 0 50px;
     box-sizing: border-box;
 }
 
-.sidebar-item {
+.signup-sidebar-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.sidebar-item > img {
+.signup-sidebar-item > img {
     width: 200px;
     height: 200px;
 }
 
-.sidebar-item > p {
+.signup-sidebar-item > p {
     color: #b1bfc4;
 }
 
-hr {
+.signup-footer-line {
     border: 0;
     border-top: 1px solid #b1bfc4;
 }
 
-.footer-container {
+.signup-footer-container {
     display: block;
     color: #b1bfc4;
     font-size: 15px;
 }
 
-.footer-content { 
+.signup-footer-content { 
     padding: 10px;
 }
 
-.footer-content > p {
+.signup-footer-content > p {
     padding: 10px;
 }
