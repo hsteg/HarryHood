@@ -41,7 +41,7 @@ class Splash extends React.Component {
             <div className="splash-content-section1">
               <div className="splash-content-section1-left">
                 <h1>Invest for Free</h1>
-                <h3>Invest in stocks and ETFs, all commission-free, all not actually real transactions right from your desktop.</h3>
+                <h3>Pretend to invest in stocks and ETFs with real-time data and functionality, all commission-free, right from your desktop.</h3>
                 <Link to="/signup"><button className="splash-signup-button">Sign Up</button></Link>
               </div>
               <div className="splash-content-section1-right">

@@ -150,5 +150,9 @@
   font-size: 16px;
   height: 48px;
   font-weight: 600; 
+  transition: box-shadow 300ms;
+}
 
+.splash-signup-button:hover {
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.16);
 }
