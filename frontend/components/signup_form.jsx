@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { signup, clearErrors } from '../actions/session_actions';
+import { Link } from 'react-router-dom';
 
 class SignUpForm extends React.Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class SignUpForm extends React.Component {
             <div className="signup-page">
                 <div className="signup-nav-bar">
                     <div className="signup-row-item">
-                        <img src={window.logoURL} />
+                        <Link to="/"><img className="signup-logo-image" src={window.logoURL} /></Link>
                     </div>
                     <div className="signup-row-item">
                         <h3>Account</h3>
@@ -92,7 +93,7 @@ class SignUpForm extends React.Component {
                                     <button className="signup-button">Sign In</button>
                                 </div>
                                 <div className="signup-form-row">
-                                    <p className={"signup-form-already-signed-up"}>Already signed up? <a href="#">Log in here.</a></p>
+                                    <p className={"signup-form-already-signed-up"}>Already signed up? <Link to="/login">Login</Link></p>
                                 </div>
                                 <div className="signup-form-row">
                                     <p className="signup-form-errors">{errors}</p>
