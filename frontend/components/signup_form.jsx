@@ -23,8 +23,7 @@ class SignUpForm extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        const user = Object.assign({}, this.state);
-        this.props.signup(user).then(() => this.props.history.push('/'));
+        this.props.signup(this.state).then(() => this.props.history.push('/'));
     }
 
     updateField(field) {
@@ -65,7 +64,7 @@ class SignUpForm extends React.Component {
             <div className="signup-below-nav">
                 <div className="signup-container">
                     <div className="signup-content">
-                        <form className="signup-form">
+                        <form className="signup-form" onSubmit={this.handleSubmit}>
                             <div className="signup-header-container">
                                 <h1>Play Around With Your Money</h1>
                                 <h2>HarryHood lets you pretend like you're investing in companies you love, commission-free.</h2>
@@ -74,24 +73,24 @@ class SignUpForm extends React.Component {
                                 <div className="signup-form-row">
                                     <div className="signup-two-row">
                                         <div className="signup-two-left">
-                                            <input type="text" placeholder="First name" className="signup-field" />
+                                            <input type="text" placeholder="First name" className="signup-field" onChange={this.updateField('first_name')} />
                                         </div>
                                         <div className="signup-two-right">
-                                            <input type="text" placeholder="Last name"className="signup-field" />
+                                            <input type="text" placeholder="Last name"className="signup-field" onChange={this.updateField('last_name')} />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="signup-form-row">
-                                    <input type="text" placeholder="Email address" className="signup-field" />
+                                    <input type="text" placeholder="Email address" className="signup-field" onChange={this.updateField('email')} />
                                 </div>
                                 <div className="signup-form-row">
-                                    <input type="text" placeholder="Username" className="signup-field" />
+                                    <input type="text" placeholder="Username" className="signup-field" onChange={this.updateField('username')} />
                                 </div>
                                 <div className="signup-form-row">
-                                    <input type="password" placeholder="Password (min. 7 characters)" className="signup-field" />
+                                    <input type="password" placeholder="Password (min. 7 characters)" className="signup-field" onChange={this.updateField('password')} />
                                 </div>
                                 <div className="signup-form-row">
-                                    <input type="submit" value="Sign Up" className="signup-button" />
+                                    <button className="signup-button">Sign In</button>
                                 </div>
                                 <div className="signup-form-row">
                                     <p>Already signed up? <a href="#">Log in here.</a></p>
