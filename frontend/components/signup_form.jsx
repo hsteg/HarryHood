@@ -39,7 +39,7 @@ class SignUpForm extends React.Component {
             <div className="signup-page">
                 <div className="signup-nav-bar">
                     <div className="signup-row-item">
-                        <img src={"../../assets/images/logo/logo.png"} />
+                        <img src={window.logoURL} />
                     </div>
                     <div className="signup-row-item">
                         <h3>Account</h3>
@@ -138,7 +138,7 @@ class SignUpForm extends React.Component {
                     </div>
                     <div className="signup-sidebar">
                         <div className="signup-sidebar-item">
-                            <img src="../../assets/images/icons/animat-rocket-green.gif" />
+                            <img src={ window.rocketGIF } />
                             <h3>Watch your portfolio skyrocket.
                             Anytime. Anywhere.</h3>
                             <p>No actual securities transactions, but real-time market data and mock transactions help you 
