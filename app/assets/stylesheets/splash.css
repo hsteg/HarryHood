@@ -66,6 +66,9 @@
   color: black;
 }
 
+.splash-navbar-right-buttons-holder > .splash-login:hover {
+  color: #21ce99;
+}
 
 .splash-content {
   width: 1192px;
