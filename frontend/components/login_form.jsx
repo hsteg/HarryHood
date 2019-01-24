@@ -14,6 +14,7 @@ class LoginForm extends React.Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateField = this.updateField.bind(this);
+        this.handleDemo = this.updateField.bind(this);
     }
 
     componentWillMount() {
@@ -31,6 +32,12 @@ class LoginForm extends React.Component {
             this.setState({ [field]: e.target.value });
         }
     }
+
+    handleDemo(e){
+      e.preventDefault();
+      const user = Object.assign({}, {username: "DemoMcDemoface", password: "demodemo"});
+      this.props.login(user).then(() => this.props.history.push('/'));
+  } 
 
     render() {
         const errors = this.props.errors.session ? this.props.errors.session[0] : null;
@@ -54,7 +61,7 @@ class LoginForm extends React.Component {
                                     <input type="password" className="field" onChange={this.updateField('password')}/>
                                 </label>
                                 <div>
-                                    <p className="login-p"><a href="#">Don't want to sign up? Try the demo mode!</a></p>
+                                    <p className="login-p"><button onClick={this.handleDemo} className="demo-button" >Don't want to sign up? Try the demo mode!</button></p>
                                 </div>
                                 <div>
                                     <p className="login-p">{errors}</p>
