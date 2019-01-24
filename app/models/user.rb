@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
     validates :username, :email, :first_name, :last_name, :account_balance, :password_digest, :session_token, presence: true
     validates :username, :email, uniqueness: true
-    validates :password, length: { minimum: 6 }, allow_nil: true
+    validates :password, length: { minimum: 7 }, allow_nil: true
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'address is not valid' } 
 
     after_initialize :ensure_session_token
