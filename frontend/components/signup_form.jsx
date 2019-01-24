@@ -16,6 +16,8 @@ class SignUpForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateField = this.updateField.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
+    this.emailValidation = this.emailValidation.bind(this);
+    this.passwordValidation = this.passwordValidation.bind(this);
   }
 
   componentWillUnmount() {
@@ -39,8 +41,30 @@ class SignUpForm extends React.Component {
     this.props.login(user).then(() => this.props.history.push('/'));
   }
 
+  passwordValidation() {
+    if (this.state.password.length > 0 && this.state.password.length < 7) {
+      return "invalid-signup-field";
+    } else {
+      return "signup-field";
+    }
+  }
+
+  emailValidation() {
+    return () => {
+      const emailField = document.getElementById('signup-email');
+      if (/(.+)@(.+){2,}\.(.+){2,}/.test(this.state.email)) {
+        emailField.className = "signup-field"
+      } else {
+        emailField.className = "invalid-signup-field"
+      }
+    }
+  }
+
+
+
   render() {
     const errors = this.props.errors.session ? this.props.errors.session[0] : null;
+    debugger
     return (
       <div className="signup-page">
         <div className="signup-nav-bar">
@@ -88,13 +112,13 @@ class SignUpForm extends React.Component {
                     </div>
                   </div>
                   <div className="signup-form-row">
-                    <input type="text" placeholder="Email address" className="signup-field" onChange={this.updateField('email')} />
+                    <input type="email" id="signup-email" placeholder="Email address" className="signup-field" onChange={this.updateField('email')} onBlur={this.emailValidation()} />
                   </div>
                   <div className="signup-form-row">
                     <input type="text" placeholder="Username" className="signup-field" onChange={this.updateField('username')} />
                   </div>
                   <div className="signup-form-row">
-                    <input type="password" placeholder="Password (min. 7 characters)" className="signup-field" onChange={this.updateField('password')} />
+                    <input type="password" placeholder="Password (min. 7 characters)" className={this.passwordValidation()} onChange={this.updateField('password')} />
                   </div>
                   <div className="signup-form-row">
                     <button className="signup-button">Sign In</button>

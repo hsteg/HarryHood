@@ -102,21 +102,42 @@ p > a:hover {
 }
 
 .signup-field {
-    background: white;
-    font-size: 18px;
-    height: 50px;
-    padding-left: 18px;
-    border: 1px solid #b1bfc4;
-    border-radius: 4px;
-    color: #040d14;
-    width: 100%;
-    box-sizing: border-box;
+  background: white;
+  font-size: 18px;
+  height: 50px;
+  padding-left: 18px;
+  border: 1px solid #b1bfc4;
+  border-radius: 4px;
+  color: #040d14;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+.invalid-signup-field {
+  background: white;
+  font-size: 18px;
+  height: 50px;
+  padding-left: 18px;
+  border: 1px solid #b1bfc4;
+  border-color: #f45531;
+  border-radius: 4px;
+  color: #f45531;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.invalid-signup-field:focus {
+  border-color: #f45531;
+  outline: none;
+  transition: border-color ease-in-out .15s;
+}
+
+
+
 .signup-field:focus {
-    border-color: #21ce99;
-    outline: none;
-    transition: border-color ease-in-out .15s;
+  border-color: #21ce99;
+  outline: none;
+  transition: border-color ease-in-out .15s;
 }
 
 ::placeholder {
