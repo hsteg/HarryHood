@@ -29,55 +29,52 @@ class Dashboard extends React.Component {
         </div>
         <div className="dashboard-content-container">
           <div className="dashboard-content">
-            <div className="dashboard-content-left-main-container">
-              <div className="dashboard-content-left-main">
-                <section className="dashboard-content-graph-container">
-                  <div className="dashboard-content-graph-header-container">
-                    <div className="dashboard-content-graph-header-portfolio-value">
-                      porfolio value here
+            <div className="dashboard-content-left-container">
+              <section className="dashboard-content-graph-container">
+                <div className="dashboard-content-graph-header-container">
+                  <div className="dashboard-content-graph-header-portfolio-value">
+                    porfolio value here
                     </div>
-                    <div className="dashboard-content-graph-header-change-container">
-                      day change
+                  <div className="dashboard-content-graph-header-change-container">
+                    day change
                     </div>
-                    <div className="dashboard-content-graph-header-change-container-afterhours">
-                      after hours change
+                  <div className="dashboard-content-graph-header-change-container-afterhours">
+                    after hours change
                     </div>
+                </div>
+                <div className="dashboard-content-graph">
+                  graph here
                   </div>
-                  <div className="dashboard-content-graph">
-                    graph here
-                  </div>
-                  <nav className="dashboard-content-graph-timeline-selector">
+                <nav className="dashboard-content-graph-timeline-selector">
 
-                  </nav>
-                </section>
-                <section className="dashboard-content-news-container">
-                  <div className="dashboard-content-news-header-container">
-                    <div className="dashboard-content-news-header">
-                      NEWS goes here
+                </nav>
+              </section>
+              <section className="dashboard-content-news-container">
+                <div className="dashboard-content-news-header-container">
+                  <div className="dashboard-content-news-header">
+                    NEWS goes here
                     </div>
+                </div>
+                <div className="dashboard-content-news-list-container">
+                  <div className="dashboard-content-news-item-container">
+                    <div className="dashboard-content-news-item">
+                      News Item
+                      </div>
+                    <div className="dashboard-content-news-item">
+                      News Item
+                      </div>
+                    <div className="dashboard-content-news-item">
+                      News Item
+                      </div>
+                    <div className="dashboard-content-news-item">
+                      News Item
+                      </div>
+                    <div className="dashboard-content-news-item">
+                      News Item
+                      </div>
                   </div>
-                  <div className="dashboard-content-news-list-container">
-                    <div className="dashboard-content-news-item-container">
-                      <div className="dashboard-content-news-item">
-                        News Item
-                      </div>
-                      <div className="dashboard-content-news-item">
-                        News Item
-                      </div>
-                      <div className="dashboard-content-news-item">
-                        News Item
-                      </div>
-                      <div className="dashboard-content-news-item">
-                        News Item
-                      </div>
-                      <div className="dashboard-content-news-item">
-                        News Item
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-              </div>
+                </div>
+              </section>
             </div>
             <div className="dashboard-content-right-main-container">
               <div className="dashboard-content-right-main">

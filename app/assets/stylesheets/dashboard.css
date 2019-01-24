@@ -54,3 +54,24 @@
 .dashboard-content-container {
   padding-top: 64px;
 }
+
+.dashboard-content {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.dashboard-content-left-container {
+  flex: 0 0 66.66667%;
+}
+
+.dashboard-content-right-main-container {
+  flex: 0 0 27.77778%;
+}
+
+.dashboard-content-graph-container {
+  width: 676px;
+  height: 349px;
+  margin-bottom: 44px;
+}
