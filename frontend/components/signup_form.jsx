@@ -64,7 +64,6 @@ class SignUpForm extends React.Component {
 
   render() {
     const errors = this.props.errors.session ? this.props.errors.session[0] : null;
-    debugger
     return (
       <div className="signup-page">
         <div className="signup-nav-bar">
@@ -112,7 +111,7 @@ class SignUpForm extends React.Component {
                     </div>
                   </div>
                   <div className="signup-form-row">
-                    <input type="email" id="signup-email" placeholder="Email address" className="signup-field" onChange={this.updateField('email')} onBlur={this.emailValidation()} />
+                    <input type="text" id="signup-email" placeholder="Email address" className="signup-field" onChange={this.updateField('email')} onBlur={this.emailValidation()} />
                   </div>
                   <div className="signup-form-row">
                     <input type="text" placeholder="Username" className="signup-field" onChange={this.updateField('username')} />
@@ -121,7 +120,7 @@ class SignUpForm extends React.Component {
                     <input type="password" placeholder="Password (min. 7 characters)" className={this.passwordValidation()} onChange={this.updateField('password')} />
                   </div>
                   <div className="signup-form-row">
-                    <button className="signup-button">Sign In</button>
+                    <button className="signup-button">Sign Up</button>
                   </div>
                   <div className="signup-form-row">
                     <button onClick={this.handleDemo} className="signup-button">Demo</button>

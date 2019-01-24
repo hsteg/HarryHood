@@ -111,6 +111,8 @@ p > a:hover {
   color: #040d14;
   width: 100%;
   box-sizing: border-box;
+  font-family: abel;
+  letter-spacing: .6px;
 }
 
 .invalid-signup-field {
@@ -124,6 +126,8 @@ p > a:hover {
   color: #f45531;
   width: 100%;
   box-sizing: border-box;
+  font-family: abel;
+  letter-spacing: .6px;
 }
 
 .invalid-signup-field:focus {
@@ -158,6 +162,8 @@ p > a:hover {
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
+    font-family: abel;
+    letter-spacing: .6px;
 }
 
 .signup-button:hover {

@@ -17,16 +17,13 @@ class Splash extends React.Component {
             </div>
             <div className="splash-navbar-left-links-holder">
               <div className="splash-navbar-left-link-item">
-                <a href="#">Content 1</a>   
+                <a href="https://linkedin.com/in/hsteg/">LinkedIn</a>   
               </div>
               <div className="splash-navbar-left-link-item">
-              <a href="#">Content 2</a>
+              <a href="https://github.com/hsteg">GitHub</a>
               </div>
               <div className="splash-navbar-left-link-item">
-              <a href="#">Content 3</a>
-              </div>
-              <div className="splash-navbar-left-link-item">
-              <a href="#">Content 4</a>
+              <a href="#">Personal Site</a>
               </div>
             </div>
             <div className="splash-navbar-right-buttons-holder">

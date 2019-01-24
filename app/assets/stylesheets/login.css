@@ -76,8 +76,9 @@ label > div {
     outline: 0;
     width: 100%;
     box-sizing: border-box;
-    font-size: 13px;
+    font-size: 16px;
     letter-spacing: .3px;
+    font-family: abel;
 }
 
 .field:hover {
@@ -104,9 +105,11 @@ label > div {
     color: white;
     background: #21ce99;
     border-color: #21ce99;
-    font-size: 13px;
+    font-size: 17px;
     font-weight: 500;
     margin-top: 60px;
+    letter-spacing: .3px;
+    font-family: abel;
 }
 
 .sign-in-button:hover {
