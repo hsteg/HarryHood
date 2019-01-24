@@ -1,65 +1,69 @@
 body {
-    margin: 0 0;
+  margin: 0 0;
 }
 
 .page {
-    display: flex;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    justify-content: center;
-    font-family: 'Abel', sans-serif;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  font-family: 'Abel', sans-serif;
 }
 
 h2 {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: 1px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .left-image {
-    background: url('/assets/bg_images/login8.jpg');
-    height: 100%;
-    flex: 1 1 50%;
-    background-position: center;
-    background-size: cover;
+  height: 100%;
+  flex: 1 1 50%;
+  overflow: hidden;
+}
+
+.left-side-actual-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .right-half {
-    flex: 1 1 50%;
+  flex: 1 1 50%;
 }
 
 .welcome-message {
-    margin: 0 0 16px;
+  margin: 0 0 16px;
 }
 
 .login-box {
-    margin-left: 52px;
-    width: 412px;
-    display: block;
-    color: #171718;
+  margin-left: 52px;
+  width: 412px;
+  display: block;
+  color: #171718;
 }
 
 label > div {
-    padding: 9px 0;
-    font-size: 16px;
+  padding: 9px 0;
+  font-size: 16px;
 }
 
 .login-p {
-    padding: 10px 0;
-    letter-spacing: .3px;
+  padding: 10px 0;
+  letter-spacing: .3px;
 }
 
 .login-p > .demo-button {
-    color: #21ce99;
-    text-decoration: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 0;
-    font-family: inherit;
+  color: #21ce99;
+  text-decoration: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0;
+  font-family: inherit;
 }
 
 .login-p > .demo-button:hover {
@@ -68,51 +72,51 @@ label > div {
 
 
 .field {
-    background: #fafafa;
-    height: 48px;
-    padding: 15px 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    outline: 0;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 16px;
-    letter-spacing: .3px;
-    font-family: abel;
+  background: #fafafa;
+  height: 48px;
+  padding: 15px 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  outline: 0;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  letter-spacing: .3px;
+  font-family: abel;
 }
 
 .field:hover {
-    border-color: #cbcbcd;
-    background-color: white;
-    transition: border-color 200ms;
+  border-color: #cbcbcd;
+  background-color: white;
+  transition: border-color 200ms;
 }
 
 .field:focus {
-    border-color: #21ce99;
-    background-color: white;
+  border-color: #21ce99;
+  background-color: white;
 }
 
 .sign-in-button {
-    height: 48px;
-    border-radius: 4px;
-    min-width: 120px;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    display: inline-flex;
-    padding: 0 48px;
-    white-space: nowrap;
-    color: white;
-    background: #21ce99;
-    border-color: #21ce99;
-    font-size: 17px;
-    font-weight: 500;
-    margin-top: 60px;
-    letter-spacing: .3px;
-    font-family: abel;
+  height: 48px;
+  border-radius: 4px;
+  min-width: 120px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+  padding: 0 48px;
+  white-space: nowrap;
+  color: white;
+  background: #21ce99;
+  border-color: #21ce99;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 60px;
+  letter-spacing: .3px;
+  font-family: abel;
 }
 
 .sign-in-button:hover {
-    background: #1ae9aa;
-    border-color: #1ae9aa;
+  background: #1ae9aa;
+  border-color: #1ae9aa;
 }
