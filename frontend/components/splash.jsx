@@ -13,7 +13,11 @@ class Splash extends React.Component {
           <div className="splash-navbar">
             <div className="splash-logo-name-holder">
               <Link to="/"><img className="splash-logo-image" src={window.logoURL} /></Link>
-              <div className="splash-logo-text">HarryHood</div>
+              <div className="splash-logo-text-holder">
+                <div className="splash-logo-text">HarryHood</div>
+                <div className="splash-logo-byline">by: Harrison Steg</div>
+                
+              </div>
             </div>
             <div className="splash-navbar-left-links-holder">
               <div className="splash-navbar-left-link-item">
