@@ -14,8 +14,10 @@ class Dashboard extends React.Component {
               <div className="dashboard-nav-logo">
                 Logo here
               </div>
-              <div className="dashboard-nav-searchbar">
-                Searchbar here
+              <div className="dashboard-nav-searchbar-container">
+                <div className="dashboard-nav-searchbar">
+                  Searchbar here
+                </div>
               </div>
             </div>
             <div className="dashboard-nav-right-links">
@@ -57,19 +59,19 @@ class Dashboard extends React.Component {
                   <div className="dashboard-content-news-list-container">
                     <div className="dashboard-content-news-item-container">
                       <div className="dashboard-content-news-item">
-                          News Item
+                        News Item
                       </div>
                       <div className="dashboard-content-news-item">
-                          News Item
+                        News Item
                       </div>
                       <div className="dashboard-content-news-item">
-                          News Item
+                        News Item
                       </div>
                       <div className="dashboard-content-news-item">
-                          News Item
+                        News Item
                       </div>
                       <div className="dashboard-content-news-item">
-                          News Item
+                        News Item
                       </div>
                     </div>
                   </div>
