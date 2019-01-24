@@ -62,7 +62,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (10.0.2)
-    capybara (3.12.0)
+    capybara (3.13.2)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -88,20 +88,11 @@ GEM
     debug_inspector (0.0.3)
     erubi (1.8.0)
     execjs (2.7.0)
-    faraday (0.15.4)
-      multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.13.0)
-      faraday (>= 0.7.4, < 1.0)
     ffi (1.10.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    hashie (3.6.0)
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
-    iex-ruby-client (0.2.0)
-      faraday (>= 0.9)
-      faraday_middleware
-      hashie
     io-like (0.3.0)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
@@ -128,7 +119,6 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.6)
     multi_json (1.13.1)
-    multipart-post (2.0.0)
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
@@ -231,7 +221,6 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
-  iex-ruby-client (~> 0.2.0)
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
