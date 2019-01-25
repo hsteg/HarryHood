@@ -55,11 +55,11 @@ class LoginForm extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <label>
                   <div>Username</div>
-                  <input type="text" className="field" onChange={this.updateField('username')} />
+                  <input type="text" className="field" onChange={this.updateField('username')} required/>
                 </label>
                 <label>
                   <div>Password</div>
-                  <input type="password" className="field" onChange={this.updateField('password')} />
+                  <input type="password" className="field" onChange={this.updateField('password')} required/>
                 </label>
                 <div>
                   <p className="login-p"><button onClick={this.handleDemo} className="demo-button" >Don't want to sign up? Try the demo mode!</button></p>
