@@ -1,7 +1,7 @@
 class Api::TransactionsController < ApplicationController 
-  def show
+  def index
     @transactions = Transaction.find_by(transaction_params[:user_id])
-    render 'api/transactions/show'
+    render 'api/transactions/index'
   end
 
   private
