@@ -8,6 +8,7 @@ class Stock extends React.Component {
     super(props);
   }
 
+
   render() {
 
   }
