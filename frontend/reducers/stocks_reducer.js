@@ -11,7 +11,7 @@ const stocksReducer = (state={}, action) => {
       newState[action.stock.quote.symbol] = action.stock;
       return newState;
     case RECEIVE_USER_STOCKS:
-      return merge(newState, stocks);
+      return merge(newState, action.stocks);
     default:
       return newState;
   }

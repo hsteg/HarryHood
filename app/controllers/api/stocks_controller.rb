@@ -1,7 +1,8 @@
-class Api::StocksController < ApplicationRecord
+require 'json'
+
+class Api::StocksController < ApplicationController
   def index
-    @stocks = params[:stocks]
-    debugger
+    @stocks = Stock.where('id IN (?)', JSON.parse(params[:ajax_stocks]))
     render 'api/stocks/index'
   end
 

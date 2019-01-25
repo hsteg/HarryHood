@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../actions/session_actions';
-import { getDayStocksPriceData } from '../actions/stock_actions';
+import { getDayStocksPriceData, getUserStocks } from '../actions/stock_actions';
 import { getUserTransactions } from '../actions/transaction_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
 
@@ -13,12 +13,9 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() { 
-    this.props.getUserTransactions(this.props.currentUser.id);
-    this.props.getUserWatches(this.props.currentUser.id);
-  }
-
-  componentDidUpdate(){
-    this.userStocks();
+    this.props.getUserTransactions(this.props.currentUser.id)
+    .then(this.props.getUserWatches(this.props.currentUser.id)
+    .then(this.userStocks));
   }
 
   userStocks() {
@@ -29,7 +26,7 @@ class Dashboard extends React.Component {
     Object.values(this.props.userWatches).forEach( watch => {
       userStocks.push(watch.stock_id);
     });
-    return userStocks.join();
+    this.props.getUserStocks(userStocks);
   }
 
   render() {  
@@ -190,6 +187,7 @@ const mdp = (dispatch) => {
     getDayStocksPriceData: (stocks) => dispatch(getDayStocksPriceData(stocks)),
     getUserTransactions: (user) => dispatch(getUserTransactions(user)),
     getUserWatches: (user) => dispatch(getUserWatches(user)),
+    getUserStocks: (stockIds) => dispatch(getUserStocks(stockIds))
   };
 }
 

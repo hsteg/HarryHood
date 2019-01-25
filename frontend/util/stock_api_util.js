@@ -15,7 +15,7 @@ export const getStocksPriceData = (symbols) => {
 export const getUserStocks = (stocks) => {
   return $.ajax({
     method: "GET",
-    url: '/api/stocks/',
-    data: { stocks }
+    url: `/api/stocks/`,
+    data: { ajax_stocks: JSON.stringify(stocks)}
   }); 
 };

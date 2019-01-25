@@ -6,7 +6,7 @@ export const RECEIVE_USER_STOCKS = "RECEIVE_USER_STOCKS";
 export const getUserStocks = (stocks) => {
   return APIUtil.getUserStocks(stocks).then(
     stocks => {
-      dispatch(receiveUserStocks(stocks));
+      return dispatch(receiveUserStocks(stocks));
     }
   );
 };
@@ -46,5 +46,5 @@ const receiveUserStocks = (stocks) => {
   return {
     type: RECEIVE_USER_STOCKS,
     stocks
-  }
+  };
 }
