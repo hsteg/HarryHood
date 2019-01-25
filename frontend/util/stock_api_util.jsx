@@ -4,10 +4,9 @@ export const getStockInfo = (location) => {
   const req = new XMLHttpRequest();
 
   req.onreadystatechange = () => {
-    //ready state of DONE means this is complete
     if (req.status === 200 && req.readyState === XMLHttpRequest.DONE) {
       const data = JSON.parse(req.responseText);
-      return data;
+      console.log(data);
     }
   };
 
