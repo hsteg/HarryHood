@@ -7,7 +7,7 @@ const stocksReducer = (state={}, action) => {
   let newState = merge({}, state);
   switch(action.type) {
     case RECEIVE_FULL_STOCK_INFO:
-      newState[action.stock.symbol] = action.stock;
+      newState[action.stock.quote.symbol] = action.stock;
       return newState;
     default:
       return newState;
