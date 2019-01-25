@@ -4,7 +4,7 @@ export const RECEIVE_USER_TRANSACTIONS = "RECEIVE_USER_TRANSACTIONS";
 export const getUserTransactions = (user) => dispatch => {
   return APIUtil.getUserTransactions(user).then(
     transactions => {
-      return dispactch(receiveUserTransactions(transactions));
+      return dispatch(receiveUserTransactions(transactions));
     }
   );
 };
