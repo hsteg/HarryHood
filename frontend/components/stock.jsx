@@ -14,4 +14,12 @@ class Stock extends React.Component {
   }
 }
 
+const msp = (state) => {
+  return {};
+}
+
+const mdp = (dispatch) => {
+  return {};
+}
+ 
 export default connect(msp, mdp)(Stock);
