@@ -11,3 +11,9 @@ export const getStocksPriceData = (symbols) => {
     url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote,chart&range=1d`,
   });
 };
+
+export const getUserStocks = (stocks) => {
+
+
+  
+}
