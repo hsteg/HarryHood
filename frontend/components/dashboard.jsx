@@ -7,13 +7,32 @@ import { getUserTransactions } from '../actions/transaction_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
 
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.userStocks = this.userStocks.bind(this)
+  }
 
   componentDidMount() { 
     this.props.getUserTransactions(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
   }
 
-  render() {
+  componentDidUpdate(){
+    this.getUserStocks();
+  }
+
+  userStocks() {
+    const userStocks = [];
+    Object.values(this.props.transactions).forEach( transaction => {
+      userStocks.push(transaction.stock_id);
+    });
+    Object.values(this.props.userWatches).forEach( watch => {
+      userStocks.push(watch.stock_id);
+    });
+    return userStocks.join();
+  }
+
+  render() {  
     return (
       <div className="dashboard-main">
         <div className="dashboard-nav-holder">
@@ -156,9 +175,12 @@ class Dashboard extends React.Component {
 
 
 const msp = (state) => {
+  
   return {
     currentUser: state.entities.users[state.session.id],
-    stocks: state.stocks,
+    stocks: state.entities.stocks,
+    transactions: state.entities.transactions,
+    userWatches: state.entities.userWatches
   };
 };
 
