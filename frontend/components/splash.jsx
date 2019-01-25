@@ -16,18 +16,18 @@ class Splash extends React.Component {
               <div className="splash-logo-text-holder">
                 <div className="splash-logo-text">HarryHood</div>
                 <div className="splash-logo-byline">by: Harrison Steg</div>
-                
+
               </div>
             </div>
             <div className="splash-navbar-left-links-holder">
               <div className="splash-navbar-left-link-item">
-                <a href="https://linkedin.com/in/hsteg/">LinkedIn</a>   
+                <a href="https://linkedin.com/in/hsteg/">LinkedIn</a>
               </div>
               <div className="splash-navbar-left-link-item">
-              <a href="https://github.com/hsteg">GitHub</a>
+                <a href="https://github.com/hsteg">GitHub</a>
               </div>
               <div className="splash-navbar-left-link-item">
-              <a href="#">Personal Site</a>
+                <a href="#">Personal Site</a>
               </div>
             </div>
             <div className="splash-navbar-right-buttons-holder">
