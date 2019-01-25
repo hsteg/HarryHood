@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/session_actions';
 import { getDayStocksPriceData } from '../actions/stock_actions';
 import { getUserTransactions } from '../actions/transaction_actions';
+import { getUserWatches } from '../actions/user_watch_actions';
 
 class Dashboard extends React.Component {
 
   componentDidMount() { 
     this.props.getUserTransactions(this.props.currentUser.id);
+    this.props.getUserWatches(this.props.currentUser.id);
   }
 
   render() {
@@ -164,7 +166,8 @@ const mdp = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
     getDayStocksPriceData: (stocks) => dispatch(getDayStocksPriceData(stocks)),
-    getUserTransactions: (user) => dispatch(getUserTransactions(user))
+    getUserTransactions: (user) => dispatch(getUserTransactions(user)),
+    getUserWatches: (user) => dispatch(getUserWatches(user)),
   };
 }
 
