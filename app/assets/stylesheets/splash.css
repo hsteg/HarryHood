@@ -1,7 +1,3 @@
-.splash {
-  font-family: abel;
-}
-
 .splash-navbar-holder {
   position: fixed;
   display: flex;
@@ -62,7 +58,7 @@
 .splash-navbar-left-link-item > a {
   padding: 0 25px;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 900;
   text-decoration: none;
   color: black;
 }
@@ -165,9 +161,9 @@
   font-size: 18px;
   height: 50px;
   letter-spacing: .5px;
-  font-weight: 700; 
+  font-weight: 900; 
   transition: box-shadow 300ms;
-  font-family: abel;
+  font-family: inherit;
 }
 
 .splash-signup-button:hover {
