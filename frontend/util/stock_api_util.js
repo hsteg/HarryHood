@@ -13,7 +13,9 @@ export const getStocksPriceData = (symbols) => {
 };
 
 export const getUserStocks = (stocks) => {
-
-
-  
-}
+  return $.ajax({
+    method: "GET",
+    url: '/api/stocks/',
+    data: { stocks }
+  }); 
+};

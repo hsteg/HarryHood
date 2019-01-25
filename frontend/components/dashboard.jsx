@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidUpdate(){
-    this.getUserStocks();
+    this.userStocks();
   }
 
   userStocks() {

@@ -2,6 +2,7 @@ class Api::StocksController < ApplicationRecord
   def index
     @stocks = params[:stocks]
     debugger
+    render 'api/stocks/index'
   end
 
   private
