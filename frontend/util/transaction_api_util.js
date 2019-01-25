@@ -1,6 +1,6 @@
 const getUserTransactions = (user) => {
   return $.ajax({
     method: "GET",
-    url: ""
+    url: `/api/transactions/${user}`
   });
 };

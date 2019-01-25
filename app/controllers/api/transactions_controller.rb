@@ -1,6 +1,7 @@
 class Api::TransactionsController < ApplicationController 
   def show
-    @transactions = Transaction.find_by(transaction_params[:user_id])
+    user_id = params[:id]
+    @transactions = Transaction.where("user_id = #{user_id}")
     render 'api/transactions/show'
   end
 
