@@ -10,10 +10,11 @@ User.destroy_all
 Stock.destroy_all
 
 
-User.create( {account_balance: 77946, email: "asdf@asdf.com", first_name: "Harry", last_name: "Test", username: "asdf", password: "asdfasdf"} )
-User.create( {account_balance: 77946, email: "demo@demouser.com", first_name: "Demo", last_name: "McDemo", username: "DemoMcDemoface", password: "demodemo"} )
+user1 = User.create( {account_balance: 77946, email: "asdf@asdf.com", first_name: "Harry", last_name: "Test", username: "asdf", password: "asdfasdf"} )
+user2 = User.create( {account_balance: 77946, email: "demo@demouser.com", first_name: "Demo", last_name: "McDemo", username: "DemoMcDemoface", password: "demodemo"} )
 Stock.create( {name: "Apple", symbol: "AAPL"} )
 Stock.create( {name: "Starwood Property Trust, Inc.", symbol: "STWD"} )
 Stock.create( {name: "Visa", symbol: "V"} )
 Stock.create( {name: "Dollar General", symbol: "DG"} )
 Stock.create( {name: "Papa Johns", symbol: "PZZA"} )
+

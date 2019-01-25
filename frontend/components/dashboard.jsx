@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../actions/session_actions';
+import { getDayStocksPriceData } from '../actions/stock_actions';
 
 class Dashboard extends React.Component {
-
+  componentDidMount() {
+    this.props.getDayStocksPriceData();
+  }
   render() {
     return (
       <div className="dashboard-main">
@@ -148,13 +151,15 @@ class Dashboard extends React.Component {
 
 const msp = (state) => {
   return {
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    stocks: state.stocks,
   };
 };
 
 const mdp = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
+    getDayStocksPriceData: (stocks) => dispatch(getDayStocksPriceData(stocks))
   };
 }
 

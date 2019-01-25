@@ -13,6 +13,7 @@
 #
 
 class Transaction < ApplicationRecord
-    
+  validates :buy, :stock_id, :user_id, :num_shares, :price_per_share, presence: true;
+  
     
 end
