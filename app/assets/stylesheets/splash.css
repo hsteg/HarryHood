@@ -23,7 +23,7 @@
 .splash-logo-image {
   width: 40px;
   height: 40px;
-  padding-top: 8px;
+  padding-top: 4px;
 }
 
 .splash-logo-name-holder{
@@ -41,11 +41,12 @@
 .splash-logo-text {
   font-size: 24px;
   padding-left: 5px;
+  font-weight: 900;
 }
 
 .splash-logo-byline {
   font-size: 12px;
-  margin-top: -4px;
+  padding-top: 2px;
 }
 
 .splash-navbar-left-links-holder {
@@ -69,7 +70,7 @@
 .splash-navbar-right-buttons-holder > .splash-login {
   padding: 0 30px;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 900;
   text-decoration: none;
   color: black;
 }
@@ -99,7 +100,7 @@
 
 .splash-content-section1-left {
   width: 310px;
-  padding-top: 180px;
+  padding-top: 240px;
 }
 
 .splash-content-section1-left > h1 {
@@ -109,8 +110,8 @@
 }
 
 .splash-content-section1-left > h3 {
-  font-size: 17px;  
-  font-weight: 400;
+  font-size: 16px;  
+  font-weight: 100;
   line-height: 26px;
   margin-top: -5px;
   letter-spacing: .2px;
