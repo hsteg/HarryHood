@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+UserWatch.destroy_all
 Transaction.destroy_all
 Stock.destroy_all
 User.destroy_all
@@ -18,11 +19,20 @@ stock2 = Stock.create( {name: "Starwood Property Trust, Inc.", symbol: "STWD"} )
 stock3 = Stock.create( {name: "Visa", symbol: "V"} )
 stock4 = Stock.create( {name: "Dollar General", symbol: "DG"} )
 stock5 = Stock.create( {name: "Papa Johns", symbol: "PZZA"} )
+stock6 = Stock.create( {name: "Chipotle", symbol: "CMG"} )
+stock7 = Stock.create( {name: "Tesla", symbol: "TSLA"} )
+stock8 = Stock.create( {name: "Twitter", symbol: "TWTR"} )
 
 transaction1 = Transaction.create({ buy: true, stock_id: stock1.id, user_id: user1.id, num_shares: 3, price_per_share: 130 })
 transaction2 = Transaction.create({ buy: true, stock_id: stock2.id, user_id: user1.id, num_shares: 10, price_per_share: 20.58 })
 transaction3 = Transaction.create({ buy: true, stock_id: stock3.id, user_id: user1.id, num_shares: 1, price_per_share: 130.32 })
 transaction4 = Transaction.create({ buy: true, stock_id: stock4.id, user_id: user1.id, num_shares: 14, price_per_share: 85.93 })
 transaction5 = Transaction.create({ buy: true, stock_id: stock5.id, user_id: user1.id, num_shares: 7, price_per_share: 34.91 })
+
+user_watch1 = UserWatch.create( {stock_id: stock6.id, user_id: user1.id } )
+user_watch1 = UserWatch.create( {stock_id: stock7.id, user_id: user1.id } )
+user_watch1 = UserWatch.create( {stock_id: stock8.id, user_id: user1.id } )
+user_watch1 = UserWatch.create( {stock_id: stock1.id, user_id: user2.id } )
+user_watch1 = UserWatch.create( {stock_id: stock3.id, user_id: user2.id } )
 
  

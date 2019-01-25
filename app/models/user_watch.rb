@@ -10,6 +10,6 @@
 #
 
 class UserWatch < ApplicationRecord
-  validates :stock_id, :user_id
+  validates :stock_id, :user_id, presence: true
   belongs_to :user
 end
