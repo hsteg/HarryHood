@@ -13,7 +13,7 @@ h2 {
     width: 1170px;
     margin: 0 auto;
     margin-top: 20px;
-    font-family: abel;
+    font-family: inherit;
 }
 
 .signup-nav-bar {
@@ -40,9 +40,19 @@ h2 {
     text-align: center;
 }
 
-.signup-row-item > h3, p {
+.signup-row-item > .top {
     margin: 0 0;
+    font-weight: 400;
+    font-size: 18px;
 }
+
+.signup-row-item > p {
+  margin: 0 0;
+  font-weight: 400;
+  font-size: 14px;
+
+}
+
 
 .signup-logo-image {
     width: 80px;
@@ -111,7 +121,7 @@ p > a:hover {
   color: #040d14;
   width: 100%;
   box-sizing: border-box;
-  font-family: abel;
+  font-family: inherit;
   letter-spacing: .6px;
 }
 
@@ -126,7 +136,7 @@ p > a:hover {
   color: #f45531;
   width: 100%;
   box-sizing: border-box;
-  font-family: abel;
+  font-family: inherit;
   letter-spacing: .6px;
 }
 
@@ -162,7 +172,7 @@ p > a:hover {
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
-    font-family: abel;
+    font-family: inherit;
     letter-spacing: .6px;
 }
 
@@ -171,8 +181,9 @@ p > a:hover {
     border-color: #199972;
 }
 
-.signup-header-container > h1 {
+.signup-header-container {
     margin: 0 0;
+    font-weight: extra-light;
 }
 
 .signup-form-errors {

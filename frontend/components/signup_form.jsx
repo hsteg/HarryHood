@@ -71,23 +71,23 @@ class SignUpForm extends React.Component {
             <Link to="/"><img className="signup-logo-image" src={window.logoURL} /></Link>
           </div>
           <div className="signup-row-item">
-            <h3>Account</h3>
+            <div className="signup-row-item-top">Account</div>
             <p>The only info we need</p>
           </div>
           <div className="signup-row-item">
-            <h3>Basic Info</h3>
+            <div className="signup-row-item-top">Basic Info</div>
             <p>Won't be collected</p>
           </div>
           <div className="signup-row-item">
-            <h3>Identity</h3>
+            <div className="signup-row-item-top">Identity</div>
             <p>No need for verification</p>
           </div>
           <div className="signup-row-item">
-            <h3>Funding</h3>
+            <div className="signup-row-item-top">Funding</div>
             <p>No funding necessary</p>
           </div>
           <div className="signup-row-item">
-            <h3>Submit</h3>
+            <div className="signup-row-item-top">Submit</div>
             <p>On this page</p>
           </div>
         </div>
@@ -96,7 +96,7 @@ class SignUpForm extends React.Component {
             <div className="signup-content">
               <form className="signup-form" onSubmit={this.handleSubmit}>
                 <div className="signup-header-container">
-                  <h1>Play Around With Your Money</h1>
+                  <div>Play Around With Your Money</div>
                   <h2>HarryHood lets you pretend like you're investing in companies you love, commission-free.</h2>
                 </div>
                 <div className="signup-form-container">
