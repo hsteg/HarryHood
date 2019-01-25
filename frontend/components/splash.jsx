@@ -31,7 +31,7 @@ class Splash extends React.Component {
               </div>
             </div>
             <div className="splash-navbar-right-buttons-holder">
-              <Link to="/login" className="splash-login">Login</Link>
+              <Link to="/login" className="splash-login">Log In</Link>
               <Link to="/signup"><button className="splash-signup-button">Sign Up</button></Link>
             </div>
           </div>

@@ -1,10 +1,10 @@
-h1 {
+.signup-header-container > p {
     font-size: 48px;
-    font-weight: 300;
+    font-weight: 100;
     letter-spacing: .4px;
 }
 
-h2 {
+.signup-header-container > h2 {
     font-size: 24px;
     font-weight: 200;
 }
@@ -40,7 +40,7 @@ h2 {
     text-align: center;
 }
 
-.signup-row-item > .top {
+.signup-row-item > h3 {
     margin: 0 0;
     font-weight: 400;
     font-size: 18px;
