@@ -63,7 +63,14 @@ class SignUpForm extends React.Component {
 
 
   render() {
-    const errors = this.props.errors.session ? this.props.errors.session[0] : null;
+    const errors = this.props.errors.session.length > 0 ? (
+      <div className="signup-form-row">
+        <p className="signup-form-errors">
+          {this.props.errors.session[0]}
+        </p>
+      </div>
+    ) : (null);
+
     return (
       <div className="signup-page">
         <div className="signup-nav-bar">
@@ -96,7 +103,7 @@ class SignUpForm extends React.Component {
             <div className="signup-content">
               <form className="signup-form" onSubmit={this.handleSubmit}>
                 <div className="signup-header-container">
-                  <p>Play Around With Your Money</p>
+                  <h3>Play Around With Your Money</h3>
                   <h2>HarryHood lets you pretend like you're investing in companies you love, commission-free.</h2>
                 </div>
                 <div className="signup-form-container">
@@ -119,6 +126,7 @@ class SignUpForm extends React.Component {
                   <div className="signup-form-row">
                     <input type="password" placeholder="Password (min. 7 characters)" className={this.passwordValidation()} onChange={this.updateField('password')} />
                   </div>
+                  {errors}
                   <div className="signup-form-row">
                     <button className="signup-button">Sign Up</button>
                   </div>
@@ -126,10 +134,7 @@ class SignUpForm extends React.Component {
                     <button onClick={this.handleDemo} className="signup-button">Demo</button>
                   </div>
                   <div className="signup-form-row">
-                    <p className={"signup-form-already-signed-up"}>Already signed up? <Link to="/login">Login</Link></p>
-                  </div>
-                  <div className="signup-form-row">
-                    <p className="signup-form-errors">{errors}</p>
+                    <p className="signup-form-already-signed-up">Already signed up? <Link to="/login">Login</Link></p>
                   </div>
                 </div>
               </form>

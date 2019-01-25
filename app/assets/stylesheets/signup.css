@@ -1,12 +1,12 @@
-.signup-header-container > p {
-    font-size: 48px;
-    font-weight: 100;
-    letter-spacing: .4px;
+.signup-header-container > h3 {
+  font-size: 50px;
+  font-weight: 300;
+  padding-bottom: 20px;
 }
 
 .signup-header-container > h2 {
-    font-size: 24px;
-    font-weight: 200;
+    font-size: 22px;
+    font-weight: 300;
 }
 
 .signup-page {
@@ -14,6 +14,10 @@
     margin: 0 auto;
     margin-top: 20px;
     font-family: inherit;
+}
+
+.signup-form-container {
+  margin-top: 10px;
 }
 
 .signup-nav-bar {
@@ -42,13 +46,13 @@
 
 .signup-row-item > h3 {
     margin: 0 0;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 18px;
 }
 
 .signup-row-item > p {
   margin: 0 0;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 14px;
 
 }
@@ -72,7 +76,7 @@
 
 .signup-form {
     width: 100%;
-    margin-bottom: 130px;
+    margin-bottom: 90px;
 }
 
 .signup-form-row {
@@ -84,8 +88,9 @@
 }
 
 .signup-form-already-signed-up {
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: .6px;
+    font-weight: 300;
 }
 
 p > a {
@@ -212,8 +217,20 @@ p > a:hover {
     height: 200px;
 }
 
+.signup-sidebar-item > h3 {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: .3px;
+  line-height: 1.1;
+}
+
 .signup-sidebar-item > p {
     color: #b1bfc4;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 20px;
+    letter-spacing: .3px;
+    line-height: 1.1;
 }
 
 .signup-footer-line {
@@ -224,7 +241,9 @@ p > a:hover {
 .signup-footer-container {
     display: block;
     color: #b1bfc4;
-    font-size: 15px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.1;
 }
 
 .signup-footer-content { 
