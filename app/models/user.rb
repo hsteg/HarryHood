@@ -24,6 +24,8 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 7 }, allow_nil: true
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'address is not valid' } 
 
+    has_many :transactions
+
     after_initialize :ensure_session_token
 
     def self.find_by_credentials(username, password)
