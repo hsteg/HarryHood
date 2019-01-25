@@ -27,6 +27,7 @@ class Dashboard extends React.Component {
               <div className="dashboard-nav-right-links-link-item">Home</div>
               <div className="dashboard-nav-right-links-link-item">Notifications</div>
               <div className="dashboard-nav-right-links-link-item">Account</div>
+              <button onClick={this.props.logout}>Log Out :(</button>
             </div>
           </div>
         </div>

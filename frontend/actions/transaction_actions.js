@@ -9,7 +9,7 @@ export const getUserTransactions = (user) => dispatch => {
   );
 };
 
-const receiveUserTransactions(transactions) {
+const receiveUserTransactions = (transactions) => {
   return {
     type: RECEIVE_USER_TRANSACTIONS,
     transactions
