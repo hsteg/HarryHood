@@ -16,6 +16,7 @@ const App = () => {
             <ProtectedRoute path="/dashboard" component={Dashboard} />
             <AuthRoute exact path="/" component={Splash} />
             <ProtectedRoute path="/stock/:symbol" component={Stock} />
+            
         </div>
     );
 };

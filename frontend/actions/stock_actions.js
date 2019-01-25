@@ -1,4 +1,4 @@
-import * as APIUtil from '../util/session_api_util';
+import * as APIUtil from '../util/stock_api_util';
 export const RECEIVE_FULL_STOCK_INFO = "RECEIVE_FULL_STOCK_INFO";
 export const RECEIVE_STOCK_GROUP_PRICE_DATA = "RECEIVE_STOCK_GROUP_PRICE_DATA";
 
