@@ -6,7 +6,7 @@ import { getDayStocksPriceData } from '../actions/stock_actions';
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.getDayStocksPriceData();
+    
   }
   render() {
     return (
