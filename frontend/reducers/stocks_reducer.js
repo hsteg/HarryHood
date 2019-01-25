@@ -9,6 +9,8 @@ const stocksReducer = (state={}, action) => {
     case RECEIVE_FULL_STOCK_INFO:
       newState[action.stock.quote.symbol] = action.stock;
       return newState;
+    case RECEIVE_STOCK_GROUP_PRICE_DATA:
+      
     default:
       return newState;
   }

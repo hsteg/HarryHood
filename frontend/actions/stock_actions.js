@@ -1,6 +1,6 @@
 import * as APIUtil from '../util/stock_api_util';
 export const RECEIVE_FULL_STOCK_INFO = "RECEIVE_FULL_STOCK_INFO";
-export const RECEIVE_STOCK_GROUP_PRICE_DATA = "RECEIVE_STOCK_GROUP_PRICE_DATA";
+export const RECEIVE_DAY_STOCK_GROUP_PRICE_DATA = "RECEIVE_DAY_STOCK_GROUP_PRICE_DATA";
 
 export const getStockInfo = (stock) => dispatch => {
   return APIUtil.getStockInfo(stock).then(
@@ -10,10 +10,10 @@ export const getStockInfo = (stock) => dispatch => {
   );
 };
 
-export const getStocksPriceData = (stocks) => dispatch => {
-  return APIUtil.getStocksPriceData(stocks).then(
+export const getDayStocksPriceData = (stocks) => dispatch => {
+  return APIUtil.getDayStocksPriceData(stocks).then(
     stocks => {
-      return dispatch(receiveStockGroupPriceData(stocks));
+      return dispatch(receiveDayStockGroupPriceData(stocks));
     },
   );
 };
@@ -26,9 +26,9 @@ const receiveFullStockInfo = (stock) => {
   };
 };
 
-const receiveStockGroupPriceData = (stocks) => {
+const receiveDayStockGroupPriceData = (stocks) => {
   return {
-    type: RECEIVE_STOCK_GROUP_PRICE_DATA,
+    type: RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
     stocks
   };
 };
