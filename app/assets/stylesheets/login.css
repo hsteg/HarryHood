@@ -30,7 +30,7 @@ body {
 .welcome-message {
   margin: 0 0 16px;
   font-size: 26px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .login-box {
@@ -77,9 +77,9 @@ label > div {
   outline: 0;
   width: 100%;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: .3px;
-  font-family: abel;
+  font-family: inherit;
 }
 
 .field:hover {
