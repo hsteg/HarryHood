@@ -60,8 +60,6 @@ class SignUpForm extends React.Component {
     }
   }
 
-
-
   render() {
     const errors = this.props.errors.session.length > 0 ? (
       <div className="signup-form-row">

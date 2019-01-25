@@ -164,6 +164,7 @@
   letter-spacing: .5px;
   font-weight: 700; 
   transition: box-shadow 300ms;
+  outline: none;
   font-family: inherit;
 }
 

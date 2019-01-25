@@ -111,6 +111,7 @@ label > div {
   margin-top: 60px;
   letter-spacing: .3px;
   font-family: inherit;
+  outline: none;
 }
 
 .sign-in-button:hover {

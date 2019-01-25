@@ -168,6 +168,7 @@ p > a:hover {
 
 .signup-button {
     width: 100%;
+    outline: none;
     color: #fff;
     background-color: #21ce99;
     border-color: #21ce99;
