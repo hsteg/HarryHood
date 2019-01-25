@@ -11,4 +11,5 @@
 
 class UserWatch < ApplicationRecord
   validates :stock_id, :user_id
+  belongs_to :user
 end

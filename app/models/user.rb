@@ -25,6 +25,7 @@ class User < ApplicationRecord
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'address is not valid' } 
 
     has_many :transactions
+    has_many :watches
 
     after_initialize :ensure_session_token
 
