@@ -3,7 +3,7 @@ export const RECEIVE_FULL_STOCK_INFO = "RECEIVE_FULL_STOCK_INFO";
 export const RECEIVE_DAY_STOCK_GROUP_PRICE_DATA = "RECEIVE_DAY_STOCK_GROUP_PRICE_DATA";
 export const RECEIVE_USER_STOCKS = "RECEIVE_USER_STOCKS";
 
-export const getUserStocks = (user) => {
+export const getUserStocks = (user) => dispatch => {
   return APIUtil.getUserStocks(user).then(
     stocks => {
       return dispatch(receiveUserStocks(stocks));

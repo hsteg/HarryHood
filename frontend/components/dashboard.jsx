@@ -9,8 +9,7 @@ import { getUserWatches } from '../actions/user_watch_actions';
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.userStocks = this.userStocks.bind(this)
-    // this.userStockSymbols = this.userStockSymbols.bind(this);
+
     }
 
   componentDidMount() { 
@@ -18,33 +17,6 @@ class Dashboard extends React.Component {
     this.props.getUserWatches(this.props.currentUser.id);
     this.props.getUserStocks(this.props.currentUser.id)
   }
-
-  // componentDidUpdate() {
-  //   this.userStocks();
-  // }
-
-
-
-  userStocks() {
-    const userStocks = [];
-    Object.values(this.props.transactions).forEach( transaction => {
-      userStocks.push(transaction.stock_id);
-    });
-    Object.values(this.props.userWatches).forEach( watch => {
-      userStocks.push(watch.stock_id);
-    });
-  
-    return this.props.getUserStocks(userStocks);
-  }
-
-  // userStockSymbols() {
-  //   const userStockSymbols = [];
-  
-  //   Object.values(this.props.stocks).forEach( stock => {
-  //     userStockSymbols.push(stock.symbol);
-  //   });
-  //   return this.props.getDayStocksPriceData(userStockSymbols.join(','));
-  // }
 
   render() {  
     return (
