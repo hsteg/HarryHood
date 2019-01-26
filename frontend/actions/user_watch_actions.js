@@ -4,6 +4,7 @@ export const RECEIVE_USER_WATCHES = "RECEIVE_USER_WATCHES";
 export const getUserWatches = (user) => dispatch => {
   return APIUtil.getUserWatches(user).then(
     watches => {
+  
       return dispatch(receiveUserWatches(watches));
     }
   );

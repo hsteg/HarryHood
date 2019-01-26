@@ -10,13 +10,20 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.userStocks = this.userStocks.bind(this)
-  }
+    // this.userStockSymbols = this.userStockSymbols.bind(this);
+    }
 
   componentDidMount() { 
-    this.props.getUserTransactions(this.props.currentUser.id)
-    .then(this.props.getUserWatches(this.props.currentUser.id)
-    .then(this.userStocks));
+    this.props.getUserTransactions(this.props.currentUser.id);
+    this.props.getUserWatches(this.props.currentUser.id);
+    this.props.getUserStocks(this.props.currentUser.id)
   }
+
+  // componentDidUpdate() {
+  //   this.userStocks();
+  // }
+
+
 
   userStocks() {
     const userStocks = [];
@@ -26,8 +33,18 @@ class Dashboard extends React.Component {
     Object.values(this.props.userWatches).forEach( watch => {
       userStocks.push(watch.stock_id);
     });
-    this.props.getUserStocks(userStocks);
+  
+    return this.props.getUserStocks(userStocks);
   }
+
+  // userStockSymbols() {
+  //   const userStockSymbols = [];
+  
+  //   Object.values(this.props.stocks).forEach( stock => {
+  //     userStockSymbols.push(stock.symbol);
+  //   });
+  //   return this.props.getDayStocksPriceData(userStockSymbols.join(','));
+  // }
 
   render() {  
     return (
@@ -166,18 +183,12 @@ class Dashboard extends React.Component {
 }
 
 
-
-
-
-
-
 const msp = (state) => {
-  
   return {
     currentUser: state.entities.users[state.session.id],
     stocks: state.entities.stocks,
     transactions: state.entities.transactions,
-    userWatches: state.entities.userWatches
+    userWatches: state.entities.userWatches,
   };
 };
 

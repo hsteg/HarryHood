@@ -3,8 +3,8 @@ export const RECEIVE_FULL_STOCK_INFO = "RECEIVE_FULL_STOCK_INFO";
 export const RECEIVE_DAY_STOCK_GROUP_PRICE_DATA = "RECEIVE_DAY_STOCK_GROUP_PRICE_DATA";
 export const RECEIVE_USER_STOCKS = "RECEIVE_USER_STOCKS";
 
-export const getUserStocks = (stocks) => {
-  return APIUtil.getUserStocks(stocks).then(
+export const getUserStocks = (user) => {
+  return APIUtil.getUserStocks(user).then(
     stocks => {
       return dispatch(receiveUserStocks(stocks));
     }
@@ -14,6 +14,7 @@ export const getUserStocks = (stocks) => {
 export const getStockInfo = (stock) => dispatch => {
   return APIUtil.getStockInfo(stock).then(
     stock => {
+  
       return dispatch(receiveFullStockInfo(stock));
     },
   );
@@ -22,6 +23,7 @@ export const getStockInfo = (stock) => dispatch => {
 export const getDayStocksPriceData = (stocks) => dispatch => {
   return APIUtil.getDayStocksPriceData(stocks).then(
     stocks => {
+  
       return dispatch(receiveDayStockGroupPriceData(stocks));
     },
   );

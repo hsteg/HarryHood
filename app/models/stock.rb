@@ -11,4 +11,13 @@
 class Stock < ApplicationRecord
   validates :symbol, presence: true
   validates :symbol, uniqueness: true
+
+  has_many :watches,
+  foreign_key: :stock_id,
+  class_name: :UserWatch
+
+
+  has_many :transactions,
+  foreign_key: :stock_id,
+  class_name: :Stock
 end

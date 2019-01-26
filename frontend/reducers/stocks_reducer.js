@@ -1,5 +1,5 @@
 import { RECEIVE_FULL_STOCK_INFO, 
-        RECEIVE_STOCK_GROUP_PRICE_DATA,
+        RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
         RECEIVE_USER_STOCKS } from '../actions/stock_actions';
 import { merge } from 'lodash';
 
@@ -12,6 +12,8 @@ const stocksReducer = (state={}, action) => {
       return newState;
     case RECEIVE_USER_STOCKS:
       return merge(newState, action.stocks);
+    case RECEIVE_DAY_STOCK_GROUP_PRICE_DATA:
+      return merge(newState, action.stocks)
     default:
       return newState;
   }

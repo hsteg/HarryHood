@@ -25,7 +25,19 @@ class User < ApplicationRecord
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'address is not valid' } 
 
     has_many :transactions
-    has_many :watches
+
+    has_many :watches,
+    foreign_key: :user_id,
+    class_name: :UserWatch
+
+    has_many :watch_stocks,
+    through: :watches,
+    source: :stock
+
+    has_many :transaction_stocks,
+    through: :transactions, 
+    source: :stock
+
 
     after_initialize :ensure_session_token
 

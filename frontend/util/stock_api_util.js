@@ -5,17 +5,17 @@ export const getStockInfo = (symbol) => {
   });
 };
 
-export const getStocksPriceData = (symbols) => {
-  return $.ajax({
+export const getDayStocksPriceData = (symbols) => {
+  return $.ajax({ 
     method: "GET",
     url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote,chart&range=1d`,
   });
 };
 
-export const getUserStocks = (stocks) => {
+export const getUserStocks = (user) => {
   return $.ajax({
     method: "GET",
-    url: `/api/stocks/`,
-    data: { ajax_stocks: JSON.stringify(stocks)}
+    url: `/api/users/${user}`,
+    // data: { ajax_stocks: JSON.stringify(stocks)}
   }); 
 };
