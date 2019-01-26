@@ -16,6 +16,11 @@ class Api::UsersController < ApplicationController
       render 'api/users/stocks'
     end
 
+    def held_stocks
+      user_id = params[:id]
+      @transactions = Transaction.where("user_id = #{user_id}")
+      # @currently_held_stocks = 
+    end
 
     private
     def user_params

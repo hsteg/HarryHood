@@ -15,8 +15,9 @@ class Dashboard extends React.Component {
   componentDidMount() { 
     this.props.getUserTransactions(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
-    this.props.getUserStocks(this.props.currentUser.id)
+    this.props.getUserStocks(this.props.currentUser.id);
   }
+
 
   render() {  
     return (
