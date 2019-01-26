@@ -16,6 +16,5 @@ export const getUserStocks = (user) => {
   return $.ajax({
     method: "GET",
     url: `/api/users/${user}`,
-    // data: { ajax_stocks: JSON.stringify(stocks)}
   }); 
 };
