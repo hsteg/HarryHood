@@ -7,6 +7,7 @@ import { getUserWatches } from '../actions/user_watch_actions';
 import DashboardWatchlist from './dashboard_watchlist';
 import DashboardUserStockList from './dashboard_user_stocks';
 import Navbar from './navbar';
+import DashboardChart from './dashboard_chart';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -41,23 +42,7 @@ class Dashboard extends React.Component {
           <div className="dashboard-content">
             <div className="dashboard-content-left-container">
               <section className="dashboard-content-graph-container">
-                <div className="dashboard-content-graph-header-container">
-                  <div className="dashboard-content-graph-header-portfolio-value">
-                    porfolio value here
-                    </div>
-                  <div className="dashboard-content-graph-header-change-container">
-                    day change
-                    </div>
-                  <div className="dashboard-content-graph-header-change-container-afterhours">
-                    after hours change
-                    </div>
-                </div>
-                <div className="dashboard-content-graph">
-                  graph here
-                  </div>
-                <nav className="dashboard-content-graph-timeline-selector">
-
-                </nav>
+                <DashboardChart />
               </section>
               <section className="dashboard-content-news-container">
                 <div className="dashboard-content-news-header-container">
