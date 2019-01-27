@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
 
 
 
-  render() {  
+  render() { 
     return (
       <div className="dashboard-main">
         <div className="dashboard-nav-holder">
@@ -133,7 +133,7 @@ class Dashboard extends React.Component {
                   </div>
                 </section>
                 <section className="dashboard-content-right-users-watchlist">
-                  <DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} />
+                  <DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} loading={this.props.loading} />
                 </section>
               </div>
             </div>

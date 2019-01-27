@@ -55,13 +55,13 @@ const receiveUserStocks = (stocks) => {
   };
 }
 
-const startLoadingDayStockGroupPriceData = () => {
+export const startLoadingDayStockGroupPriceData = () => {
   return {
     type: START_LOADING_DAY_STOCK_GROUP_PRICE_DATA,
   };
 };
 
-const startLoadingFullStockInfo = () => {
+export const startLoadingFullStockInfo = () => {
   return {
     type: START_LOADING_FULL_STOCK_INFO,
   };
