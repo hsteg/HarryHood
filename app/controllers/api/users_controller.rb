@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
     def create
         @user = User.new(user_params)
-        @user.account_balance = 0
+        @user.cash_balance = 0
         
         if @user.save
             login(@user)

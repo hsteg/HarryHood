@@ -7,7 +7,7 @@
 #  email           :string           not null
 #  first_name      :string           not null
 #  last_name       :string           not null
-#  account_balance :float            not null
+#  cash_balance    :float            not null
 #  password_digest :string           not null
 #  session_token   :string           not null
 #  created_at      :datetime         not null
@@ -19,7 +19,7 @@ require 'uri'
 class User < ApplicationRecord
     attr_reader :password
 
-    validates :username, :email, :first_name, :last_name, :account_balance, :password_digest, :session_token, presence: true
+    validates :username, :email, :first_name, :last_name, :cash_balance, :password_digest, :session_token, presence: true
     validates :username, :email, uniqueness: true
     validates :password, length: { minimum: 7 }, allow_nil: true
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'address is not valid' } 
