@@ -23,7 +23,14 @@ class Navbar extends React.Component {
         <div className="loggedin-nav-right-links">
           <div className="loggedin-nav-right-links-link-item">Home</div>
           <div className="loggedin-nav-right-links-link-item">Notifications</div>
-          <div className="loggedin-nav-right-links-link-item">Account</div>
+          <div className="loggedin-nav-right-links-link-item">
+            <p>Account</p>
+            <div className="loggedin-nav-right-links-account-dropdown-container">
+              <div className="loggedin-nav-right-links-account-dropdown-menu">
+                
+              </div>
+            </div>
+          </div>
           <button onClick={this.props.logout}>Log Out :(</button>
         </div>
       </div>

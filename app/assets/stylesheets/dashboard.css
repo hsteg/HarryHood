@@ -7,50 +7,10 @@
 .loggedin-nav-holder {
   position: fixed;
   top: 0;
+  background-color: #1b1b1d;
   width: 100%;
   z-index: 100;
   height: 64px;
-}
-
-.loggedin-navbar {
-  display: flex;
-  max-width: 100%;
-  padding-top: 14px;
-  justify-content: space-between;
-}
-
-.loggedin-nav-logo-search {
-  display: flex;
-  align-items: center;
-  flex: 0 0 72.2%;
-}
-
-.loggedin-nav-logo {
-  padding-left: 8px;
-  padding-right: 18px;
-}
-
-.loggedin-nav-searchbar-container {
-  flex-basis: 480px;
-  min-width: 160px;
-  margin-right: auto;
-}
-
-.loggedin-nav-searchbar {
-  border: 1px solid gray;
-  border-radius: 4px;
-  width: 100%;
-} 
-
-.loggedin-nav-right-links {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 10px;
-}
-
-.loggedin-nav-right-links-link-item {
-  margin-left: 10px;
 }
 
 .loggedin-content-container {
