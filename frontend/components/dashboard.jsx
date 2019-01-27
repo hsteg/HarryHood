@@ -5,8 +5,8 @@ import { logout } from '../actions/session_actions';
 import { getDayStocksPriceData, getUserStocks } from '../actions/stock_actions';
 import { getUserTransactions } from '../actions/transaction_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
-import DashboardWatchlist from './watchlist';
-import DashboardUserStockList from './user_stocks';
+import DashboardWatchlist from './dashboard_watchlist';
+import DashboardUserStockList from './dashboard_user_stocks';
 
 class Dashboard extends React.Component {
   constructor(props) {

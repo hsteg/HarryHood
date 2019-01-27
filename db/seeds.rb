@@ -28,6 +28,8 @@ transaction2 = Transaction.create({ buy: true, stock_id: stock2.id, user_id: use
 transaction3 = Transaction.create({ buy: true, stock_id: stock3.id, user_id: user1.id, num_shares: 1, price_per_share: 130.32 })
 transaction4 = Transaction.create({ buy: true, stock_id: stock4.id, user_id: user1.id, num_shares: 14, price_per_share: 85.93 })
 transaction5 = Transaction.create({ buy: true, stock_id: stock5.id, user_id: user1.id, num_shares: 7, price_per_share: 34.91 })
+transaction6 = Transaction.create({ buy: false, stock_id: stock5.id, user_id: user1.id, num_shares: 3, price_per_share: 40.05 })
+transaction7 = Transaction.create({ buy: true, stock_id: stock3.id, user_id: user1.id, num_shares: 1, price_per_share: 135.05 })
 
 user_watch1 = UserWatch.create( {stock_id: stock6.id, user_id: user1.id } )
 user_watch1 = UserWatch.create( {stock_id: stock7.id, user_id: user1.id } )
