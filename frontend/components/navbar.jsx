@@ -9,21 +9,21 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <div className="dashboard-navbar">
-        <div className="dashboard-nav-logo-search">
-          <div className="dashboard-nav-logo">
+      <div className="loggedin-navbar">
+        <div className="loggedin-nav-logo-search">
+          <div className="loggedin-nav-logo">
             Logo here
             </div>
-          <div className="dashboard-nav-searchbar-container">
-            <div className="dashboard-nav-searchbar">
+          <div className="loggedin-nav-searchbar-container">
+            <div className="loggedin-nav-searchbar">
               Searchbar here
               </div>
           </div>
         </div>
-        <div className="dashboard-nav-right-links">
-          <div className="dashboard-nav-right-links-link-item">Home</div>
-          <div className="dashboard-nav-right-links-link-item">Notifications</div>
-          <div className="dashboard-nav-right-links-link-item">Account</div>
+        <div className="loggedin-nav-right-links">
+          <div className="loggedin-nav-right-links-link-item">Home</div>
+          <div className="loggedin-nav-right-links-link-item">Notifications</div>
+          <div className="loggedin-nav-right-links-link-item">Account</div>
           <button onClick={this.props.logout}>Log Out :(</button>
         </div>
       </div>

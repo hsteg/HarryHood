@@ -1,8 +1,8 @@
-.dashboard-main {
+.loggedin-main {
   min-width: 1036px;
 }
 
-.dashboard-nav-holder {
+.loggedin-nav-holder {
   position: fixed;
   top: 0;
   width: 100%;
@@ -10,67 +10,67 @@
   height: 64px;
 }
 
-.dashboard-navbar {
+.loggedin-navbar {
   display: flex;
   max-width: 100%;
   padding-top: 14px;
   justify-content: space-between;
 }
 
-.dashboard-nav-logo-search {
+.loggedin-nav-logo-search {
   display: flex;
   align-items: center;
   flex: 0 0 72.2%;
 }
 
-.dashboard-nav-logo {
+.loggedin-nav-logo {
   padding-left: 8px;
   padding-right: 18px;
 }
 
-.dashboard-nav-searchbar-container {
+.loggedin-nav-searchbar-container {
   flex-basis: 480px;
   min-width: 160px;
   margin-right: auto;
 }
 
-.dashboard-nav-searchbar {
+.loggedin-nav-searchbar {
   border: 1px solid gray;
   border-radius: 4px;
   width: 100%;
 } 
 
-.dashboard-nav-right-links {
+.loggedin-nav-right-links {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding-right: 10px;
 }
 
-.dashboard-nav-right-links-link-item {
+.loggedin-nav-right-links-link-item {
   margin-left: 10px;
 }
 
-.dashboard-content-container {
+.loggedin-content-container {
   padding-top: 64px;
 }
 
-.dashboard-content {
+.loggedin-content {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
   padding: 0 10px;
 }
 
-.dashboard-content-left-container {
+.loggedin-content-left-container {
   flex: 0 0 66.66667%;
 }
 
-.dashboard-content-right-main-container {
+.loggedin-content-right-main-container {
   flex: 0 0 27.77778%;
 }
 
-.dashboard-content-graph-container {
+.loggedin-content-graph-container {
   width: 676px;
   height: 349px;
   margin-bottom: 44px;

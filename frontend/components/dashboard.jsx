@@ -34,45 +34,45 @@ class Dashboard extends React.Component {
 
   render() { 
     return (
-      <div className="dashboard-main">
-        <div className="dashboard-nav-holder">
+      <div className="loggedin-main">
+        <div className="loggedin-nav-holder">
           <Navbar />
         </div>
-        <div className="dashboard-content-container">
-          <div className="dashboard-content">
-            <div className="dashboard-content-left-container">
-              <section className="dashboard-content-graph-container">
+        <div className="loggedin-content-container">
+          <div className="loggedin-content">
+            <div className="loggedin-content-left-container">
+              <section className="loggedin-content-graph-container">
                 <DashboardChart />
               </section>
-              <section className="dashboard-content-news-container">
-                <div className="dashboard-content-news-header-container">
-                  <div className="dashboard-content-news-header">
+              <section className="loggedin-content-news-container">
+                <div className="loggedin-content-news-header-container">
+                  <div className="loggedin-content-news-header">
                     NEWS goes here
                     </div>
                 </div>
-                <div className="dashboard-content-news-list-container">
-                  <div className="dashboard-content-news-item-container">
-                    <div className="dashboard-content-news-item">
+                <div className="loggedin-content-news-list-container">
+                  <div className="loggedin-content-news-item-container">
+                    <div className="loggedin-content-news-item">
                       News Item
                       </div>
-                    <div className="dashboard-content-news-item">
+                    <div className="loggedin-content-news-item">
                       News Item
                       </div>
-                    <div className="dashboard-content-news-item">
+                    <div className="loggedin-content-news-item">
                       News Item
                       </div>
-                    <div className="dashboard-content-news-item">
+                    <div className="loggedin-content-news-item">
                       News Item
                       </div>
-                    <div className="dashboard-content-news-item">
+                    <div className="loggedin-content-news-item">
                       News Item
                       </div>
                   </div>
                 </div>
               </section>
             </div>
-            <div className="dashboard-content-right-main-container">
-              <div className="dashboard-content-right-main">
+            <div className="loggedin-content-right-main-container">
+              <div className="loggedin-content-right-main">
                 <section className="dashboard-content-right-users-stocks">
                   <div className="dashboard-content-right-users-stocks-header">
                     <div className="dashboard-content-users-stocks-header-title">
