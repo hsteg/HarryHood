@@ -6,6 +6,7 @@ import { getDayStocksPriceData, getUserStocks } from '../actions/stock_actions';
 import { getUserTransactions } from '../actions/transaction_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
 import DashboardWatchlist from './watchlist';
+import DashboardUserStockList from './user_stocks';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -113,26 +114,11 @@ class Dashboard extends React.Component {
                       Button
                     </div>
                   </div>
-                  <div className="dashboard-content-right-users-stocks-stockitem">
-                    <div className="dashboard-content-right-stockitem-name-container">
-                      <div className="dashboard-content-right-stockitem-name">
-                      </div>
-                      <div className="dashboard-content-right-stockitem-numshares">
-                      </div>
-                    </div>
-                    <div className="dashboard-content-right-stockitem-graph-container">
-                      <div className="dashboard-content-right-stockitem-graph">
-                        graph
-                      </div>
-                    </div>
-                    <div className="dashboard-content-right-stockitem-price-container">
-                      <div className="dashboard-content-right-stockitem-price">
-
-                      </div>
-                    </div>
-                  </div>
+                  <DashboardUserStockList stocks={this.props.stocks} loading={this.props.loading} transactions={this.props.transactions}/>
+  
                 </section>
                 <section className="dashboard-content-right-users-watchlist">
+                  <h1>watchlist</h1>
                   <DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} loading={this.props.loading} />
                 </section>
               </div>
