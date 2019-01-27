@@ -2,6 +2,9 @@ import * as APIUtil from '../util/stock_api_util';
 export const RECEIVE_FULL_STOCK_INFO = "RECEIVE_FULL_STOCK_INFO";
 export const RECEIVE_DAY_STOCK_GROUP_PRICE_DATA = "RECEIVE_DAY_STOCK_GROUP_PRICE_DATA";
 export const RECEIVE_USER_STOCKS = "RECEIVE_USER_STOCKS";
+export const START_LOADING_FULL_STOCK_INFO = "START_LOADING_FULL_STOCK_INFO";
+export const START_LOADING_DAY_STOCK_GROUP_PRICE_DATA = "START_LOADING_DAY_STOCK_GROUP_PRICE_DATA";
+
 
 export const getUserStocks = (user) => dispatch => {
   return APIUtil.getUserStocks(user).then(
@@ -12,6 +15,7 @@ export const getUserStocks = (user) => dispatch => {
 };
 
 export const getStockInfo = (stock) => dispatch => {
+  dispatch(startLoadingFullStockInfo());
   return APIUtil.getStockInfo(stock).then(
     stock => {
       return dispatch(receiveFullStockInfo(stock));
@@ -20,6 +24,7 @@ export const getStockInfo = (stock) => dispatch => {
 };
 
 export const getDayStocksPriceData = (stocks) => dispatch => {
+  dispatch(startLoadingDayStockGroupPriceData());
   return APIUtil.getDayStocksPriceData(stocks).then(
     stocks => {
   
@@ -49,3 +54,15 @@ const receiveUserStocks = (stocks) => {
     stocks
   };
 }
+
+const startLoadingDayStockGroupPriceData = () => {
+  return {
+    type: START_LOADING_DAY_STOCK_GROUP_PRICE_DATA,
+  };
+};
+
+const startLoadingFullStockInfo = () => {
+  return {
+    type: START_LOADING_FULL_STOCK_INFO,
+  };
+};
