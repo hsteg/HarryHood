@@ -20,7 +20,7 @@ const loadingReducer = (state = initialState, action) => {
     case RECEIVE_DAY_STOCK_GROUP_PRICE_DATA:
       return Object.assign({}, state, { userStocksLoading: false });
     case START_LOADING_DAY_STOCK_GROUP_PRICE_DATA:
-      return Object.assign({}, state, { detailLoading: true });
+      return Object.assign({}, state, { userStocksLoading: true });
     default:
       return state;
   }
