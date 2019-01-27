@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logout } from '../actions/session_actions';
 import { getDayStocksPriceData, getUserStocks } from '../actions/stock_actions';
 import { getUserTransactions } from '../actions/transaction_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
 import DashboardWatchlist from './dashboard_watchlist';
 import DashboardUserStockList from './dashboard_user_stocks';
+import Navbar from './navbar';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -35,24 +35,7 @@ class Dashboard extends React.Component {
     return (
       <div className="dashboard-main">
         <div className="dashboard-nav-holder">
-          <div className="dashboard-navbar">
-            <div className="dashboard-nav-logo-search">
-              <div className="dashboard-nav-logo">
-                Logo here
-              </div>
-              <div className="dashboard-nav-searchbar-container">
-                <div className="dashboard-nav-searchbar">
-                  Searchbar here
-                </div>
-              </div>
-            </div>
-            <div className="dashboard-nav-right-links">
-              <div className="dashboard-nav-right-links-link-item">Home</div>
-              <div className="dashboard-nav-right-links-link-item">Notifications</div>
-              <div className="dashboard-nav-right-links-link-item">Account</div>
-              <button onClick={this.props.logout}>Log Out :(</button>
-            </div>
-          </div>
+          <Navbar />
         </div>
         <div className="dashboard-content-container">
           <div className="dashboard-content">
@@ -143,7 +126,6 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
   return {
-    logout: () => dispatch(logout()),
     getDayStocksPriceData: (stocks) => dispatch(getDayStocksPriceData(stocks)),
     getUserTransactions: (user) => dispatch(getUserTransactions(user)),
     getUserWatches: (user) => dispatch(getUserWatches(user)),
