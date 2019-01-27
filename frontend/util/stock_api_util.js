@@ -8,7 +8,7 @@ export const getStockInfo = (symbol) => {
 export const getDayStocksPriceData = (symbols) => {
   return $.ajax({ 
     method: "GET",
-    url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote,chart&range=1d`,
+    url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote,chart&range=1d&chartInterval=5`,
   });
 };
 
