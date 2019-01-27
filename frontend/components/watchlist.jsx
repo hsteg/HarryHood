@@ -7,8 +7,28 @@ class DashboardWatchlist extends React.Component {
   }
 
   render() {
+    // debugger
+    // const lis = Object.keys(this.props.watches).map( watch => 
+    //   {
+    //     return(
+    //     <li>
+    //       <div className="watchlist-stock-symbol">
+    //         {this.props.stocks[watch.id].symbol}
+    //       </div>
+    //       <div className="watchlist-stock-graph">
+    //         graph here
+    //       </div>
+    //       <div className="watchlist-stock-price">
+    //         {this.props.stocks[watch.id].quote.latestPrice}
+    //       </div>
+    //     </li>
+    //     ); 
+    //   }
+
+    // );
     return (
-      <h1>hello</h1>
+      <div>hello</div>
+      
     );
   }
 }

@@ -133,7 +133,7 @@ class Dashboard extends React.Component {
                   </div>
                 </section>
                 <section className="dashboard-content-right-users-watchlist">
-                  <DashboardWatchlist watches={this.props.userWatches} />
+                  <DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} />
                 </section>
               </div>
             </div>
