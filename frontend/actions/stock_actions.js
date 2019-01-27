@@ -14,7 +14,6 @@ export const getUserStocks = (user) => dispatch => {
 export const getStockInfo = (stock) => dispatch => {
   return APIUtil.getStockInfo(stock).then(
     stock => {
-  
       return dispatch(receiveFullStockInfo(stock));
     },
   );

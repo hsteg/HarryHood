@@ -5,18 +5,29 @@ import { logout } from '../actions/session_actions';
 import { getDayStocksPriceData, getUserStocks } from '../actions/stock_actions';
 import { getUserTransactions } from '../actions/transaction_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
+import DashboardWatchlist from './watchlist';
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-
+    this.getStockSymbols = this.getStockSymbols.bind(this);
     }
 
   componentDidMount() { 
     this.props.getUserTransactions(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
-    this.props.getUserStocks(this.props.currentUser.id);
+    this.props.getUserStocks(this.props.currentUser.id).then( () => this.getStockSymbols()); 
   }
+
+  getStockSymbols() {
+    const stockSymbols = [];
+    Object.values(this.props.stocks).forEach(
+      stock => stockSymbols.push(stock.symbol)
+    );
+    this.props.getDayStocksPriceData(stockSymbols.join(','));
+  }
+
+
 
 
   render() {  
@@ -122,29 +133,7 @@ class Dashboard extends React.Component {
                   </div>
                 </section>
                 <section className="dashboard-content-right-users-watchlist">
-                  <div className="dashboard-content-right-users-watchlist-header">
-                    <div className="dashboard-content-users-watchlist-header-title">
-                      User watchlist
-                    </div>
-                    <div className="dashboard-content-users-watchlist-header-button">
-                      Button
-                    </div>
-                  </div>
-                  <div className="dashboard-content-right-users-watchlist-watchitem">
-                    <div className="dashboard-content-right-watchitem-name-container">
-                      <div className="dashboard-content-right-watchitem-name">
-                      </div>
-                    </div>
-                    <div className="dashboard-content-right-watchitem-graph-container">
-                      <div className="dashboard-content-right-watchitem-graph">
-                        graph
-                      </div>
-                    </div>
-                    <div className="dashboard-content-right-watchitem-price-container">
-                      <div className="dashboard-content-right-watchitem-price">
-                      </div>
-                    </div>
-                  </div>
+                  <DashboardWatchlist watches={this.props.userWatches} />
                 </section>
               </div>
             </div>

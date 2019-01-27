@@ -13,7 +13,10 @@ const stocksReducer = (state={}, action) => {
     case RECEIVE_USER_STOCKS:
       return merge(newState, action.stocks);
     case RECEIVE_DAY_STOCK_GROUP_PRICE_DATA:
-      return merge(newState, action.stocks)
+      let stockIds = Object.values(newState);
+      let marriage = {};
+      stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stocks[stock.symbol]))
+      return marriage;
     default:
       return newState;
   }
