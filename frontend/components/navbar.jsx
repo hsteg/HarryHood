@@ -7,7 +7,7 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropdown: "loggedin-nav-right-links-account-dropdown-container-hidden"
+      dropdown: "account-dropdown-hidden"
     }
     this.navOpen = this.navOpen.bind(this);
     this.navClose = this.navClose.bind(this);
@@ -15,7 +15,7 @@ class Navbar extends React.Component {
 
   navOpen() {
     this.setState({
-      dropdown: "loggedin-nav-right-links-account-dropdown-container",
+      dropdown: "account-dropdown",
     });
     document.addEventListener('click', this.navClose, {once: true, useCapture: false});
 
@@ -25,7 +25,7 @@ class Navbar extends React.Component {
 
   navClose() {
     this.setState({
-      dropdown: "loggedin-nav-right-links-account-dropdown-container-hidden",
+      dropdown: "account-dropdown-hidden",
     });
   }
 
