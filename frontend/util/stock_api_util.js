@@ -18,3 +18,10 @@ export const getUserStocks = (user) => {
     url: `/api/users/${user}`,
   }); 
 };
+
+export const getStockObjectBySymbol = (symbol) => {
+  return $.ajax({
+    method: "GET", 
+    url: `/api/stocks/${symbol}`
+  });
+};

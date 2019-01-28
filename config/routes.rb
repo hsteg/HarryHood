@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
     resources :transactions, only: [:show]
     resources :user_watches, only: [:show]
-    resources :stocks, only: [:index]
+    resources :stocks, only: [:index, :show]
   end
   
   root "static_pages#root"
