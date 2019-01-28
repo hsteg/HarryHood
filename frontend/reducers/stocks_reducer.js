@@ -1,6 +1,7 @@
 import { RECEIVE_FULL_STOCK_INFO, 
         RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
-        RECEIVE_USER_STOCKS } from '../actions/stock_actions';
+        RECEIVE_USER_STOCKS,
+        RECEIVE_USER_STOCK_OBJECT } from '../actions/stock_actions';
 import { merge } from 'lodash';
 
 const stocksReducer = (state={}, action) => {
@@ -17,6 +18,8 @@ const stocksReducer = (state={}, action) => {
       let marriage = {};
       stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stocks[stock.symbol]))
       return marriage;
+    case RECEIVE_USER_STOCK_OBJECT:
+      return merge(newState, action.stockObject);
     default:
       return newState;
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getStockInfo } from '../actions/stock_actions';
+import { getStockInfo, getStockObjectBySymbol } from '../actions/stock_actions';
 import Navbar from './navbar';
 import StockChart from './stock_chart';
 import TransactionBox from './transaction-box';
@@ -12,6 +12,7 @@ class Stock extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getStockObjectBySymbol(this.props.symbol)
     this.props.getStockInfo(this.props.symbol);
   }
 
@@ -59,6 +60,7 @@ const msp = (state, ownProps) => {
 const mdp = (dispatch) => {
   return {
     getStockInfo: (stock) => dispatch(getStockInfo(stock)),
+    getStockObjectBySymbol: (symbol) => dispatch(getStockObjectBySymbol(symbol)),
     
   };
 }
