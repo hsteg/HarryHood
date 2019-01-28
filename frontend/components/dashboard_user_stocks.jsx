@@ -14,13 +14,13 @@ class DashboardUserStockList extends React.Component {
       return (
         <div className="list-item" key={transaction.id}>
           
-            <div className="userstock-stock-symbol">
+            <div className="list-stock-symbol">
               {stocks[transaction.stock_id].symbol}
             </div>
-            <div className="userstock-stock-graph">
+            <div className="list-stock-graph">
               graph here
           </div>
-            <div className="userstock-stock-price">
+            <div className="list-stock-price">
               {stocks[transaction.stock_id].quote.latestPrice}
             </div>
 

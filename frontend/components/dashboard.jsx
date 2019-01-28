@@ -50,13 +50,13 @@ class Dashboard extends React.Component {
           <div className="right-col">
             <div className="stocks-lists-container">
               <div className="stocks-list-header">
-                <h1>user stocks</h1>
-                <h1>button</h1>
+                <h1 className="stocks-list-header-text">user stocks</h1>
+                <h1 className="stocks-list-header-button">button</h1>
               </div>
               <DashboardUserStockList stocks={this.props.stocks} loading={this.props.loading} transactions={this.props.transactions} />
               <div className="watch-list-header">
-                <h1>Watchlist</h1>
-                <h1>button</h1>
+                <h1 className="stocks-list-header-text">Watchlist</h1>
+                <h1 className="stocks-list-header-button">button</h1>
               </div>
               <DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} loading={this.props.loading} />
             </div>

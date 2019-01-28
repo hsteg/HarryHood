@@ -13,13 +13,13 @@ class DashboardWatchlist extends React.Component {
 
       return (
         <div className="list-item" key={watch.id}>
-            <div className="watchlist-stock-symbol">
+            <div className="list-stock-symbol">
               {stocks[watch.stock_id].symbol}
             </div>
-            <div className="watchlist-stock-graph">
+            <div className="list-stock-graph">
               graph here
           </div>
-            <div className="watchlist-stock-price">
+            <div className="list-stock-price">
               {stocks[watch.stock_id].quote.latestPrice}
             </div>
           

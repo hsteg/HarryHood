@@ -13,7 +13,7 @@
 }
 
 .content-main {
-  /* min-height: 100vh; */
+  min-height: 100vh;
   width: 1024px;
   display: flex;
   flex-direction: row;

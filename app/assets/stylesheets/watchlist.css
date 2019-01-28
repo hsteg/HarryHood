@@ -8,3 +8,57 @@
   height: 60px;
 }
 
+.list-item:hover {
+  background-color: #171718;
+}
+
+.list-stock-symbol {
+  padding-left: 20px;
+  width: 70px;
+}
+
+.list-stock-graph {
+  width: 64px;
+}
+
+.list-stock-price {
+  width: 70px;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.stocks-list-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #0e0d0d;
+  height: 52px;
+  align-items: center;
+}
+
+.watch-list-header {
+  border-top: 1px solid #0e0d0d;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #0e0d0d;
+  height: 52px;
+  align-items: center;
+}
+
+.stocks-lists-container::-webkit-scrollbar { 
+  width: 0 !important 
+}
+
+.stocks-list-header-text {
+  padding-left: 20px;
+}
+
+.stocks-list-header-button {
+  padding-right: 20px;
+  text-align: right;
+}
+
+
+
+
