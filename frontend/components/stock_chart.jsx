@@ -7,11 +7,12 @@ class StockChart extends React.Component {
   }
 
   render() {
+    const companyName = this.props.stock.company.companyName;
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container-stock">
           <div className="chart-header-name-display">
-            Stock Name
+            {companyName}
           </div>
           <div className="chart-header-price-value-stock-view">
             $23,951.37

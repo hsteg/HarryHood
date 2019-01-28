@@ -6,20 +6,26 @@ import StockChart from './stock_chart';
 import TransactionBox from './transaction-box';
 
 
+
 class Stock extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      dataLoaded: false
+    }
   }
 
   componentDidMount() {
     this.props.getStockObjectBySymbol(this.props.symbol)
-    this.props.getStockInfo(this.props.symbol);
+    .then(() => this.props.getStockInfo(this.props.symbol))
+    .then( () => this.setState({dataLoaded: true}));
   }
 
 
 
   render() {
-    if (this.props.loading) { return (<h1>loading :)</h1>); }
+    if (this.state.dataLoaded === false) { return (<h1>loading :)</h1>); };
+    if (this.props.loading) { return (<h1>loading :)</h1>); };
     
     return (
       <div className="dashboard-main">
@@ -51,7 +57,7 @@ class Stock extends React.Component {
 
 const msp = (state, ownProps) => {
   return {
-    stock: state.stocks,
+    stock: Object.values(state.entities.stocks)[0],
     symbol: ownProps.match.params.symbol,
     loading: state.ui.loading.stockDataLoading,
   };
@@ -61,7 +67,6 @@ const mdp = (dispatch) => {
   return {
     getStockInfo: (stock) => dispatch(getStockInfo(stock)),
     getStockObjectBySymbol: (symbol) => dispatch(getStockObjectBySymbol(symbol)),
-    
   };
 }
  

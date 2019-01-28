@@ -7,6 +7,7 @@ export const START_LOADING_DAY_STOCK_GROUP_PRICE_DATA = "START_LOADING_DAY_STOCK
 export const RECEIVE_USER_STOCK_OBJECT = "RECEIVE_USER_STOCK_OBJECT";
 
 export const getStockObjectBySymbol = (symbol) => dispatch => {
+  dispatch(startLoadingFullStockInfo());
   return APIUtil.getStockObjectBySymbol(symbol).then(
     stockObject => {
       return dispatch(receiveStockObject(stockObject));
