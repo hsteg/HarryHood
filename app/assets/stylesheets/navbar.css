@@ -45,6 +45,7 @@
   font-size: 14px;
   text-decoration: none;
   padding: 0 10px;
+  
 }
 
 .loggedin-nav-links-account-button {
@@ -57,11 +58,13 @@
   font-family: inherit;
   background-color: transparent;
   color: white;
+  margin-right: 7px;
 }
 
 .loggedin-nav-links-account-button-green {
   text-decoration: none;
   border: 0;
+  margin-right: 7px;
   align-items: center;
   cursor: pointer;
   font-size: 14px;
@@ -69,6 +72,10 @@
   font-family: inherit;
   background-color: transparent;
   color: #21ce99;
+  border-bottom: 2px solid #21ce99;
+  box-sizing: border-box;
+  padding-top: 7px;
+  padding-bottom: 5px;
 }
 
 .loggedin-nav-links-account-button:hover, .loggedin-nav-right-links-link-item:hover {
