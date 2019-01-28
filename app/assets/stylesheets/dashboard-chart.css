@@ -1,0 +1,33 @@
+.dashboard-chart {
+  height: 350px;
+  box-sizing: border-box;
+  margin-bottom: 44px;
+}
+
+.dashboard-chart-header-container {
+  height: 84px;
+  box-sizing: border-box;
+}
+
+.dashboard-chart-header-portfolio-value {
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: .8px;
+}
+
+.dashboard-chart-header-change-container {
+  padding-top: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .2px;
+}
+
+.dashboard-actual-chart {
+  height: 200px;
+}
+
+.dashboard-chart-timeline-selector {
+  height: 33px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}

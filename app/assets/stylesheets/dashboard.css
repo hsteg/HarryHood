@@ -31,12 +31,12 @@
 }
 
 .content-chart {
-  margin-top: 20px;
+  margin-top: 36px;
 }
 .stocks-lists-container {
   overflow: scroll;
   height: 85vh;
-  margin-top: 20px;
+  margin-top: 30px;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(0, 0, 0, 0.6);
 }
 

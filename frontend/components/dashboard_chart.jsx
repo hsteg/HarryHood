@@ -9,21 +9,18 @@ class DashboardChart extends React.Component {
   render() {
     return (
       <div className="dashboard-chart">
-        <div className="dashboard-content-graph-header-container">
-          <div className="dashboard-content-graph-header-portfolio-value">
-            porfolio value here
+        <div className="dashboard-chart-header-container">
+          <div className="dashboard-chart-header-portfolio-value">
+            $23,951.37
           </div>
-          <div className="dashboard-content-graph-header-change-container">
-            day change
-          </div>
-          <div className="dashboard-content-graph-header-change-container-afterhours">
-            after hours change
+          <div className="dashboard-chart-header-change-container">
+            +$420.69 (4.20%) 
           </div>
         </div>
-        <div className="dashboard-content-graph">
-          graph here
+        <div className="dashboard-actual-chart">
+          chart here
         </div>
-        <nav className="dashboard-content-graph-timeline-selector">
+        <nav className="dashboard-chart-timeline-selector">
           1s 3d etc
         </nav>
       </div>
