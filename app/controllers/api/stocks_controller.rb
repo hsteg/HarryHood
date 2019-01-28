@@ -10,6 +10,6 @@ class Api::StocksController < ApplicationController
 
   private
   def stock_params 
-    params.require(:stock).permit(:symbol)
+    params.require(:stock).permit(:symbol, :name)
   end
 end
