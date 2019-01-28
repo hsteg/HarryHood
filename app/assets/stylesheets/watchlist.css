@@ -1,0 +1,10 @@
+.list-item {
+  cursor: pointer;
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+

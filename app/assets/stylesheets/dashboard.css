@@ -2,6 +2,7 @@
   min-width: 1036px;
   background-color: #1b1b1d;
   color: white;
+  min-height: 100vh;
 }
 
 .loggedin-nav-holder {
@@ -21,7 +22,7 @@
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 0 10px;
+  width: 1024px;
 }
 
 .loggedin-content-left-container {
@@ -30,10 +31,23 @@
 
 .loggedin-content-right-main-container {
   flex: 0 0 27.77778%;
+  box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.01), 0 3px 20px rgba(0, 0, 0, 0.6);  
+  overflow: hidden;
+  height: calc(100vh - 95px - 24px);
+  border: none;
 }
 
 .loggedin-content-graph-container {
   width: 676px;
   height: 349px;
   margin-bottom: 44px;
+}
+
+.dashboard-content-right-users-stocks-header {
+  height: 52px;
+  display: flex;
+  padding: 4px 24px 0;
+  align-items: center;
+  border-bottom: 1px solid #0e0d0d;
+  justify-content: space-between;
 }

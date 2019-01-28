@@ -8,7 +8,7 @@
 .loggedin-nav-logo-search {
   display: flex;
   align-items: center;
-  flex: 0 0 72.2%;
+  flex: 0 0 72.2%;  
 }
 
 .loggedin-nav-logo {
@@ -21,7 +21,7 @@
 .loggedin-nav-searchbar-container {
   flex-basis: 480px;
   min-width: 160px;
-  margin-right: auto;
+
 }
 
 .loggedin-nav-searchbar {
