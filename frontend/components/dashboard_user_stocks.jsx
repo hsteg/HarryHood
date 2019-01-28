@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class DashboardUserStockList extends React.Component {
   constructor(props) {
@@ -12,8 +13,7 @@ class DashboardUserStockList extends React.Component {
     const lis = Object.values(this.props.transactions).map(transaction => {
 
       return (
-        <div className="list-item" key={transaction.id}>
-          
+        <Link to={`/stock/${stocks[transaction.stock_id].symbol}`} className="list-item" key={transaction.id}>
             <div className="list-stock-symbol">
               {stocks[transaction.stock_id].symbol}
             </div>
@@ -23,8 +23,7 @@ class DashboardUserStockList extends React.Component {
             <div className="list-stock-price">
               {stocks[transaction.stock_id].quote.latestPrice}
             </div>
-
-        </div>
+        </Link>
       );
     }
 
