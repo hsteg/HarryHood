@@ -12,8 +12,10 @@
 }
 
 .loggedin-nav-logo {
-  padding-left: 8px;
+  padding-left: 40px;
   padding-right: 18px;
+  width: 40px;
+  height: 40px;
 }
 
 .loggedin-nav-searchbar-container {
@@ -32,11 +34,33 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 10px;
+  padding-right: 50px;
 }
 
+
+
 .loggedin-nav-right-links-link-item {
+  color: white;
   margin-left: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 0 10px;
+}
+
+.loggedin-nav-right-links-link-item > button {
+  text-decoration: none;
+  border: 0;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  background-color: transparent;
+  color: white;
+}
+
+.loggedin-nav-right-links-link-item > button:hover, .loggedin-nav-right-links-link-item:hover {
+  color: #21ce99;
 }
 
 .loggedin-nav-right-links-account-dropdown-container-hidden {

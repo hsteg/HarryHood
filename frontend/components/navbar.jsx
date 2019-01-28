@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { logout } from '../actions/session_actions';
 
 class Navbar extends React.Component {
@@ -17,6 +18,7 @@ class Navbar extends React.Component {
       dropdown: "loggedin-nav-right-links-account-dropdown-container",
     });
     document.addEventListener('click', this.navClose, {once: true, useCapture: false});
+
     document.getElementById('dropdown').addEventListener('click',function(e) {
       e.stopPropagation();}, true);
   }
@@ -31,9 +33,7 @@ class Navbar extends React.Component {
     return (
       <div className="loggedin-navbar">
         <div className="loggedin-nav-logo-search">
-          <div className="loggedin-nav-logo">
-            Logo here
-            </div>
+          <img className="loggedin-nav-logo" src={window.logoURL} />
           <div className="loggedin-nav-searchbar-container">
             <div className="loggedin-nav-searchbar">
               Searchbar here
@@ -41,8 +41,7 @@ class Navbar extends React.Component {
           </div>
         </div>
         <div className="loggedin-nav-right-links">
-          <div className="loggedin-nav-right-links-link-item">Home</div>
-          <div className="loggedin-nav-right-links-link-item">Notifications</div>
+          <Link to="/" className="loggedin-nav-right-links-link-item">Home</Link>
           <div className="loggedin-nav-right-links-link-item">
             <button onClick={this.navOpen}>Account</button>
             <div className={this.state.dropdown}  id="dropdown" >
