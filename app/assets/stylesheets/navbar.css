@@ -38,3 +38,23 @@
 .loggedin-nav-right-links-link-item {
   margin-left: 10px;
 }
+
+.loggedin-nav-right-links-account-dropdown-container-hidden {
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+}
+
+.loggedin-nav-right-links-account-dropdown-container {
+  padding: 24px 0 0;
+  right: -12px;
+  transition: opacity 150ms, visibility 150ms;
+  border: none;
+  border-radius: 2px;
+  position: absolute;
+}
+
+.loggedin-nav-right-links-account-dropdown-menu {
+  width: 296px;
+
+}
