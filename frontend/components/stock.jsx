@@ -30,8 +30,16 @@ class Stock extends React.Component {
             </div>
           </div>
           <div className="right-col">
-            <div className="stocks-lists-container">
-              
+            <div className="transaction-container">
+              <div className="transaction-container-header-container">
+                  asdf
+              </div>
+              <div className="transaction-component">
+                transactions here
+                <div className="transaction-transaction-assets">
+                  buying power or shares available to sell
+                </div>
+              </div>
             </div>
           </div>
         </div>
