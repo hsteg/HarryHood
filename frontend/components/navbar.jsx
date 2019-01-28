@@ -16,17 +16,15 @@ class Navbar extends React.Component {
     this.setState({
       dropdown: "loggedin-nav-right-links-account-dropdown-container",
     });
-    document.addEventListener('click', this.navClose, false);
+    document.addEventListener('click', this.navClose, {once: true, useCapture: false});
     document.getElementById('dropdown').addEventListener('click',function(e) {
-      e.stopPropagation();
-    }, true);
+      e.stopPropagation();}, true);
   }
 
   navClose() {
     this.setState({
       dropdown: "loggedin-nav-right-links-account-dropdown-container-hidden",
     });
-    document.removeEventListener('click', this.navClose);
   }
 
   render() {
