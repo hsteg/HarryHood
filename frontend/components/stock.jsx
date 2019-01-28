@@ -15,7 +15,11 @@ class Stock extends React.Component {
     this.props.getStockInfo(this.props.symbol);
   }
 
+
+
   render() {
+    if (this.props.loading) { return (<h1>loading :)</h1>); }
+    
     return (
       <div className="dashboard-main">
         <div className="header-container">
@@ -24,7 +28,8 @@ class Stock extends React.Component {
         <div className="content-main">
           <div className="left-col">
             <div className="content-chart">
-              <StockChart stock={this.props.stocks} />
+              
+              <StockChart stock={this.props.stock} />
             </div>
             <div className="content-news">
               News goes here
@@ -32,9 +37,6 @@ class Stock extends React.Component {
           </div>
           <div className="right-col">
             <div className="transaction-container">
-              <div className="transaction-container-header-container">
-                  asdf
-              </div>
               <div className="transaction-component">
                 <TransactionBox />
               </div>
@@ -48,14 +50,16 @@ class Stock extends React.Component {
 
 const msp = (state, ownProps) => {
   return {
-    stocks: state.stocks,
-    symbol: ownProps.match.params.symbol
+    stock: state.stocks,
+    symbol: ownProps.match.params.symbol,
+    loading: state.ui.loading.stockDataLoading,
   };
 }
 
 const mdp = (dispatch) => {
   return {
     getStockInfo: (stock) => dispatch(getStockInfo(stock)),
+    
   };
 }
  

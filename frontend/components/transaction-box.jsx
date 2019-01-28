@@ -8,7 +8,11 @@ class TransactionBox extends React.Component {
 
   render() {
     return (
-      <h1>hello i am transactionbox</h1>
+      <>
+        <div className="transaction-container-header-container">
+          asdf
+        </div>
+      </>
     );
   }
 }
