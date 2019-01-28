@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getStockInfo } from '../actions/stock_actions';
 import Navbar from './navbar';
 import StockChart from './stock_chart';
+import TransactionBox from './transaction-box';
 
 
 class Stock extends React.Component {
@@ -35,10 +36,7 @@ class Stock extends React.Component {
                   asdf
               </div>
               <div className="transaction-component">
-                transactions here
-                <div className="transaction-transaction-assets">
-                  buying power or shares available to sell
-                </div>
+                <TransactionBox />
               </div>
             </div>
           </div>
