@@ -79,10 +79,74 @@
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(0, 0, 0, 0.6);
   background-color: #1b1b1d;
   margin-right: 75px;
-
+  color: white;
 }
 
 .loggedin-nav-right-links-account-dropdown-menu {
   width: 296px;
+}
 
+.dropdown-menu-header {
+  height: 100px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #0e0d0d;
+  padding: 0 24px 12px;
+  letter-spacing: .8px;
+}
+
+.dropdown-menu-header-name {
+  width: 100%;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.dropdown-menu-header-finances {
+  display: flex;
+  margin-top: 24px;
+}
+
+.dropdown-finances-porfolio-value {
+  margin-right: 36px;
+}
+
+.dropdown-portfolio-value-numbers {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+}
+
+.dropdown-portfolio-value-text {
+  font-size: 13px;
+  font-weight: 300;
+  padding-top: 3px;
+}
+
+.dropdown-menu-content-2 {
+  height: 48px;
+  border-bottom: 1px solid #0e0d0d;
+}
+
+.dropdown-signout-button {
+  height: 48px;
+  background: transparent;
+  color: white;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 0 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  outline: none;
+}
+
+.icon-signout {
+  width: 24px;
+  margin-right: 12px;
+  font-size: 20px;
+  outline: none;
 }

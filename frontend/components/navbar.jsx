@@ -17,10 +17,11 @@ class Navbar extends React.Component {
     this.setState({
       dropdown: "account-dropdown",
     });
-    document.addEventListener('click', this.navClose, {once: true, useCapture: false});
+    document.addEventListener('click', this.navClose, { once: true, useCapture: false });
 
-    document.getElementById('dropdown').addEventListener('click',function(e) {
-      e.stopPropagation();}, true);
+    document.getElementById('dropdown').addEventListener('click', function (e) {
+      e.stopPropagation();
+    }, true);
   }
 
   navClose() {
@@ -44,26 +45,31 @@ class Navbar extends React.Component {
           <Link to="/" className="loggedin-nav-right-links-link-item">Home</Link>
           <div className="loggedin-nav-right-links-link-item">
             <button onClick={this.navOpen}>Account</button>
-            <div className={this.state.dropdown}  id="dropdown" >
+            <div className={this.state.dropdown} >
               <div className="loggedin-nav-right-links-account-dropdown-menu">
-                <div className="loggedin-nav-right-links-account-dropdown-menu-header">
-                  <h3>
+                <div className="dropdown-menu-header" id="dropdown">
+                  <h3 className="dropdown-menu-header-name">
                     {this.props.currentUser.first_name} {this.props.currentUser.last_name}
                   </h3>
-                  <div className="loggedin-nav-right-links-account-dropdown-menu-header-finances">
-                    <div className="loggedin-nav-right-links-dropdown-finances-porfolio-value">
-                      porfolio value
+                  <div className="dropdown-menu-header-finances">
+                    <div className="dropdown-finances-porfolio-value">
+                      <h1 className="dropdown-portfolio-value-numbers">$12345.67</h1>
+                      <h1 className="dropdown-portfolio-value-text">Portfolio Value</h1>
                     </div>
-                    <div className="loggedin-nav-right-links-dropdown-finances-cash-balance">
-                      {this.props.currentUser.cash_balance}
+                    <div className="dropdown-finances-cash-balance">
+                      <h1 className="dropdown-portfolio-value-numbers">${this.props.currentUser.cash_balance}</h1>
+                      <h1 className="dropdown-portfolio-value-text">Buying Power</h1>
                     </div>
                   </div>
                 </div>
-                <div className="loggedin-nav-right-links-account-dropdown-menu-content-2">
+                <div className="dropdown-menu-content-2">
                   content 2
                 </div>
-                <div className="loggedin-nav-right-links-account-dropdown-menu-content-3">
-                  <button onClick={this.props.logout}>Log Out :(</button>
+                <div className="dropdown-menu-content-3">
+                  <button onClick={this.props.logout} className="dropdown-signout-button">
+                    <i className="fas fa-sign-in-alt icon-signout"></i>
+                    <h1 className="dropdown-signout-button-text">Log Out</h1>
+                  </button>
                 </div>
               </div>
             </div>

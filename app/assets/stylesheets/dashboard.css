@@ -40,26 +40,6 @@
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(0, 0, 0, 0.6);
 }
 
-.stocks-list-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-bottom: 1px solid #0e0d0d;
-  height: 52px;
-  align-items: center;
-}
-
-.watch-list-header {
-  border-top: 1px solid #0e0d0d;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-bottom: 1px solid #0e0d0d;
-  height: 52px;
-  align-items: center;
-}
-
-.stocks-lists-container::-webkit-scrollbar { width: 0 !important }
 
 
 
