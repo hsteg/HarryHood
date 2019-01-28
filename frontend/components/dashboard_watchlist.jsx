@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class DashboardWatchlist extends React.Component {
   constructor(props) {
@@ -12,18 +13,17 @@ class DashboardWatchlist extends React.Component {
     const lis = Object.values(this.props.watches).map(watch => {
 
       return (
-        <div className="list-item" key={watch.id}>
-            <div className="list-stock-symbol">
-              {stocks[watch.stock_id].symbol}
-            </div>
-            <div className="list-stock-graph">
-              graph here
+        <Link to={`/stock/${stocks[watch.stock_id].symbol}`} className="list-item" key={watch.id}>
+          <div className="list-stock-symbol">
+            {stocks[watch.stock_id].symbol}
           </div>
-            <div className="list-stock-price">
-              {stocks[watch.stock_id].quote.latestPrice}
-            </div>
-          
-        </div>
+          <div className="list-stock-graph">
+            graph here
+          </div>
+          <div className="list-stock-price">
+            {stocks[watch.stock_id].quote.latestPrice}
+          </div>
+        </Link>
       );
     }
 
