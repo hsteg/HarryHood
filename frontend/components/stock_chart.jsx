@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-class DashboardChart extends React.Component {
+class StockChart extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -40,4 +40,4 @@ const mdp = (dispatch) => {
   };
 };
 
-export default connect(msp, mdp)(DashboardChart)
+export default connect(msp, mdp)(StockChart)

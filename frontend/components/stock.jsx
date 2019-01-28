@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getStockInfo } from '../actions/stock_actions';
+import Navbar from './navbar';
+import DashboardChart from './dashboard_chart';
+
 
 class Stock extends React.Component {
   constructor(props) {
@@ -13,8 +16,25 @@ class Stock extends React.Component {
 
   render() {
     return (
-      <div>
-       <h1>hello</h1>
+      <div className="dashboard-main">
+        <div className="header-container">
+          <Navbar />
+        </div>
+        <div className="content-main">
+          <div className="left-col">
+            <div className="content-chart">
+              <DashboardChart />
+            </div>
+            <div className="content-news">
+              News goes here
+            </div>
+          </div>
+          <div className="right-col">
+            <div className="stocks-lists-container">
+              
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
