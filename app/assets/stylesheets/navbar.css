@@ -47,7 +47,7 @@
   padding: 0 10px;
 }
 
-.loggedin-nav-right-links-link-item > button {
+.loggedin-nav-links-account-button {
   text-decoration: none;
   border: 0;
   align-items: center;
@@ -59,7 +59,19 @@
   color: white;
 }
 
-.loggedin-nav-right-links-link-item > button:hover, .loggedin-nav-right-links-link-item:hover {
+.loggedin-nav-links-account-button-green {
+  text-decoration: none;
+  border: 0;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  background-color: transparent;
+  color: #21ce99;
+}
+
+.loggedin-nav-links-account-button:hover, .loggedin-nav-right-links-link-item:hover {
   color: #21ce99;
 }
 
@@ -149,4 +161,8 @@
   margin-right: 12px;
   font-size: 20px;
   outline: none;
+}
+
+.dropdown-signout-button:hover {
+  background-color: #171718;
 }

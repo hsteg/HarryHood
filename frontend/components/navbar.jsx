@@ -44,7 +44,10 @@ class Navbar extends React.Component {
         <div className="loggedin-nav-right-links">
           <Link to="/" className="loggedin-nav-right-links-link-item">Home</Link>
           <div className="loggedin-nav-right-links-link-item">
-            <button onClick={this.navOpen}>Account</button>
+            <button onClick={this.navOpen} 
+            className={this.state.dropdown === "account-dropdown" ? "loggedin-nav-links-account-button-green" : "loggedin-nav-links-account-button"}>
+              Account
+            </button>
             <div className={this.state.dropdown} >
               <div className="loggedin-nav-right-links-account-dropdown-menu">
                 <div className="dropdown-menu-header" id="dropdown">
@@ -63,7 +66,7 @@ class Navbar extends React.Component {
                   </div>
                 </div>
                 <div className="dropdown-menu-content-2">
-                  content 2
+                  
                 </div>
                 <div className="dropdown-menu-content-3">
                   <button onClick={this.props.logout} className="dropdown-signout-button">
