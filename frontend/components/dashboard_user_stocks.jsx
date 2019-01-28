@@ -12,7 +12,7 @@ class DashboardUserStockList extends React.Component {
     const lis = Object.values(this.props.transactions).map(transaction => {
 
       return (
-        <div className="list-item">
+        <div className="list-item" key={transaction.id}>
           
             <div className="userstock-stock-symbol">
               {stocks[transaction.stock_id].symbol}

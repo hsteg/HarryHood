@@ -22,6 +22,10 @@ stock5 = Stock.create( {symbol: "PZZA"} )
 stock6 = Stock.create( {symbol: "CMG"} )
 stock7 = Stock.create( {symbol: "TSLA"} )
 stock8 = Stock.create( {symbol: "TWTR"} )
+stock9 = Stock.create( {symbol: "F"} )
+stock10 = Stock.create( {symbol: "NOK"} )
+stock11 = Stock.create( {symbol: "SNAP"} )
+stock12 = Stock.create( {symbol: "FB"} )
 
 transaction1 = Transaction.create({ buy: true, stock_id: stock1.id, user_id: user1.id, num_shares: 3, price_per_share: 130 })
 transaction2 = Transaction.create({ buy: true, stock_id: stock2.id, user_id: user1.id, num_shares: 10, price_per_share: 20.58 })
@@ -32,9 +36,13 @@ transaction6 = Transaction.create({ buy: false, stock_id: stock5.id, user_id: us
 transaction7 = Transaction.create({ buy: true, stock_id: stock3.id, user_id: user1.id, num_shares: 1, price_per_share: 135.05 })
 
 user_watch1 = UserWatch.create( {stock_id: stock6.id, user_id: user1.id } )
-user_watch1 = UserWatch.create( {stock_id: stock7.id, user_id: user1.id } )
-user_watch1 = UserWatch.create( {stock_id: stock8.id, user_id: user1.id } )
-user_watch1 = UserWatch.create( {stock_id: stock1.id, user_id: user2.id } )
-user_watch1 = UserWatch.create( {stock_id: stock3.id, user_id: user2.id } )
+user_watch2 = UserWatch.create( {stock_id: stock7.id, user_id: user1.id } )
+user_watch3 = UserWatch.create( {stock_id: stock8.id, user_id: user1.id } )
+user_watch4 = UserWatch.create( {stock_id: stock1.id, user_id: user2.id } )
+user_watch5 = UserWatch.create( {stock_id: stock3.id, user_id: user2.id } )
+user_watch6 = UserWatch.create( {stock_id: stock9.id, user_id: user1.id } )
+user_watch7 = UserWatch.create( {stock_id: stock10.id, user_id: user1.id } )
+user_watch8 = UserWatch.create( {stock_id: stock11.id, user_id: user1.id } )
+user_watch9 = UserWatch.create( {stock_id: stock12.id, user_id: user1.id } )
 
  

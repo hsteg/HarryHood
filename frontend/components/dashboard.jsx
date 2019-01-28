@@ -13,12 +13,12 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.getStockSymbols = this.getStockSymbols.bind(this);
-    }
+  }
 
-  componentDidMount() { 
+  componentDidMount() {
     this.props.getUserTransactions(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
-    this.props.getUserStocks(this.props.currentUser.id).then( () => this.getStockSymbols()); 
+    this.props.getUserStocks(this.props.currentUser.id).then(() => this.getStockSymbols());
   }
 
   getStockSymbols() {
@@ -32,64 +32,33 @@ class Dashboard extends React.Component {
 
 
 
-  render() { 
+  render() {
     return (
-      <div className="loggedin-main">
-        <div className="loggedin-nav-holder">
+      <div className="dashboard-main">
+        <div className="header-container">
           <Navbar />
         </div>
-        <div className="loggedin-content-container">
-          <div className="loggedin-content">
-            <div className="loggedin-content-left-container">
-              <section className="loggedin-content-graph-container">
-                <DashboardChart />
-              </section>
-              <section className="loggedin-content-news-container">
-                <div className="loggedin-content-news-header-container">
-                  <div className="loggedin-content-news-header">
-                    NEWS goes here
-                    </div>
-                </div>
-                <div className="loggedin-content-news-list-container">
-                  <div className="loggedin-content-news-item-container">
-                    <div className="loggedin-content-news-item">
-                      News Item
-                      </div>
-                    <div className="loggedin-content-news-item">
-                      News Item
-                      </div>
-                    <div className="loggedin-content-news-item">
-                      News Item
-                      </div>
-                    <div className="loggedin-content-news-item">
-                      News Item
-                      </div>
-                    <div className="loggedin-content-news-item">
-                      News Item
-                      </div>
-                  </div>
-                </div>
-              </section>
+        <div className="content-main">
+          <div className="left-col">
+            <div className="content-chart">
+              <DashboardChart />
             </div>
-            <div className="loggedin-content-right-main-container">
-              <div className="loggedin-content-right-main">
-                <section className="dashboard-content-right-users-stocks">
-                  <div className="dashboard-content-right-users-stocks-header">
-                    <div className="dashboard-content-users-stocks-header-title">
-                      User stocks
-                    </div>
-                    <div className="dashboard-content-users-stocks-header-button">
-                      Button
-                    </div>
-                  </div>
-                  <DashboardUserStockList stocks={this.props.stocks} loading={this.props.loading} transactions={this.props.transactions}/>
-  
-                </section>
-                <section className="dashboard-content-right-users-watchlist">
-                  <h1>watchlist</h1>
-                  <DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} loading={this.props.loading} />
-                </section>
+            <div className="content-news">
+              News goes here
+            </div>
+          </div>
+          <div className="right-col">
+            <div className="stocks-lists-container">
+              <div className="stocks-list-header">
+                <h1>user stocks</h1>
+                <h1>button</h1>
               </div>
+              <DashboardUserStockList stocks={this.props.stocks} loading={this.props.loading} transactions={this.props.transactions} />
+              <div className="watch-list-header">
+                <h1>Watchlist</h1>
+                <h1>button</h1>
+              </div>
+              <DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} loading={this.props.loading} />
             </div>
           </div>
         </div>
@@ -97,6 +66,9 @@ class Dashboard extends React.Component {
     );
   }
 }
+
+
+
 
 
 const msp = (state) => {
