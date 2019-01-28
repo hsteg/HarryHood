@@ -9,12 +9,15 @@ class StockChart extends React.Component {
   render() {
     return (
       <div className="dashboard-chart">
-        <div className="chart-header-container">
-          <div className="chart-header-price-value">
+        <div className="chart-header-container-stock">
+          <div className="chart-header-name-display">
+            Stock Name
+          </div>
+          <div className="chart-header-price-value-stock-view">
             $23,951.37
           </div>
-          <div className="chart-header-change-value">
-            +$420.69 (4.20%) 
+          <div className="chart-header-change-value-stock-page">
+            +$420.69 (4.20%)
           </div>
         </div>
         <div className="chart-actual-chart">

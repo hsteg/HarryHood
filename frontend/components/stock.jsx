@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getStockInfo } from '../actions/stock_actions';
 import Navbar from './navbar';
-import DashboardChart from './dashboard_chart';
+import StockChart from './stock_chart';
 
 
 class Stock extends React.Component {
@@ -23,7 +23,7 @@ class Stock extends React.Component {
         <div className="content-main">
           <div className="left-col">
             <div className="content-chart">
-              <DashboardChart />
+              <StockChart stock={this.props.stocks} />
             </div>
             <div className="content-news">
               News goes here
