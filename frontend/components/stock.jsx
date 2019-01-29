@@ -12,7 +12,7 @@ class Stock extends React.Component {
     super(props);
     this.state = {
       dataLoaded: false,
-      range: "5Y"
+      range: "1D"
     }
     this.handleSelector = this.handleSelector.bind(this);
   }
@@ -41,7 +41,7 @@ class Stock extends React.Component {
         <div className="content-main">
           <div className="left-col">
             <div className="content-chart">
-              <StockChart stock={this.props.stock} range={this.state.range} />
+              <StockChart stock={this.props.stock} dateRange={this.state.range} />
               <nav className="chart-timeline-selector">
                 <button className={this.state.range === "1D" ? "chart-selector-button-a" : "chart-selector-button"} 
                         onClick={this.handleSelector}>1D</button>

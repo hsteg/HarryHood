@@ -24,13 +24,11 @@ const stocksReducer = (state={}, action) => {
     case RECEIVE_USER_STOCK_OBJECT:
       return merge(newState, action.stockObject);
     case RECEIVE_HISTORICAL_STOCK_DATA:
-    debugger
       stockIds = Object.values(newState)
       stockIds.forEach(stock => {
         marriage[stock.id] = stock;
         marriage[stock.id].historicalData = action.stockData;
       }); 
-      debugger
     default:
       return newState;
   }
