@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getStockInfo, getStockObjectBySymbol } from '../actions/stock_actions';
 import Navbar from './navbar';
 import StockChart from './stock_chart';
-import TransactionBox from './transaction-box';
+import StockTransaction from './stock_transaction';
 
 
 
@@ -63,7 +63,7 @@ class Stock extends React.Component {
           <div className="right-col">
             <div className="transaction-container">
               <div className="transaction-component">
-                <TransactionBox />
+                <StockTransaction />
               </div>
             </div>
           </div>

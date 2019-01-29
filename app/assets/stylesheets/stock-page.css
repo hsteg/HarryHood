@@ -31,12 +31,6 @@
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(0, 0, 0, 0.6);
 }
 
-.transaction-container-header-container {
-  height: 52px;
-  box-sizing: border-box;
-  border-bottom: 1px solid #0e0d0d;
-}
-
 .transaction-transaction-assets {
   height: 48px;
   box-sizing: border-box;
