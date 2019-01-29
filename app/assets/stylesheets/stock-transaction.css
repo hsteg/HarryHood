@@ -2,4 +2,145 @@
   height: 52px;
   box-sizing: border-box;
   border-bottom: 1px solid #0e0d0d;
+  display: flex;
+  flex-direction: row;
+  padding: 0 22px;
+  justify-content: space-between;
 }
+
+.transaction-form-footer {
+  height: 47px;
+  box-sizing: border-box;
+  border-top: 1px solid #0e0d0d;
+}
+
+.transaction-buy-form {
+  height: 251px;
+  box-sizing: border-box;
+  padding: 12px 22px;
+  font-family: inherit;
+}
+
+.transaction-form-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: .4px;
+}
+
+.transaction-shares-text {
+  font-weight: 300;
+}
+
+.transaction-form-row:nth-of-type(3) {
+  border-top: 1px solid #0e0d0d;
+}
+
+.transaction-form-row:nth-of-type(4) {
+  justify-content: center; 
+  height: 85px;
+}
+
+.transaction-button {
+  background: #21ce99;
+  border-color: #21ce99;
+  color: #fff;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 48px;
+  min-width: 120px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.transaction-button:hover {
+  background: #1ae9aa;
+  border-color: #1ae9aa;
+}
+
+.transaction-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+
+.transaction-header-button {
+  background: transparent;
+  color: white;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  width: 110px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 0 0;
+  text-align: center;
+  flex-direction: row;
+  align-items: center;
+  outline: none;
+}
+
+.transaction-header-button-a {
+  background: transparent;
+  color: #21ce99;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  width: 110px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 0 0;
+  text-align: center;
+  flex-direction: row;
+  align-items: center;
+  outline: none;
+}
+
+.transaction-header-button:hover {
+  color: #21ce99;
+  transition: color 250ms;
+}
+
+.transaction-shares-field {
+  background: #171718;
+  border-color: #171718;
+  color: #fff;
+  width: 82px;
+  text-align: right;
+  border: 1px solid #171718;
+  border-radius: 4px;
+  height: 36px;
+  font-size: 14px;
+  letter-spacing: .4px;
+  outline: 0;
+  box-sizing: border-box;
+  padding: 0 13px;
+  transition: border-color 200ms;
+  font-family: inherit;
+}
+
+.transaction-shares-field::placeholder {
+  font-size: 14px;
+  color: #8c8c8e; 
+}
+
+
+.transaction-shares-field:hover {
+  border-color: #8c8c8e;
+  background-color: #1b1b1d;
+}
+
+.transaction-shares-field:focus {
+  border-color: #21ce99;
+  background-color: #1b1b1d;
+}
+

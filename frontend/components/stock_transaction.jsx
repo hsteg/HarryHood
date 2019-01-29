@@ -1,20 +1,98 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-class TransactionBox extends React.Component {
+class StockTransaction extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      numShares: '',
+      formType: "buy"
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateNumSharesField = this.updateNumSharesField.bind(this);
+    this.selectForm = this.selectForm.bind(this);
   }
 
+  // componentWillMount() {
+  //   // this.props.clearErrors();
+  // }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    debugger;
+  }
+
+  updateNumSharesField() {
+    return (e) => {
+      this.setState({ numShares: e.target.value });
+    }
+  }
+
+  selectForm(value) {
+    return (e) => {
+      this.setState({ formType: value });
+    };
+  };
+
   render() {
+    const { currentSymbol, latestStockPrice } = this.props;
+
+    const formType = (field) => {
+      if (this.state.formType === field) {
+        return "transaction-header-button-a";
+      } else {
+        return "transaction-header-button"
+      }
+    };
+
+    const footerText = (this.state.formType === "buy") ? "how much cash u have" : "how many shares u have";
+
     return (
       <>
         <div className="transaction-container-header-container">
-          asdf
+          <button className={formType("buy")} onClick={this.selectForm("buy")}>
+            Buy {currentSymbol}
+          </button>
+          <button className={formType("sell")} onClick={this.selectForm("sell")}>
+            Sell {currentSymbol}
+          </button>
+        </div>
+        <div className="transaction-buy-form">
+          <form onSubmit={this.handleSubmit}>
+            <div className="transaction-form-row">
+              <h1 className="transaction-shares-text">Shares</h1>
+              <input type="text" 
+                    className="transaction-shares-field" 
+                    placeholder="0" 
+                    onChange={this.updateNumSharesField()} />
+            </div>
+            <div className="transaction-form-row">
+              <h1 className="transaction-price-text">Market Price</h1>
+              <h1 className="transaction-price-number">{latestStockPrice}</h1>
+            </div>
+            <div className="transaction-form-row">
+              <h1 className="transaction-estimated-cost-text">Estimated Cost</h1>
+              <h1 className="transaction-estimated-cost-number">Market Price</h1>
+            </div>
+            <div className="transaction-form-row">
+              <input type="submit" value="Review Order" className="transaction-button" />
+            </div>
+          </form>
+        </div>
+        <div className="transaction-form-footer">
+          <h1 className="transaction-footer-text">{footerText}</h1>
         </div>
       </>
     );
   }
 }
 
-export default connect(null, null)(TransactionBox);
+const msp = (state) => {
+  return {
+    currentUser: Object.values(state.entities.users)[0],
+    latestStockPrice: Object.values(state.entities.stocks)[0].quote.latestPrice,
+    currentSymbol: Object.values(state.entities.stocks)[0].symbol,
+  };
+};
+
+export default connect(msp, null)(StockTransaction);
