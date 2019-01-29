@@ -43,30 +43,18 @@ class Stock extends React.Component {
             <div className="content-chart">
               <StockChart stock={this.props.stock} range={this.state.range} />
               <nav className="chart-timeline-selector">
-                <button className={this.state.range === "1D" ? "chart-selector-button-g" : "chart-selector-button"} 
-                        onClick={this.handleSelector}>
-                  1D
-                </button>
-                <button className={this.state.range === "1W" ? "chart-selector-button-g" : "chart-selector-button"} 
-                        onClick={this.handleSelector}>
-                  1W
-                </button>
-                <button className={this.state.range === "1M" ? "chart-selector-button-g" : "chart-selector-button"} 
-                        onClick={this.handleSelector}>
-                  1M
-                </button>
-                <button className={this.state.range === "3M" ? "chart-selector-button-g" : "chart-selector-button"} 
-                        onClick={this.handleSelector}>
-                  3M
-                </button>
-                <button className={this.state.range === "1Y" ? "chart-selector-button-g" : "chart-selector-button"} 
-                        onClick={this.handleSelector}>
-                  1Y
-                </button>
-                <button className={this.state.range === "5Y" ? "chart-selector-button-g" : "chart-selector-button"} 
-                        onClick={this.handleSelector}>
-                  5Y
-                </button>
+                <button className={this.state.range === "1D" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>1D</button>
+                <button className={this.state.range === "1W" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>1W</button>
+                <button className={this.state.range === "1M" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>1M</button>
+                <button className={this.state.range === "3M" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>3M</button>
+                <button className={this.state.range === "1Y" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>1Y</button>
+                <button className={this.state.range === "5Y" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>5Y</button>
               </nav>
             </div>
             <div className="content-news">

@@ -9,6 +9,7 @@ class StockChart extends React.Component {
     this.chartColor = this.chartColor.bind(this);
   }
 
+
   oneDayChartData() {
     const chartData = [];
     this.props.stock.chart.forEach(dataPoint => 

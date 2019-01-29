@@ -12,6 +12,15 @@ export const getDayStocksPriceData = (symbols) => {
   });
 };
 
+export const getHistoricalStockData = (symbol, period) => {
+  return $.ajax({ 
+    method: "GET",
+    url: `https://api.iextrading.com/1.0/stock/${symbol}/chart/5y`,
+  });
+};
+
+
+
 export const getUserStocks = (user) => {
   return $.ajax({
     method: "GET",
