@@ -6,6 +6,7 @@ export const START_LOADING_FULL_STOCK_INFO = "START_LOADING_FULL_STOCK_INFO";
 export const START_LOADING_DAY_STOCK_GROUP_PRICE_DATA = "START_LOADING_DAY_STOCK_GROUP_PRICE_DATA";
 export const RECEIVE_USER_STOCK_OBJECT = "RECEIVE_USER_STOCK_OBJECT";
 export const START_LOADING_HISTORICAL_STOCK_DATA = "START_LOADING_HISTORICAL_STOCK_DATA";
+export const RECEIVE_HISTORICAL_STOCK_DATA = "RECEIVE_HISTORICAL_STOCK_DATA";
 
 export const getStockObjectBySymbol = (symbol) => dispatch => {
   dispatch(startLoadingFullStockInfo());
@@ -54,6 +55,12 @@ export const getDayStocksPriceData = (stocks) => dispatch => {
   );
 };
 
+export const receiveHistoricalStockData = (stockData) => {
+  return {
+    type: RECEIVE_HISTORICAL_STOCK_DATA,
+    stockData
+  }
+};
 
 const receiveFullStockInfo = (stock) => {
   return {
