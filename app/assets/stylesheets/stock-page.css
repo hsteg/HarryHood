@@ -1,6 +1,7 @@
 .chart-header-container-stock {
   height: 104px;
   box-sizing: border-box;
+  margin-bottom: 30px;
 }
 
 .chart-header-name-display {

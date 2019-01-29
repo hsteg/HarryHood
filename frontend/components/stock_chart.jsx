@@ -10,8 +10,7 @@ class StockChart extends React.Component {
     this.chartColor = this.chartColor.bind(this);
     this.parseChartData = this.parseChartData.bind(this);
     this.oneDayChartData = this.oneDayChartData.bind(this);
-    this.oneAndThreeMonthChartData = this.oneAndThreeMonthChartData.bind(this);
-    this.oneAndFiveYearChartData = this.oneAndFiveYearChartData.bind(this);
+    this.greaterThanOneWeekChartData = this.greaterThanOneWeekChartData.bind(this);
   }
 
 
@@ -30,13 +29,13 @@ class StockChart extends React.Component {
       case "1D":
         return { data: this.oneDayChartData() };
       case "1M":
-        return { data: this.oneAndThreeMonthChartData() };
+        return { data: this.greaterThanOneWeekChartData() };
       case "3M":
-        return { data: this.oneAndThreeMonthChartData() };
+        return { data: this.greaterThanOneWeekChartData() };
       case "1Y":
-        return { data: this.oneAndFiveYearChartData() };
+        return { data: this.greaterThanOneWeekChartData() };
       case "5Y":
-        return { data: this.oneAndFiveYearChartData() };
+        return { data: this.greaterThanOneWeekChartData() };
       default:
         return null;
     }
@@ -54,30 +53,17 @@ class StockChart extends React.Component {
     return oneDayChartData;
   }
 
-  oneAndThreeMonthChartData() {
+  greaterThanOneWeekChartData() {
     if (!this.props.stock.historicalData) { return []; }
-    const oneAndThreeMonthChartData = [];
+    const greaterThanOneWeekChartData = [];
     this.props.stock.historicalData.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
       dpObject['price'] = dataPoint.close;
-      oneAndThreeMonthChartData.push(dpObject);
+      greaterThanOneWeekChartData.push(dpObject);
     }
     );
-    return oneAndThreeMonthChartData;
-  }
-
-  oneAndFiveYearChartData() {
-    if (!this.props.stock.historicalData) { return []; }
-    const oneAndFiveYearChartData = [];
-    this.props.stock.historicalData.forEach(dataPoint => {
-      let dpObject = {};
-      dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.close;
-      oneAndFiveYearChartData.push(dpObject);
-    }
-    );
-    return oneAndFiveYearChartData;
+    return greaterThanOneWeekChartData;
   }
 
   chartColor() {
