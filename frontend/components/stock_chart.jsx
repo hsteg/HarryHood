@@ -11,6 +11,7 @@ class StockChart extends React.Component {
     this.parseChartData = this.parseChartData.bind(this);
     this.oneDayChartData = this.oneDayChartData.bind(this);
     this.greaterThanOneWeekChartData = this.greaterThanOneWeekChartData.bind(this);
+    this.oneWeekChartData = this.oneWeekChartData.bind(this);
   }
 
 
@@ -20,22 +21,29 @@ class StockChart extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.range !== this.props.range) {
-      this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);
+      if (this.props.range === "1W") {
+        this.props.getHistoricalStockData(this.props.stock.symbol, "1M");
+      } else {
+        this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);
+      }
     }
   }
-  
+
   parseChartData() {
-    switch (this.props.range) {
+    const { range } = this.props;
+    switch (range) {
       case "1D":
-        return { data: this.oneDayChartData() };
+        return { data: this.oneDayChartData(), color: this.chartColor(range) };
+      case "1W":
+        return { data: this.oneWeekChartData() };
       case "1M":
-        return { data: this.greaterThanOneWeekChartData() };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
       case "3M":
-        return { data: this.greaterThanOneWeekChartData() };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
       case "1Y":
-        return { data: this.greaterThanOneWeekChartData() };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
       case "5Y":
-        return { data: this.greaterThanOneWeekChartData() };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
       default:
         return null;
     }
@@ -53,6 +61,20 @@ class StockChart extends React.Component {
     return oneDayChartData;
   }
 
+  oneWeekChartData() {
+    if (!this.props.stock.historicalData) { return []; }
+    const oneWeekChartData = [];
+    this.props.stock.historicalData.forEach(dataPoint => {
+      let dpObject = {};
+      dpObject['time'] = (dataPoint.label).toString();
+      dpObject['price'] = dataPoint.close;
+      oneWeekChartData.push(dpObject);
+    }
+    );
+    oneWeekChartData.push({ 'time': "most recent", 'price': this.props.stock.quote.latestPrice });
+    return oneWeekChartData.slice(-5);
+  }
+
   greaterThanOneWeekChartData() {
     if (!this.props.stock.historicalData) { return []; }
     const greaterThanOneWeekChartData = [];
@@ -66,11 +88,21 @@ class StockChart extends React.Component {
     return greaterThanOneWeekChartData;
   }
 
-  chartColor() {
-    if (this.props.stock.quote.change < 0) {
-      return "#f45531";
-    } else {
-      return "#1ae9aa";
+  chartColor(range) {
+    const { previousClose, latestPrice } = this.props.stock.quote;
+    let first, last;
+    switch (range) {
+      case "1D":
+        return (previousClose <= latestPrice) ? ("#21ce99") : ("#f45531");
+      case "1M":
+      case "3M":
+      case "1Y":
+      case "5Y":
+        first = this.props.stock.historicalData[0].close;
+        last = this.props.stock.historicalData.slice(-1)[0].close;
+        return (first <= last) ? ("#21ce99") : ("#f45531");
+      default:
+        return null;
     }
   }
 
@@ -80,7 +112,6 @@ class StockChart extends React.Component {
     const currentPrice = this.props.stock.quote.latestPrice;
     const allData = this.parseChartData();
     const range = [this.props.stock.quote.low, this.props.stock.quote.high];
-    const color = this.chartColor();
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container-stock">
@@ -96,7 +127,7 @@ class StockChart extends React.Component {
         </div>
         <div className="chart-actual-chart">
           <LineChart width={675} height={200} data={allData.data}>
-            <Line type="monotone" dataKey="price" stroke={color} dot={false} />
+            <Line type="monotone" dataKey="price" stroke={allData.color} dot={false} strokeWidth={1.5} />
             <YAxis type="number" domain={range} hide={true} />
           </LineChart>
         </div>
