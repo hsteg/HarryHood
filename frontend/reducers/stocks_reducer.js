@@ -9,21 +9,28 @@ const stocksReducer = (state={}, action) => {
   Object.freeze(state);
   let newState = merge({}, state);
   let marriage = {};
+  let stockIds;
   switch(action.type) {
     case RECEIVE_FULL_STOCK_INFO:
-      let stockId = Object.values(newState);
-      stockId.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stock));
+      stockIds = Object.values(newState);
+      stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stock));
       return marriage;
     case RECEIVE_USER_STOCKS:
       return merge(newState, action.stocks);
     case RECEIVE_DAY_STOCK_GROUP_PRICE_DATA:
-      let stockIds = Object.values(newState);
+      stockIds = Object.values(newState);
       stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stocks[stock.symbol]))
       return marriage;
     case RECEIVE_USER_STOCK_OBJECT:
       return merge(newState, action.stockObject);
     case RECEIVE_HISTORICAL_STOCK_DATA:
-      return merge(newState, action.stockData);
+    debugger
+      stockIds = Object.values(newState)
+      stockIds.forEach(stock => {
+        marriage[stock.id] = stock;
+        marriage[stock.id].historicalData = action.stockData;
+      }); 
+      debugger
     default:
       return newState;
   }

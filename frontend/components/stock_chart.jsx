@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { LineChart, Line, YAxis } from 'recharts';
+import { getHistoricalStockData } from '../actions/stock_actions';
 
 class StockChart extends React.Component {
   constructor(props) {
@@ -9,6 +10,11 @@ class StockChart extends React.Component {
     this.chartColor = this.chartColor.bind(this);
   }
 
+
+  componentDidMount() {
+    this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range)
+    debugger
+  }
 
   oneDayChartData() {
     const chartData = [];
@@ -72,7 +78,7 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
   return {
-
+    getHistoricalStockData: (symbol, period) => dispatch(getHistoricalStockData(symbol, period)),
   };
 };
 

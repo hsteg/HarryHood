@@ -12,7 +12,7 @@ class Stock extends React.Component {
     super(props);
     this.state = {
       dataLoaded: false,
-      range: "1D"
+      range: "5Y"
     }
     this.handleSelector = this.handleSelector.bind(this);
   }
