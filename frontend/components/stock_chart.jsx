@@ -35,7 +35,7 @@ class StockChart extends React.Component {
       case "1D":
         return { data: this.oneDayChartData(), color: this.chartColor(range) };
       case "1W":
-        return { data: this.oneWeekChartData() };
+        return { data: this.oneWeekChartData(), color: this.chartColor(range) };
       case "1M":
         return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
       case "3M":
@@ -94,6 +94,10 @@ class StockChart extends React.Component {
     switch (range) {
       case "1D":
         return (previousClose <= latestPrice) ? ("#21ce99") : ("#f45531");
+      case "1W":
+        first = this.props.stock.historicalData.slice(-4)[0].close;
+        last = latestPrice;
+        return (first <= last) ? ("#21ce99") : ("#f45531");
       case "1M":
       case "3M":
       case "1Y":
@@ -105,6 +109,23 @@ class StockChart extends React.Component {
         return null;
     }
   }
+
+  // rangeSelector(range) {
+  //   const { low, high } = this.props.stock.quote;
+  //   switch(range) {
+  //     case "1D":
+  //       return [low, high];
+  //     case "1W":
+
+  //     case "1M":
+  //     case "3M":
+  //     case "1Y":
+  //     case "5Y":
+
+  //     default: 
+  //       return null;
+  //   }
+  // }
 
   render() {
     if (this.props.loading) { return (<h1>loading :)</h1>); };
