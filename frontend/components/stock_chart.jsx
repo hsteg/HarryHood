@@ -37,7 +37,6 @@ class StockChart extends React.Component {
     const chartData = this.oneDayChartData();
     const range = [this.props.stock.quote.low, this.props.stock.quote.high];
     const color = this.chartColor();
-
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container-stock">
@@ -57,9 +56,7 @@ class StockChart extends React.Component {
             <YAxis type="number" domain={range} hide={true}/>
           </LineChart>
         </div>
-        <nav className="chart-timeline-selector">
-          1s 3d etc
-        </nav>
+
       </div>
     );
   }
