@@ -54,7 +54,7 @@ class StockChart extends React.Component {
     this.props.stock.chart.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.marketAverage;
+      dpObject['price'] = dataPoint.close;
       oneDayChartData.push(dpObject);
     }
     );
