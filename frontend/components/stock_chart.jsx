@@ -10,10 +10,8 @@ class StockChart extends React.Component {
     this.chartColor = this.chartColor.bind(this);
     this.parseChartData = this.parseChartData.bind(this);
     this.oneDayChartData = this.oneDayChartData.bind(this);
-    this.oneMonthChartData = this.oneMonthChartData.bind(this);
-    this.threeMonthChartData = this.threeMonthChartData.bind(this);
-    this.oneYearChartData = this.oneYearChartData.bind(this);
-    this.fiveYearChartData = this.fiveYearChartData.bind(this);
+    this.oneAndThreeMonthChartData = this.oneAndThreeMonthChartData.bind(this);
+    this.oneAndFiveYearChartData = this.oneAndFiveYearChartData.bind(this);
   }
 
 
@@ -26,29 +24,25 @@ class StockChart extends React.Component {
       this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);
     }
   }
-
-
-
   
   parseChartData() {
     switch (this.props.range) {
       case "1D":
         return { data: this.oneDayChartData() };
       case "1M":
-        return { data: this.oneMonthChartData() };
+        return { data: this.oneAndThreeMonthChartData() };
       case "3M":
-        return { data: this.threeMonthChartData() };
+        return { data: this.oneAndThreeMonthChartData() };
       case "1Y":
-        return { data: this.oneYearChartData() };
+        return { data: this.oneAndFiveYearChartData() };
       case "5Y":
-        return { data: this.fiveYearChartData() };
+        return { data: this.oneAndFiveYearChartData() };
       default:
         return null;
     }
   }
 
   oneDayChartData() {
-    // debugger
     const oneDayChartData = [];
     this.props.stock.chart.forEach(dataPoint => {
       let dpObject = {};
@@ -60,60 +54,30 @@ class StockChart extends React.Component {
     return oneDayChartData;
   }
 
-  oneMonthChartData() {
-    // debugger
+  oneAndThreeMonthChartData() {
     if (!this.props.stock.historicalData) { return []; }
-    const oneMonthChartData = [];
+    const oneAndThreeMonthChartData = [];
     this.props.stock.historicalData.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
       dpObject['price'] = dataPoint.close;
-      oneMonthChartData.push(dpObject);
+      oneAndThreeMonthChartData.push(dpObject);
     }
     );
-    return oneMonthChartData;
+    return oneAndThreeMonthChartData;
   }
 
-  threeMonthChartData() {
-    // debugger
+  oneAndFiveYearChartData() {
     if (!this.props.stock.historicalData) { return []; }
-    const threeMonthChartData = [];
+    const oneAndFiveYearChartData = [];
     this.props.stock.historicalData.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
       dpObject['price'] = dataPoint.close;
-      threeMonthChartData.push(dpObject);
+      oneAndFiveYearChartData.push(dpObject);
     }
     );
-    return threeMonthChartData;
-  }
-
-  oneYearChartData() {
-    // debugger
-    if (!this.props.stock.historicalData) { return []; }
-    const oneYearChartData = [];
-    this.props.stock.historicalData.forEach(dataPoint => {
-      let dpObject = {};
-      dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.close;
-      oneYearChartData.push(dpObject);
-    }
-    );
-    return oneYearChartData;
-  }
-
-  fiveYearChartData() {
-    // debugger
-    if (!this.props.stock.historicalData) { return []; }
-    const fiveYearChartData = [];
-    this.props.stock.historicalData.forEach(dataPoint => {
-      let dpObject = {};
-      dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.close;
-      fiveYearChartData.push(dpObject);
-    }
-    );
-    return fiveYearChartData;
+    return oneAndFiveYearChartData;
   }
 
   chartColor() {
@@ -123,7 +87,6 @@ class StockChart extends React.Component {
       return "#1ae9aa";
     }
   }
-
 
   render() {
     if (this.props.loading) { return (<h1>loading :)</h1>); };
