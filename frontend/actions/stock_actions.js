@@ -5,6 +5,7 @@ export const RECEIVE_USER_STOCKS = "RECEIVE_USER_STOCKS";
 export const START_LOADING_FULL_STOCK_INFO = "START_LOADING_FULL_STOCK_INFO";
 export const START_LOADING_DAY_STOCK_GROUP_PRICE_DATA = "START_LOADING_DAY_STOCK_GROUP_PRICE_DATA";
 export const RECEIVE_USER_STOCK_OBJECT = "RECEIVE_USER_STOCK_OBJECT";
+export const START_LOADING_HISTORICAL_STOCK_DATA = "START_LOADING_HISTORICAL_STOCK_DATA";
 
 export const getStockObjectBySymbol = (symbol) => dispatch => {
   dispatch(startLoadingFullStockInfo());
@@ -14,6 +15,17 @@ export const getStockObjectBySymbol = (symbol) => dispatch => {
     }
   );
 };
+
+export const getHistoricalStockData = (symbol, period) => dispatch => {
+  dispatch(startLoadingHistoricalStockData());
+  return APIUtil.getHistoricalStockData(symbol, period).then(
+    stockData => {
+      return dispatch(receiveHistoricalStockData(stockData));
+    }
+  );
+};
+
+
 
 export const getUserStocks = (user) => dispatch => {
   return APIUtil.getUserStocks(user).then(
@@ -80,5 +92,11 @@ const receiveStockObject = (stockObject) => {
   return {
     type: RECEIVE_USER_STOCK_OBJECT,
     stockObject
+  };
+};
+
+export const startLoadingHistoricalStockData = () => {
+  return {
+    type: START_LOADING_HISTORICAL_STOCK_DATA,
   };
 };

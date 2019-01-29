@@ -33,6 +33,7 @@ class StockChart extends React.Component {
 
 
   render() {
+    if (this.props.loading) { return (<h1>loading :)</h1>); };
     const companyName = this.props.stock.company.companyName;
     const currentPrice = this.props.stock.quote.latestPrice;
     const chartData = this.oneDayChartData();
@@ -65,7 +66,7 @@ class StockChart extends React.Component {
 
 const msp = (state) => {
   return {
-
+    loading: state.ui.loading.historicalStockDataLoading,
   };
 };
 
