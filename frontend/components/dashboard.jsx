@@ -36,7 +36,6 @@ class Dashboard extends React.Component {
 
   displayUserStockList(){
     const { userHeldStocksLoading, userStocksLoading } = this.props.loading;
-    // debugger
     if ( userHeldStocksLoading || userStocksLoading ) {
       return (<h1>Loading</h1> );
     } else {

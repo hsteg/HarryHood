@@ -17,7 +17,7 @@ class DashboardUserStockList extends React.Component {
                 {stocks[heldStock.stock_id].symbol}
               </h2>
               <h3 className="list-stock-numshares">
-                numshares
+                {heldStock.num_shares} Shares
               </h3>
             </div>
             <div className="list-stock-graph">
