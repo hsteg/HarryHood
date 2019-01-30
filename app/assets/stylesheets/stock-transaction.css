@@ -107,6 +107,11 @@
   transition: color 250ms;
 }
 
+.transaction-empty-sell-button {
+  background: transparent;
+  width: 110px;
+}
+
 .transaction-shares-field {
   background: #171718;
   border-color: #171718;

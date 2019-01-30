@@ -19,6 +19,8 @@ class StockTransaction extends React.Component {
     this.selectForm = this.selectForm.bind(this);
     this.calculateCostCredit = this.calculateCostCredit.bind(this);
     this.footerText = this.footerText.bind(this);
+    this.displaySellButton = this.displaySellButton.bind(this);
+    this.activeButton = this.activeButton.bind(this);
   }
 
   componentDidMount(){
@@ -46,31 +48,37 @@ class StockTransaction extends React.Component {
     const caluclatedVal = this.state.num_shares * this.props.latestStockPrice;
     return (caluclatedVal === 0) ? ("0.00") : (caluclatedVal.toFixed(2));
   }
+
   footerText() {
     return (this.state.buy) ? `$${this.props.currentUser.cash_balance} Buying Power Available` : `${this.props.numSharesToSell[this.props.currentStock].num_shares} Shares Available`;
   }
 
+  activeButton(tfValue) {
+    return (this.state.buy === tfValue) ? "transaction-header-button-a" : "transaction-header-button";
+  }
+
+  displaySellButton(){
+    const { numSharesToSell, currentStock, currentSymbol } = this.props;
+    if ((numSharesToSell).hasOwnProperty(currentStock)) {
+      return (<button className={this.activeButton(false)} onClick={this.selectForm(false)}>Sell {currentSymbol}</button>);
+    } else {
+      return (<div className="transaction-empty-sell-button"></div>);
+    }
+  }
+
 
   render() {
-    const { currentSymbol, latestStockPrice } = this.props;
+    if (Object.values(this.props.numSharesToSell).length < 1 || this.props.loading.userHeldStocks) {return <h1>loading</h1>}
 
-    const buy = (field) => {
-      if (this.state.buy === field) {
-        return "transaction-header-button-a";
-      } else {
-        return "transaction-header-button"
-      }
-    };
+    const { currentSymbol, latestStockPrice } = this.props;
 
     return (
       <>
         <div className="transaction-container-header-container">
-          <button className={buy(true)} onClick={this.selectForm(true)}>
+          <button className={this.activeButton(true)} onClick={this.selectForm(true)}>
             Buy {currentSymbol}
           </button>
-          <button className={buy(false)} onClick={this.selectForm(false)}>
-            Sell {currentSymbol}
-          </button>
+          {this.displaySellButton()}
         </div>
         <div className="transaction-buy-form">
           <form onSubmit={this.handleSubmit}>
@@ -104,13 +112,16 @@ class StockTransaction extends React.Component {
   }
 }
 
-const msp = (state) => {
+const msp = (state, ownProps) => {
+  const currentSymbol = ownProps.match.params.symbol;
+
   return {
     currentUser: Object.values(state.entities.users)[0],
     latestStockPrice: Object.values(state.entities.stocks)[0].quote.latestPrice,
-    currentSymbol: Object.values(state.entities.stocks)[0].symbol,
+    currentSymbol: currentSymbol.toUpperCase(),
     currentStock: Object.values(state.entities.stocks)[0].id,
-    numSharesToSell: state.session.heldStocks
+    numSharesToSell: state.session.heldStocks,
+    loading: state.ui.loading
   };
 };
 
