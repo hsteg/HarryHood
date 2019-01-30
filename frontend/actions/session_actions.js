@@ -4,6 +4,7 @@ export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS"
 export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS"
 export const RECEIVE_USER_HELD_STOCKS = "RECEIVE_USER_HELD_STOCKS";
 export const START_LOADING_USER_HELD_STOCKS = "START_LOADING_USER_HELD_STOCKS";
+export const RECEIVE_USER_CASH_BALANCE = "RECEIVE_USER_CASH_BALANCE";
 
 import * as APIUtil from '../util/session_api_util';
 
@@ -40,6 +41,14 @@ export const getUserHeldStocks = (userId) => dispatch => {
   return APIUtil.getUserHeldStocks(userId).then(
     heldStocks => {
       return dispatch(receiveUserHeldStocks(heldStocks));
+    }
+  );
+};
+
+export const getUserCashBalance = (userId) => dispatch => {
+  return APIUtil.getUserCashBalance(userId).then(
+    cashBalance => {
+      return dispatch(receiveUserCashBalance(cashBalance));
     }
   );
 };
@@ -82,3 +91,10 @@ const startLoadingUserHeldStocks = () => {
     type: START_LOADING_USER_HELD_STOCKS,
   };
 };
+
+const receiveUserCashBalance = (cashBalance) => {
+  return {
+    type: RECEIVE_USER_CASH_BALANCE,
+    cashBalance
+  }
+}

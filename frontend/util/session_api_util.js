@@ -27,3 +27,10 @@ export const getUserHeldStocks = (userId) => {
     url: `/api/users/${userId}/held_stocks`
   });
 };
+
+export const getUserCashBalance = (userId) => {
+  return $.ajax({
+    method: "GET",
+    url: `/api/users/${userId}/cash_balance`
+  });
+};

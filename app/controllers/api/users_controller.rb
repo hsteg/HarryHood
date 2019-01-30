@@ -22,6 +22,11 @@ class Api::UsersController < ApplicationController
       render 'api/users/held_stocks'
     end
 
+    def cash_balance
+      @user = User.find(params[:id])
+      render 'api/users/show'
+    end
+
 
 
     private

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show] 
     resources :users do
       get 'held_stocks', on: :member
+      get 'cash_balance', on: :member
     end
     resources :transactions, only: [:show, :create]
     resources :user_watches, only: [:show]

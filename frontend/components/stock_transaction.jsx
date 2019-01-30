@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createUserTransaction } from '../actions/transaction_actions';
-import { getUserHeldStocks } from '../actions/session_actions';
+import { getUserHeldStocks, getUserCashBalance } from '../actions/session_actions';
 import { withRouter } from 'react-router-dom';
 
 class StockTransaction extends React.Component {
@@ -29,7 +29,9 @@ class StockTransaction extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.createUserTransaction(this.state).then(() => this.props.history.push('/'));
+    this.props.createUserTransaction(this.state)
+    .then(() => this.props.getUserCashBalance(this.props.currentUser.id))
+    .then(() => this.props.history.push('/'));
   }
 
   updateNumSharesField() {
@@ -127,6 +129,7 @@ const mdp = (dispatch) => {
   return {
     createUserTransaction: (data) => dispatch(createUserTransaction(data)),
     getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(userId)),
+    getUserCashBalance: (userId) => dispatch(getUserCashBalance(userId))
   };
 }
 
