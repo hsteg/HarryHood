@@ -80,6 +80,7 @@ const msp = (state) => {
     transactions: state.entities.transactions,
     userWatches: state.entities.userWatches,
     loading: state.ui.loading.userStocksLoading,
+    ownedShares: state.session.heldStocks
   };
 };
 
