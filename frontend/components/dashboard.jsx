@@ -36,10 +36,13 @@ class Dashboard extends React.Component {
 
   displayUserStockList(){
     const { userHeldStocksLoading, userStocksLoading } = this.props.loading;
+    const numHeldStocks = Object.values(this.props.heldStocks).length;
+    const numUserStocksInState = Object.values(this.props.stocks).length;
+
     if ( userHeldStocksLoading || userStocksLoading ) {
       return (<h1>Loading</h1> );
     } else {
-      if (Object.values(this.props.heldStocks).length < 1 || Object.values(this.props.stocks).length < 1) { return null; }
+      if (numHeldStocks === 0 || numUserStocksInState < numHeldStocks ) { return null; }
 
       return (<DashboardUserStockList stocks={this.props.stocks} heldStocks={this.props.heldStocks} />);
     }
@@ -50,7 +53,7 @@ class Dashboard extends React.Component {
     if ( userWatchListLoading || userStocksLoading) {
       return (<h1>Loading</h1> );
     } else {
-      if (Object.values(this.props.userWatches).length < 1 || Object.values(this.props.stocks).length < 1) { return null; }
+      if (Object.values(this.props.userWatches).length === 0 || Object.values(this.props.stocks).length === 0) { return null; }
 
       return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} />);
     }

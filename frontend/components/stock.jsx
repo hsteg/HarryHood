@@ -32,6 +32,7 @@ class Stock extends React.Component {
   render() {
     if (this.state.dataLoaded === false) { return (<h1>loading :)</h1>); };
     if (this.props.loading) { return (<h1>loading :)</h1>); };
+    debugger
     return (
       <div className="dashboard-main">
         <div className="header-container">

@@ -9,6 +9,7 @@ class DashboardUserStockList extends React.Component {
 
   render() {
     const { stocks } = this.props;
+  
     const lis = Object.values(this.props.heldStocks).map(heldStock => {
       return (
         <Link to={`/stock/${stocks[heldStock.stock_id].symbol}`} className="list-item" key={heldStock.stock_id}>
