@@ -4,3 +4,11 @@ export const getUserTransactions = (user) => {
     url: `/api/transactions/${user}`
   });
 };
+
+export const createUserTransacation = (data) => {
+  return $.ajax({
+    method: "POST",
+    url: '/api/transactions',
+    data: {data}
+  });
+};

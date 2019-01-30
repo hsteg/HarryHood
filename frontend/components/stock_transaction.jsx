@@ -6,7 +6,7 @@ class StockTransaction extends React.Component {
     super(props);
     this.state = {
       numShares: 0,
-      formType: "buy"
+      buy: true
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateNumSharesField = this.updateNumSharesField.bind(this);
@@ -31,7 +31,7 @@ class StockTransaction extends React.Component {
 
   selectForm(value) {
     return (e) => {
-      this.setState({ formType: value });
+      this.setState({ buy: value });
     };
   };
 
@@ -43,23 +43,23 @@ class StockTransaction extends React.Component {
   render() {
     const { currentSymbol, latestStockPrice } = this.props;
 
-    const formType = (field) => {
-      if (this.state.formType === field) {
+    const buy = (field) => {
+      if (this.state.buy === field) {
         return "transaction-header-button-a";
       } else {
         return "transaction-header-button"
       }
     };
 
-    const footerText = (this.state.formType === "buy") ? `$${this.props.currentUser.cash_balance} Buying Power Available` : "Shares Available";
+    const footerText = (this.state.buy) ? `$${this.props.currentUser.cash_balance} Buying Power Available` : "Shares Available";
 
     return (
       <>
         <div className="transaction-container-header-container">
-          <button className={formType("buy")} onClick={this.selectForm("buy")}>
+          <button className={buy(true)} onClick={this.selectForm(true)}>
             Buy {currentSymbol}
           </button>
-          <button className={formType("sell")} onClick={this.selectForm("sell")}>
+          <button className={buy(false)} onClick={this.selectForm(false)}>
             Sell {currentSymbol}
           </button>
         </div>
@@ -78,7 +78,7 @@ class StockTransaction extends React.Component {
             </div>
             <div className="transaction-form-row">
               <h1 className="transaction-estimated-cost-text">
-                { this.state.formType === "buy" ? "Estimated Cost" : "Estimated Credit" }
+                { this.state.buy ? "Estimated Cost" : "Estimated Credit" }
               </h1>
               <h1 className="transaction-estimated-cost-number">${this.calculateCostCredit()}</h1>
             </div>
