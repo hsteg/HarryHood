@@ -15,6 +15,12 @@ class Api::UsersController < ApplicationController
       @user = User.find(params[:id])
       render 'api/users/stocks'
     end
+    
+    def held_stocks 
+      @user = User.find(params[:id])
+      @held_stocks = @user.get_all_shares
+      
+    end
 
 
 

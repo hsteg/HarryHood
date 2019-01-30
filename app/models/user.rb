@@ -66,8 +66,8 @@ class User < ApplicationRecord
       Transaction.where("user_id = #{user_id} and stock_id = #{stock_id}").sum(:num_shares)
     end
 
-    def self.get_all_shares(user)
-      
+    def get_all_shares()
+      Transaction.where("user_id = #{self.id}").group(:stock_id).sum(:num_shares)
     end
 
 

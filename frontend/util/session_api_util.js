@@ -18,6 +18,12 @@ export const logout = () => {
     return $.ajax({
         method: "DELETE",
         url: "api/session",
-
     });
 }
+
+export const getUserHeldStocks = (userId) => {
+  return $.ajax({
+    method: "GET",
+    url: `/api/users/${userId}/held_stocks`
+  });
+};
