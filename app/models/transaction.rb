@@ -3,7 +3,6 @@
 # Table name: transactions
 #
 #  id              :bigint(8)        not null, primary key
-#  buy             :boolean          not null
 #  stock_id        :integer          not null
 #  user_id         :integer          not null
 #  num_shares      :integer          not null
