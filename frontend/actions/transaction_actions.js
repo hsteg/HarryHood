@@ -1,10 +1,10 @@
 import * as APIUtil from '../util/transaction_api_util';
 export const RECEIVE_USER_TRANSACTIONS = "RECEIVE_USER_TRANSACTIONS";
-// export const CREATE_USER_TRANSACTION = "CREATE_USER_TRANSACTION";
-import {startLoadingDayStockGroupPriceData } from './stock_actions';
+export const START_LOADING_USER_TRANSACTIONS = "START_LOADING_USER_TRANSACTIONS";
+
 
 export const getUserTransactions = (user) => dispatch => {
-  dispatch(startLoadingDayStockGroupPriceData());
+  dispatch(startLoadingUserTransactions());
   return APIUtil.getUserTransactions(user).then(
     transactions => {
       return dispatch(receiveUserTransactions(transactions));
@@ -24,5 +24,11 @@ const receiveUserTransactions = (transactions) => {
   return {
     type: RECEIVE_USER_TRANSACTIONS,
     transactions
+  };
+};
+
+const startLoadingUserTransactions = () => {
+  return {
+    type: START_LOADING_USER_TRANSACTIONS
   };
 };

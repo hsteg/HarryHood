@@ -3,6 +3,8 @@ export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS"
 export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS"
 export const RECEIVE_USER_HELD_STOCKS = "RECEIVE_USER_HELD_STOCKS";
+export const START_LOADING_USER_HELD_STOCKS = "START_LOADING_USER_HELD_STOCKS";
+
 import * as APIUtil from '../util/session_api_util';
 
 
@@ -34,6 +36,7 @@ export const logout = () => dispatch => {
 };
 
 export const getUserHeldStocks = (userId) => dispatch => {
+  dispatch(startLoadingUserHeldStocks());
   return APIUtil.getUserHeldStocks(userId).then(
     heldStocks => {
       return dispatch(receiveUserHeldStocks(heldStocks));
@@ -73,3 +76,9 @@ const receiveUserHeldStocks = (heldStocks) => {
     heldStocks
   };
 }
+
+const startLoadingUserHeldStocks = () => {
+  return {
+    type: START_LOADING_USER_HELD_STOCKS
+  };
+};

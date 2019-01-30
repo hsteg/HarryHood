@@ -79,8 +79,11 @@ const msp = (state) => {
     stocks: state.entities.stocks,
     transactions: state.entities.transactions,
     userWatches: state.entities.userWatches,
-    loading: state.ui.loading.userStocksLoading,
-    ownedShares: state.session.heldStocks
+    heldStocks: state.session.heldStocks,
+    dayStockDataLoading: state.ui.loading.dayStockDataLoading,
+    userWatchListLoading: state.ui.loading.userWatchListLoading,
+    userTransactionsLoading: state.ui.loading.userTransactionsLoading,
+    userHeldStocksLoading: state.ui.loading.userHeldStocksLoading
   };
 };
 
