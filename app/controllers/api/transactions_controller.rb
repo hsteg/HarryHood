@@ -3,7 +3,7 @@ class Api::TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     debugger
     if @transaction.save
-
+      render 'api/transactions/show'
     else
       render json: @transaction.errors.full_messages, status: 422
     end

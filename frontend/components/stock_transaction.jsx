@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createUserTransaction } from '../actions/transaction_actions';
 
 class StockTransaction extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class StockTransaction extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    debugger;
+    this.props.createUserTransaction(this.state).then(() => this.props.history.push('/'));
   }
 
   updateNumSharesField() {
@@ -106,5 +107,11 @@ const msp = (state) => {
     currentStock: Object.values(state.entities.stocks)[0].id,
   };
 };
+
+const mdp = (dispatch) => {
+  return {
+    createUserTransaction: (data) => dispatch(createUserTransaction(data)),
+  };
+}
 
 export default connect(msp, null)(StockTransaction);
