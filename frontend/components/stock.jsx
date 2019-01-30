@@ -64,7 +64,7 @@ class Stock extends React.Component {
           <div className="right-col">
             <div className="transaction-container">
               <div className="transaction-component">
-                <StockTransaction />
+                <StockTransaction stock={this.props.stock} />
               </div>
             </div>
           </div>

@@ -10,9 +10,9 @@ class StockTransaction extends React.Component {
     this.state = {
       num_shares: 0,
       buy: true,
-      stock_id: this.props.currentStock,
+      stock_id: this.props.stock.id,
       user_id: this.props.currentUser.id,
-      price_per_share: this.props.latestStockPrice
+      price_per_share: this.props.stock.quote.latestPrice
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateNumSharesField = this.updateNumSharesField.bind(this);
@@ -50,7 +50,7 @@ class StockTransaction extends React.Component {
   }
 
   footerText() {
-    return (this.state.buy) ? `$${this.props.currentUser.cash_balance} Buying Power Available` : `${this.props.numSharesToSell[this.props.currentStock].num_shares} Shares Available`;
+    return (this.state.buy) ? `$${this.props.currentUser.cash_balance} Buying Power Available` : `${this.props.numSharesToSell[this.props.stock.id].num_shares} Shares Available`;
   }
 
   activeButton(tfValue) {
@@ -58,8 +58,8 @@ class StockTransaction extends React.Component {
   }
 
   displaySellButton(){
-    const { numSharesToSell, currentStock, currentSymbol } = this.props;
-    if ((numSharesToSell).hasOwnProperty(currentStock)) {
+    const { numSharesToSell, currentSymbol } = this.props;
+    if ((numSharesToSell).hasOwnProperty(this.props.stock.id)) {
       return (<button className={this.activeButton(false)} onClick={this.selectForm(false)}>Sell {currentSymbol}</button>);
     } else {
       return (<div className="transaction-empty-sell-button"></div>);
@@ -117,9 +117,7 @@ const msp = (state, ownProps) => {
 
   return {
     currentUser: Object.values(state.entities.users)[0],
-    latestStockPrice: Object.values(state.entities.stocks)[0].quote.latestPrice,
     currentSymbol: currentSymbol.toUpperCase(),
-    currentStock: Object.values(state.entities.stocks)[0].id,
     numSharesToSell: state.session.heldStocks,
     loading: state.ui.loading
   };
