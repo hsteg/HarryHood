@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getDayStocksPriceData, getUserStocks } from '../actions/stock_actions';
 import { getUserTransactions } from '../actions/transaction_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
+import { getUserHeldStocks } from '../actions/session_actions';
 import DashboardWatchlist from './dashboard_watchlist';
 import DashboardUserStockList from './dashboard_user_stocks';
 import Navbar from './navbar';
@@ -16,9 +17,11 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUserTransactions(this.props.currentUser.id);
-    this.props.getUserWatches(this.props.currentUser.id);
-    this.props.getUserStocks(this.props.currentUser.id).then(() => this.getStockSymbols());
+    const { id } = this.props.currentUser;
+    this.props.getUserHeldStocks(id);
+    this.props.getUserTransactions(id);
+    this.props.getUserWatches(id);
+    this.props.getUserStocks(id).then(() => this.getStockSymbols());
   }
 
   getStockSymbols() {
@@ -86,7 +89,8 @@ const mdp = (dispatch) => {
     getDayStocksPriceData: (stocks) => dispatch(getDayStocksPriceData(stocks)),
     getUserTransactions: (user) => dispatch(getUserTransactions(user)),
     getUserWatches: (user) => dispatch(getUserWatches(user)),
-    getUserStocks: (stockIds) => dispatch(getUserStocks(stockIds))
+    getUserStocks: (stockIds) => dispatch(getUserStocks(stockIds)),
+    getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(usedId))
   };
 }
 
