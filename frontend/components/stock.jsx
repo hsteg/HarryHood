@@ -76,7 +76,7 @@ class Stock extends React.Component {
 
 const msp = (state, ownProps) => {
   return {
-    stock: Object.values(state.entities.stocks)[0],
+    stock: Object.values(state.entities.stocks).filter((stock) => stock.symbol === ownProps.match.params.symbol)[0],
     symbol: ownProps.match.params.symbol.toUpperCase(),
     loading: state.ui.loading.stockDataLoading,
   };
