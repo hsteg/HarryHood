@@ -5,12 +5,13 @@ class StockTransaction extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numShares: '',
+      numShares: 0,
       formType: "buy"
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateNumSharesField = this.updateNumSharesField.bind(this);
     this.selectForm = this.selectForm.bind(this);
+    this.calculateCostCredit = this.calculateCostCredit.bind(this);
   }
 
   // componentWillMount() {
@@ -33,6 +34,11 @@ class StockTransaction extends React.Component {
       this.setState({ formType: value });
     };
   };
+
+  calculateCostCredit() {
+    const caluclatedVal = this.state.numShares * this.props.latestStockPrice;
+    return (caluclatedVal === 0) ? ("0.00") : (caluclatedVal.toFixed(2));
+  }
 
   render() {
     const { currentSymbol, latestStockPrice } = this.props;
@@ -71,8 +77,10 @@ class StockTransaction extends React.Component {
               <h1 className="transaction-price-number">{latestStockPrice}</h1>
             </div>
             <div className="transaction-form-row">
-              <h1 className="transaction-estimated-cost-text">Estimated Cost</h1>
-              <h1 className="transaction-estimated-cost-number">Market Price</h1>
+              <h1 className="transaction-estimated-cost-text">
+                { this.state.formType === "buy" ? "Estimated Cost" : "Estimated Credit" }
+              </h1>
+              <h1 className="transaction-estimated-cost-number">${this.calculateCostCredit()}</h1>
             </div>
             <div className="transaction-form-row">
               <input type="submit" value="Review Order" className="transaction-button" />
