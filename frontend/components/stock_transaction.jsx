@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createUserTransaction } from '../actions/transaction_actions';
+import { getUserHeldStocks } from '../actions/session_actions';
 import { withRouter } from 'react-router-dom';
 
 class StockTransaction extends React.Component {
@@ -17,11 +18,12 @@ class StockTransaction extends React.Component {
     this.updateNumSharesField = this.updateNumSharesField.bind(this);
     this.selectForm = this.selectForm.bind(this);
     this.calculateCostCredit = this.calculateCostCredit.bind(this);
+    this.footerText = this.footerText.bind(this);
   }
 
-  // componentWillMount() {
-  //   // this.props.clearErrors();
-  // }
+  componentDidMount(){
+    this.props.getUserHeldStocks(this.props.currentUser.id);
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -44,6 +46,10 @@ class StockTransaction extends React.Component {
     const caluclatedVal = this.state.num_shares * this.props.latestStockPrice;
     return (caluclatedVal === 0) ? ("0.00") : (caluclatedVal.toFixed(2));
   }
+  footerText() {
+    return (this.state.buy) ? `$${this.props.currentUser.cash_balance} Buying Power Available` : `${this.props.numSharesToSell[this.props.currentStock].num_shares} Shares Available`;
+  }
+
 
   render() {
     const { currentSymbol, latestStockPrice } = this.props;
@@ -55,8 +61,6 @@ class StockTransaction extends React.Component {
         return "transaction-header-button"
       }
     };
-
-    const footerText = (this.state.buy) ? `$${this.props.currentUser.cash_balance} Buying Power Available` : "Shares Available";
 
     return (
       <>
@@ -93,7 +97,7 @@ class StockTransaction extends React.Component {
           </form>
         </div>
         <div className="transaction-form-footer">
-          <h1 className="transaction-footer-text">{footerText}</h1>
+          <h1 className="transaction-footer-text">{this.footerText()}</h1>
         </div>
       </>
     );
@@ -106,12 +110,14 @@ const msp = (state) => {
     latestStockPrice: Object.values(state.entities.stocks)[0].quote.latestPrice,
     currentSymbol: Object.values(state.entities.stocks)[0].symbol,
     currentStock: Object.values(state.entities.stocks)[0].id,
+    numSharesToSell: state.session.heldStocks
   };
 };
 
 const mdp = (dispatch) => {
   return {
     createUserTransaction: (data) => dispatch(createUserTransaction(data)),
+    getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(userId)),
   };
 }
 
