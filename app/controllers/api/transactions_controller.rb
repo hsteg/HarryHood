@@ -1,4 +1,14 @@
 class Api::TransactionsController < ApplicationController 
+  def create
+    @transaction = Transaction.new(transaction_params)
+    debugger
+    if @transaction.save
+
+    else
+      render json: @transaction.errors.full_messages, status: 422
+    end
+  end
+  
   def show
     user_id = params[:id]
     @transactions = Transaction.where("user_id = #{user_id}")
