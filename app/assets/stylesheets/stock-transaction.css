@@ -12,6 +12,12 @@
   height: 47px;
   box-sizing: border-box;
   border-top: 1px solid #0e0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .4px;
 }
 
 .transaction-buy-form {
@@ -63,15 +69,6 @@
   background: #1ae9aa;
   border-color: #1ae9aa;
 }
-
-.transaction-form-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 15px;
-  font-weight: 300;
-}
-
 
 .transaction-header-button {
   background: transparent;

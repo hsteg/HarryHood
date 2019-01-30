@@ -51,7 +51,7 @@ class StockTransaction extends React.Component {
       }
     };
 
-    const footerText = (this.state.formType === "buy") ? "how much cash u have" : "how many shares u have";
+    const footerText = (this.state.formType === "buy") ? `$${this.props.currentUser.cash_balance} Buying Power Available` : "Shares Available";
 
     return (
       <>
