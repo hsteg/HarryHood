@@ -19,7 +19,7 @@ class Api::UsersController < ApplicationController
     def held_stocks 
       @user = User.find(params[:id])
       @held_stocks = @user.get_all_shares
-      
+      render json: @held_stocks
     end
 
 

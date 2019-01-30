@@ -12,7 +12,8 @@ const sessionReducer = (state = _nullState, action) => {
     case LOGOUT_CURRENT_USER:
       return _nullState;
     case RECEIVE_USER_HELD_STOCKS:
-      let newState = merge(state, action.heldStocks)
+      let newState = merge({}, state);
+      newState.heldStocks = action.heldStocks;
       return newState;
     default:
       return state;

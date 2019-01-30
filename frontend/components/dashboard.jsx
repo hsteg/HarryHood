@@ -17,11 +17,10 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.currentUser;
-    this.props.getUserHeldStocks(id);
-    this.props.getUserTransactions(id);
-    this.props.getUserWatches(id);
-    this.props.getUserStocks(id).then(() => this.getStockSymbols());
+    this.props.getUserHeldStocks(this.props.currentUser.id);
+    this.props.getUserTransactions(this.props.currentUser.id);
+    this.props.getUserWatches(this.props.currentUser.id);
+    this.props.getUserStocks(this.props.currentUser.id).then(() => this.getStockSymbols());
   }
 
   getStockSymbols() {
@@ -90,7 +89,7 @@ const mdp = (dispatch) => {
     getUserTransactions: (user) => dispatch(getUserTransactions(user)),
     getUserWatches: (user) => dispatch(getUserWatches(user)),
     getUserStocks: (stockIds) => dispatch(getUserStocks(stockIds)),
-    getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(usedId))
+    getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(userId))
   };
 }
 
