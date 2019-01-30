@@ -14,8 +14,13 @@ class DashboardUserStockList extends React.Component {
 
       return (
         <Link to={`/stock/${stocks[transaction.stock_id].symbol}`} className="list-item" key={transaction.id}>
-            <div className="list-stock-symbol">
-              {stocks[transaction.stock_id].symbol}
+            <div className="list-stock-symbol-container">
+              <h2 className=".list-stock-symbol">
+                {stocks[transaction.stock_id].symbol}
+              </h2>
+              <h3 className="list-stock-numshares">
+                numshares
+              </h3>
             </div>
             <div className="list-stock-graph">
               graph here

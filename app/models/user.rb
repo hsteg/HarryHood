@@ -62,7 +62,13 @@ class User < ApplicationRecord
         self.password_digest = BCrypt::Password.create(password)
     end
 
-    def buy_asset
+    def self.get_num_asset_shares(user_id, stock_id)
+      num_bought = Transaction.where("user_id = #{user_id} and stock_id = #{stock_id} and buy = ?", true).sum(:num_shares)
+      num_sold = Transaction.where("user_id = #{user_id} and stock_id = #{stock_id} and buy = ?", false).sum(:num_shares)
+      return num_bought - num_sold
+    end
+
+    def self.get_all_shares(user)
       
     end
 

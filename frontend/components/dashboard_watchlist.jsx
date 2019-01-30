@@ -14,14 +14,14 @@ class DashboardWatchlist extends React.Component {
 
       return (
         <Link to={`/stock/${stocks[watch.stock_id].symbol}`} className="list-item" key={watch.id}>
-          <div className="list-stock-symbol">
+          <div className="list-stock-symbol-container">
             {stocks[watch.stock_id].symbol}
           </div>
           <div className="list-stock-graph">
             graph here
           </div>
           <div className="list-stock-price">
-            {stocks[watch.stock_id].quote.latestPrice}
+            ${stocks[watch.stock_id].quote.latestPrice}
           </div>
         </Link>
       );

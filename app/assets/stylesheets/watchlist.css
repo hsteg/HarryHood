@@ -13,9 +13,11 @@
   background-color: #171718;
 }
 
-.list-stock-symbol {
+.list-stock-symbol-container {
   padding-left: 20px;
   width: 70px;
+  display: flex;
+  flex-direction: column;
 }
 
 .list-stock-graph {
