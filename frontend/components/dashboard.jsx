@@ -14,10 +14,12 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.getStockSymbols = this.getStockSymbols.bind(this);
+    this.displayUserStockList = this.displayUserStockList.bind(this);
+    this.displayUserWatchList = this.displayUserWatchList.bind(this);
   }
 
   componentDidMount() {
-    this.props.getUserHeldStocks(this.props.currentUser.id);
+    // this.props.getUserHeldStocks(this.props.currentUser.id);
     this.props.getUserTransactions(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
     this.props.getUserStocks(this.props.currentUser.id).then(() => this.getStockSymbols());
@@ -32,7 +34,24 @@ class Dashboard extends React.Component {
   }
 
 
+  displayUserStockList(){
+    const { userTransactionsLoading, userStocksLoading } = this.props.loading;
+    if ( userTransactionsLoading || userStocksLoading ) {
+      return (<h1>Loading</h1> );
+    } else {
+      return (<DashboardUserStockList stocks={this.props.stocks} loading={this.props.loading} transactions={this.props.transactions} />);
+    }
+  }
 
+  displayUserWatchList(){
+    const { userWatchListLoading, userStocksLoading } = this.props.loading;
+    debugger
+    if ( userWatchListLoading || userStocksLoading) {
+      return (<h1>Loading</h1> );
+    } else {
+      return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} loading={this.props.loading} />);
+    }
+  }
 
   render() {
     return (
@@ -55,12 +74,12 @@ class Dashboard extends React.Component {
                 <h1 className="stocks-list-header-text">user stocks</h1>
                 <h1 className="stocks-list-header-button">button</h1>
               </div>
-              <DashboardUserStockList stocks={this.props.stocks} loading={this.props.loading} transactions={this.props.transactions} />
+                {this.displayUserStockList()}
               <div className="watch-list-header">
                 <h1 className="stocks-list-header-text">Watchlist</h1>
                 <h1 className="stocks-list-header-button">button</h1>
               </div>
-              <DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} loading={this.props.loading} />
+                {this.displayUserWatchList()}
             </div>
           </div>
         </div>
@@ -80,10 +99,11 @@ const msp = (state) => {
     transactions: state.entities.transactions,
     userWatches: state.entities.userWatches,
     heldStocks: state.session.heldStocks,
-    dayStockDataLoading: state.ui.loading.dayStockDataLoading,
-    userWatchListLoading: state.ui.loading.userWatchListLoading,
-    userTransactionsLoading: state.ui.loading.userTransactionsLoading,
-    userHeldStocksLoading: state.ui.loading.userHeldStocksLoading
+    loading: state.ui.loading
+    // dayStockDataLoading: state.ui.loading.dayStockDataLoading,
+    // userWatchListLoading: state.ui.loading.userWatchListLoading,
+    // userTransactionsLoading: state.ui.loading.userTransactionsLoading,
+    // userHeldStocksLoading: state.ui.loading.userHeldStocksLoading
   };
 };
 

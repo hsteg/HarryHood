@@ -8,7 +8,9 @@ class DashboardUserStockList extends React.Component {
   }
 
   render() {
-    if (this.props.loading) { return (<h1>loading :)</h1>); }
+    // const { userTransactionsLoading, dayStockDataLoading } = this.props.loading;
+    
+    // if (userTransactionsLoading || dayStockDataLoading) { return (<h1>loading :)</h1>); }
     const { stocks } = this.props;
     const lis = Object.values(this.props.transactions).map(transaction => {
 

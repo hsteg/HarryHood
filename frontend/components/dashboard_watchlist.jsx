@@ -8,10 +8,8 @@ class DashboardWatchlist extends React.Component {
   }
 
   render() {
-    if (this.props.loading) { return (<h1>loading :)</h1>); }
     const { stocks } = this.props;
     const lis = Object.values(this.props.watches).map(watch => {
-
       return (
         <Link to={`/stock/${stocks[watch.stock_id].symbol}`} className="list-item" key={watch.id}>
           <div className="list-stock-symbol-container">
@@ -30,7 +28,6 @@ class DashboardWatchlist extends React.Component {
     );
     return (
       <div>{lis}</div>
-
     );
   }
 }
