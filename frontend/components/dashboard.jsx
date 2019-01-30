@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.getUserHeldStocks(this.props.currentUser.id);
+    this.props.getUserHeldStocks(this.props.currentUser.id);
     this.props.getUserTransactions(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
     this.props.getUserStocks(this.props.currentUser.id).then(() => this.getStockSymbols());
@@ -35,21 +35,25 @@ class Dashboard extends React.Component {
 
 
   displayUserStockList(){
-    const { userTransactionsLoading, userStocksLoading } = this.props.loading;
-    if ( userTransactionsLoading || userStocksLoading ) {
+    const { userHeldStocksLoading, userStocksLoading } = this.props.loading;
+    // debugger
+    if ( userHeldStocksLoading || userStocksLoading ) {
       return (<h1>Loading</h1> );
     } else {
-      return (<DashboardUserStockList stocks={this.props.stocks} loading={this.props.loading} transactions={this.props.transactions} />);
+      if (Object.values(this.props.heldStocks).length < 1 || Object.values(this.props.stocks).length < 1) { return null; }
+
+      return (<DashboardUserStockList stocks={this.props.stocks} heldStocks={this.props.heldStocks} />);
     }
   }
 
   displayUserWatchList(){
     const { userWatchListLoading, userStocksLoading } = this.props.loading;
-    debugger
     if ( userWatchListLoading || userStocksLoading) {
       return (<h1>Loading</h1> );
     } else {
-      return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} loading={this.props.loading} />);
+      if (Object.values(this.props.userWatches).length < 1 || Object.values(this.props.stocks).length < 1) { return null; }
+
+      return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} />);
     }
   }
 
@@ -100,10 +104,6 @@ const msp = (state) => {
     userWatches: state.entities.userWatches,
     heldStocks: state.session.heldStocks,
     loading: state.ui.loading
-    // dayStockDataLoading: state.ui.loading.dayStockDataLoading,
-    // userWatchListLoading: state.ui.loading.userWatchListLoading,
-    // userTransactionsLoading: state.ui.loading.userTransactionsLoading,
-    // userHeldStocksLoading: state.ui.loading.userHeldStocksLoading
   };
 };
 

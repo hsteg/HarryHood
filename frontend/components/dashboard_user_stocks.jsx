@@ -8,17 +8,13 @@ class DashboardUserStockList extends React.Component {
   }
 
   render() {
-    // const { userTransactionsLoading, dayStockDataLoading } = this.props.loading;
-    
-    // if (userTransactionsLoading || dayStockDataLoading) { return (<h1>loading :)</h1>); }
     const { stocks } = this.props;
-    const lis = Object.values(this.props.transactions).map(transaction => {
-
+    const lis = Object.values(this.props.heldStocks).map(heldStock => {
       return (
-        <Link to={`/stock/${stocks[transaction.stock_id].symbol}`} className="list-item" key={transaction.id}>
+        <Link to={`/stock/${stocks[heldStock.stock_id].symbol}`} className="list-item" key={heldStock.stock_id}>
             <div className="list-stock-symbol-container">
               <h2 className=".list-stock-symbol">
-                {stocks[transaction.stock_id].symbol}
+                {stocks[heldStock.stock_id].symbol}
               </h2>
               <h3 className="list-stock-numshares">
                 numshares
@@ -28,7 +24,7 @@ class DashboardUserStockList extends React.Component {
               graph here
           </div>
             <div className="list-stock-price">
-              {stocks[transaction.stock_id].quote.latestPrice}
+              ${stocks[heldStock.stock_id].quote.latestPrice}
             </div>
         </Link>
       );

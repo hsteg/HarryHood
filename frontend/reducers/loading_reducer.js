@@ -14,6 +14,10 @@ import { RECEIVE_USER_HELD_STOCKS, START_LOADING_USER_HELD_STOCKS } from '../act
 const initialState = {
   stockDataLoading: false,
   userStocksLoading: false,
+  historicalStockDataLoading: false,
+  userWatchListLoading: false,
+  userTransactionsLoading: false,
+  userHeldStocksLoading: false
 };
 
 const loadingReducer = (state = initialState, action) => {
@@ -38,7 +42,7 @@ const loadingReducer = (state = initialState, action) => {
     case START_LOADING_USER_HELD_STOCKS:
       return Object.assign({}, state, { userHeldStocksLoading: true } )
     case RECEIVE_USER_HELD_STOCKS:
-      return Object.assign({}, state, { userHeldStocksLoading: false } )
+      return Object.assign({}, state, { userHeldStocksLoading: false} )
     case START_LOADING_USER_STOCKS:
       return Object.assign({}, state, { userStocksLoading: true } ) 
     case RECEIVE_DAY_STOCK_GROUP_PRICE_DATA:

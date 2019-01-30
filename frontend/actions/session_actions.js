@@ -79,6 +79,6 @@ const receiveUserHeldStocks = (heldStocks) => {
 
 const startLoadingUserHeldStocks = () => {
   return {
-    type: START_LOADING_USER_HELD_STOCKS
+    type: START_LOADING_USER_HELD_STOCKS,
   };
 };
