@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createUserTransaction } from '../actions/transaction_actions';
+import { withRouter } from 'react-router-dom';
 
 class StockTransaction extends React.Component {
   constructor(props) {
@@ -114,4 +115,4 @@ const mdp = (dispatch) => {
   };
 }
 
-export default connect(msp, null)(StockTransaction);
+export default withRouter(connect(msp, mdp)(StockTransaction));

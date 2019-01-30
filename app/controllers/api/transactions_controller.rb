@@ -1,9 +1,8 @@
 class Api::TransactionsController < ApplicationController 
   def create
     @transaction = Transaction.new(transaction_params)
-    debugger
     if @transaction.save
-      render 'api/transactions/show'
+      render 'api/transactions/new'
     else
       render json: @transaction.errors.full_messages, status: 422
     end

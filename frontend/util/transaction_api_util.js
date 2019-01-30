@@ -5,10 +5,10 @@ export const getUserTransactions = (user) => {
   });
 };
 
-export const createUserTransacation = (data) => {
+export const createUserTransaction = (data) => {
   return $.ajax({
     method: "POST",
     url: '/api/transactions',
-    data: {data}
+    data: {transaction: data}
   });
 };
