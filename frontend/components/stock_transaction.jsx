@@ -5,8 +5,11 @@ class StockTransaction extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numShares: 0,
-      buy: true
+      num_shares: 0,
+      buy: true,
+      stock_id: this.props.currentStock,
+      user_id: this.props.currentUser.id,
+      price_per_share: this.props.latestStockPrice
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateNumSharesField = this.updateNumSharesField.bind(this);
@@ -25,7 +28,7 @@ class StockTransaction extends React.Component {
 
   updateNumSharesField() {
     return (e) => {
-      this.setState({ numShares: e.target.value });
+      this.setState({ num_shares: e.target.value });
     }
   }
 
@@ -36,7 +39,7 @@ class StockTransaction extends React.Component {
   };
 
   calculateCostCredit() {
-    const caluclatedVal = this.state.numShares * this.props.latestStockPrice;
+    const caluclatedVal = this.state.num_shares * this.props.latestStockPrice;
     return (caluclatedVal === 0) ? ("0.00") : (caluclatedVal.toFixed(2));
   }
 
@@ -100,6 +103,7 @@ const msp = (state) => {
     currentUser: Object.values(state.entities.users)[0],
     latestStockPrice: Object.values(state.entities.stocks)[0].quote.latestPrice,
     currentSymbol: Object.values(state.entities.stocks)[0].symbol,
+    currentStock: Object.values(state.entities.stocks)[0].id,
   };
 };
 
