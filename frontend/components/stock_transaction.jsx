@@ -45,7 +45,7 @@ class StockTransaction extends React.Component {
   };
 
   calculateCostCredit() {
-    const caluclatedVal = this.state.num_shares * this.props.latestStockPrice;
+    const caluclatedVal = this.state.num_shares * this.props.stock.quote.latestPrice;
     return (caluclatedVal === 0) ? ("0.00") : (caluclatedVal.toFixed(2));
   }
 
