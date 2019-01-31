@@ -94,10 +94,6 @@ class Dashboard extends React.Component {
   }
 }
 
-
-
-
-
 const msp = (state) => {
   return {
     currentUser: state.entities.users[state.session.id],
