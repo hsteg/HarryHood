@@ -35,7 +35,7 @@ class WatchListChart extends React.Component {
 
 
   render() {
-    const width = (((this.props.chartData.length) / 390) * 120);
+    const width = (((this.props.chartData.length) / 390) * 110);
     const range = this.props.quote.latestPrice > this.props.quote.previousClose ? [this.props.quote.previousClose, this.props.quote.high] : [this.props.quote.low, this.props.quote.previousClose];
     
     return (
