@@ -38,6 +38,8 @@ class User < ApplicationRecord
     through: :transactions, 
     source: :stock
 
+    has_many :portfolio_snapshots
+
 
     after_initialize :ensure_session_token
 
