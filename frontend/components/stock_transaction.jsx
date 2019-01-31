@@ -116,7 +116,7 @@ class StockTransaction extends React.Component {
   render() {
     if (Object.values(this.props.numSharesToSell).length < 1 || this.props.loading.userHeldStocks) {return <h1>loading</h1>}
 
-    const { currentSymbol, latestStockPrice } = this.props;
+    const { currentSymbol } = this.props;
 
     return (
       <>
@@ -137,7 +137,7 @@ class StockTransaction extends React.Component {
             </div>
             <div className="transaction-form-row">
               <h1 className="transaction-price-text">Market Price</h1>
-              <h1 className="transaction-price-number">{latestStockPrice}</h1>
+              <h1 className="transaction-price-number">{this.props.stock.quote.latestPrice}</h1>
             </div>
             <div className="transaction-form-row">
               <h1 className="transaction-estimated-cost-text">
