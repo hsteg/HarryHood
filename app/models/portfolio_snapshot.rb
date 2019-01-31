@@ -7,6 +7,7 @@
 #  total_portfolio_value :float            not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  date                  :integer          not null
 #
 
 class PortfolioSnapshot < ApplicationRecord
