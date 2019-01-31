@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getStockInfo, getStockObjectBySymbol } from '../actions/stock_actions';
-import { getUserWatches, createUserWatch } from '../actions/user_watch_actions'
+import { getUserWatches, createUserWatch, removeUserWatch } from '../actions/user_watch_actions'
 import Navbar from './navbar';
 import StockChart from './stock_chart';
 import StockTransaction from './stock_transaction';
@@ -13,7 +13,7 @@ class Stock extends React.Component {
     super(props);
     this.state = {
       dataLoaded: false,
-      range: "1D"
+      range: "1D",
     }
     this.handleSelector = this.handleSelector.bind(this);
     this.addUserWatch = this.addUserWatch.bind(this);
@@ -32,13 +32,11 @@ class Stock extends React.Component {
   }
 
   displayAddWatchButton() {
-    debugger
-    const watches = Object.values(this.props.userWatches).filter(watch => watch.stock_id === this.props.stock.id)
-
-    if (watches.length % 2 === 0) {
+    const watches = Object.values(this.props.userWatches).filter((watch => watch.stock_id === this.props.stock.id))
+    if (watches.length === 0) {
       return (<button onClick={this.addUserWatch}>Add to Watchlist</button>);
     } else {
-      return (<button onClick={this.addUserWatch}>Remove from Watchlist</button>);
+      return (<button onClick={this.removeUserWatch}>Remove from Watchlist</button>);
     }
   }
 
@@ -50,7 +48,8 @@ class Stock extends React.Component {
 
   removeUserWatch(e){
     e.preventDefault();
-    this.props.createUserWatch(this.props.currentUser.id, this.props.stock.id)
+    const watches = Object.values(this.props.userWatches).filter((watch => watch.stock_id === this.props.stock.id))
+    this.props.removeUserWatch(watches[0].id)
     .then(() => this.props.getUserWatches(this.props.currentUser.id))
   }
 
@@ -118,7 +117,8 @@ const mdp = (dispatch) => {
     getStockInfo: (stock) => dispatch(getStockInfo(stock)),
     getStockObjectBySymbol: (symbol) => dispatch(getStockObjectBySymbol(symbol)),
     getUserWatches: (userId) => dispatch(getUserWatches(userId)),
-    createUserWatch: (userId, stockId) => dispatch(createUserWatch(userId, stockId))
+    createUserWatch: (userId, stockId) => dispatch(createUserWatch(userId, stockId)),
+    removeUserWatch: (watchId) => dispatch(removeUserWatch(watchId))
   };
 }
 

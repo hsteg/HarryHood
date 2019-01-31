@@ -11,3 +11,10 @@ export const createUserWatch = (user, stock) => {
     url: `/api/user_watches/${user}/${stock}`
   });
 };
+
+export const removeUserWatch = (watchId) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `/api/user_watches/${watchId}`
+  });
+};

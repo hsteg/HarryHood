@@ -15,7 +15,16 @@ export const createUserWatch = (user, stock) => dispatch => {
   return APIUtil.createUserWatch(user, stock).then(
     watches => {
       dispatch(startLoadingUserWatches());
-      return dispatch(receiveUserWatches(watches))
+      return dispatch(receiveUserWatches(watches));
+    }
+  );
+};
+
+export const removeUserWatch = (watchId) => dispatch => {
+  return APIUtil.removeUserWatch(watchId).then(
+    watches => {
+      dispatch(startLoadingUserWatches());
+      return dispatch(receiveUserWatches(watches));
     }
   );
 };

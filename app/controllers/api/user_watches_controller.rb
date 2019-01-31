@@ -18,6 +18,14 @@ class Api::UserWatchesController < ApplicationController
     end
   end
 
+  def destroy
+    @user_watch = UserWatch.find(params[:id])
+    @user_id = @user_watch.user_id
+    @user_watch.destroy
+    @user_watches = UserWatch.where("user_id = #{@user_id}")
+    render 'api/user_watches/show'
+  end
+
   private
   def user_watch_params 
     params.require(:user_watch).permit(:stock_id, :user_id)
