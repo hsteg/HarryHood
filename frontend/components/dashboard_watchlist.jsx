@@ -21,7 +21,7 @@ class DashboardWatchlist extends React.Component {
           </div>
           <div className="list-stock-price">
             {this.props.watchListValue === "currentPrice" ? (
-                `$${stocks[watch.stock_id].quote.latestPrice}`
+                `$${(stocks[watch.stock_id].quote.latestPrice).toFixed(2)}`
                 ) : (
                   `${((stocks[watch.stock_id].quote.changePercent) * 100)}%`
               )}

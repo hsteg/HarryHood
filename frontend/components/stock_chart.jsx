@@ -148,7 +148,7 @@ class StockChart extends React.Component {
     const companyName = this.props.stock.company.companyName;
     const currentPrice = this.props.stock.quote.latestPrice;
     const allData = this.parseChartData();
-    const range = [this.props.stock.quote.previousClose, this.props.stock.quote.high];
+    const range = this.props.stock.quote.latestPrice > this.props.stock.quote.previousClose ? [this.props.stock.quote.previousClose, this.props.stock.quote.high] : [this.props.stock.quote.low, this.props.stock.quote.previousClose];
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container-stock">
@@ -156,15 +156,15 @@ class StockChart extends React.Component {
             {companyName}
           </div>
           <div className="chart-header-price-value-stock-view">
-            ${currentPrice}
+            ${currentPrice.toFixed(2)}
           </div>
           <div className="chart-header-change-value-stock-page">
             +$420.69 (4.20%)
           </div>
         </div>
         <div className="chart-actual-chart">
-          <LineChart width={675} height={190} data={allData.data}>
-            <Line type="monotone" dataKey="price" stroke={allData.color} dot={false} strokeWidth={1.5} width={300} />
+          <LineChart width={allData.width} height={190} data={allData.data}>
+            <Line type="monotone" dataKey="price" stroke={allData.color} dot={false} strokeWidth={1.5}   />
             <YAxis type="number" domain={range} hide={true} />
             <ReferenceLine y={this.props.stock.quote.previousClose} strokeDasharray="1 6" stroke={allData.refColor} isFront={false}/>
           </LineChart>
