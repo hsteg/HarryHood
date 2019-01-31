@@ -1,7 +1,6 @@
 .dashboard-chart {
   height: 350px;
   box-sizing: border-box;
-  margin-bottom: 44px;
 }
 
 .chart-header-container {
@@ -28,6 +27,6 @@
 
 .chart-timeline-selector {
   height: 33px;
-  margin-top: 24px;
+
   margin-bottom: 12px;
 }

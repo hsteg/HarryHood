@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LineChart, Line, YAxis } from 'recharts';
+import { LineChart, Line, YAxis, ReferenceLine } from 'recharts';
 
 
 class WatchListChart extends React.Component {
@@ -36,13 +36,14 @@ class WatchListChart extends React.Component {
 
   render() {
     const width = (((this.props.chartData.length) / 390) * 120);
-    const range = [this.props.quote.low, this.props.quote.high];
+    const range = [this.props.quote.previousClose, this.props.quote.high];
     
     return (
       <div className="watchlist-actual-chart">
         <LineChart width={width} height={30} data={this.chartData()}>
           <Line type="monotone" dataKey="price" stroke={this.chartColor()} dot={false} strokeWidth={1} />
           <YAxis type="number" domain={range} hide={true} />
+          <ReferenceLine y={this.props.quote.previousClose} strokeDasharray="1 1" stroke="gray" isFront={false} />
         </LineChart>
       </div>
     );

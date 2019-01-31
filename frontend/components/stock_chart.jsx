@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LineChart, Line, YAxis } from 'recharts';
+import { LineChart, Line, YAxis, ReferenceLine } from 'recharts';
 import { getHistoricalStockData } from '../actions/stock_actions';
 
 class StockChart extends React.Component {
@@ -34,17 +34,17 @@ class StockChart extends React.Component {
     const { range } = this.props;
     switch (range) {
       case "1D":
-        return { data: this.oneDayChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
+        return { data: this.oneDayChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "gray" };
       case "1W":
-        return { data: this.oneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
+        return { data: this.oneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
       case "1M":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
       case "3M":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
       case "1Y":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
       case "5Y":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
       default:
         return null;
     }
@@ -148,8 +148,7 @@ class StockChart extends React.Component {
     const companyName = this.props.stock.company.companyName;
     const currentPrice = this.props.stock.quote.latestPrice;
     const allData = this.parseChartData();
-    const range = [this.props.stock.quote.low, this.props.stock.quote.high];
-    
+    const range = [this.props.stock.quote.previousClose, this.props.stock.quote.high];
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container-stock">
@@ -164,9 +163,10 @@ class StockChart extends React.Component {
           </div>
         </div>
         <div className="chart-actual-chart">
-          <LineChart width={allData.width} height={200} data={allData.data}>
-            <Line type="monotone" dataKey="price" stroke={allData.color} dot={false} strokeWidth={1.5} />
+          <LineChart width={675} height={190} data={allData.data}>
+            <Line type="monotone" dataKey="price" stroke={allData.color} dot={false} strokeWidth={1.5} width={300} />
             <YAxis type="number" domain={range} hide={true} />
+            <ReferenceLine y={this.props.stock.quote.previousClose} strokeDasharray="1 6" stroke={allData.refColor} isFront={false}/>
           </LineChart>
         </div>
 
