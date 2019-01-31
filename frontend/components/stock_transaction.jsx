@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createUserTransaction } from '../actions/transaction_actions';
 import { getUserHeldStocks, getUserCashBalance } from '../actions/session_actions';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'; 
 
 class StockTransaction extends React.Component {
   constructor(props) {
@@ -21,6 +21,7 @@ class StockTransaction extends React.Component {
     this.footerText = this.footerText.bind(this);
     this.displaySellButton = this.displaySellButton.bind(this);
     this.activeButton = this.activeButton.bind(this);
+    this.submitButton = this.submitButton.bind(this);
   }
 
   componentDidMount(){
@@ -59,6 +60,14 @@ class StockTransaction extends React.Component {
     return (this.state.buy === tfValue) ? "transaction-header-button-a" : "transaction-header-button";
   }
 
+  submitButton() {
+    if (this.calculateCostCredit() > this.props.currentUser.cash_balance) {
+      return (<button className="invalid-transaction-button">Insufficient Funds</button>);
+    } else {
+      return (<button onClick={this.handleSubmit} className="transaction-button">Submit Order</button>);
+    }
+  }
+
   displaySellButton(){
     const { numSharesToSell, currentSymbol } = this.props;
     if ((numSharesToSell).hasOwnProperty(this.props.stock.id)) {
@@ -83,7 +92,7 @@ class StockTransaction extends React.Component {
           {this.displaySellButton()}
         </div>
         <div className="transaction-buy-form">
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <div className="transaction-form-row">
               <h1 className="transaction-shares-text">Shares</h1>
               <input type="text" 
@@ -102,7 +111,7 @@ class StockTransaction extends React.Component {
               <h1 className="transaction-estimated-cost-number">${this.calculateCostCredit()}</h1>
             </div>
             <div className="transaction-form-row">
-              <input type="submit" value="Review Order" className="transaction-button" />
+              {this.submitButton()}
             </div>
           </form>
         </div>

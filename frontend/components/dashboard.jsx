@@ -33,7 +33,6 @@ class Dashboard extends React.Component {
     this.props.getDayStocksPriceData(stockSymbols.join(','));
   }
 
-
   displayUserStockList(){
     const { userHeldStocksLoading, userStocksLoading } = this.props.loading;
     const numHeldStocks = Object.values(this.props.heldStocks).length;

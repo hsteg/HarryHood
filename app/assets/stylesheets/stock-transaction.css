@@ -54,7 +54,7 @@
 .transaction-button {
   background: #21ce99;
   border-color: #21ce99;
-  color: #fff;
+  color: #1b1b1d;
   width: 100%;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -63,11 +63,32 @@
   min-width: 120px;
   font-size: 13px;
   font-weight: 600;
+  outline: none;
+}
+
+.invalid-transaction-button {
+  background: #f45531;
+  border-color: #f45531;
+  color: #1b1b1d;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 48px;
+  min-width: 120px;
+  font-size: 13px;
+  font-weight: 600;
+  outline: none;
 }
 
 .transaction-button:hover {
   background: #1ae9aa;
   border-color: #1ae9aa;
+}
+
+.invalid-transaction-button:hover {
+  background: #ff6340;
+  border-color: #ff6340;
 }
 
 .transaction-header-button {
