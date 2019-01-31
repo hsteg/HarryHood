@@ -129,7 +129,7 @@ class StockTransaction extends React.Component {
           <form>
             <div className="transaction-form-row">
               <h1 className="transaction-shares-text">Shares</h1>
-              <input type="text" 
+              <input type="number" 
                     className="transaction-shares-field" 
                     placeholder="0" 
                     onChange={this.updateNumSharesField()} />

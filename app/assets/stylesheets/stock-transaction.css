@@ -170,3 +170,9 @@
 .transaction-price-text {
   color: #21ce99;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
