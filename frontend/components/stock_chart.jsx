@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LineChart, Line, YAxis, ReferenceLine } from 'recharts';
+import { LineChart, Line, YAxis, ReferenceLine, Tooltip } from 'recharts';
 import { getHistoricalStockData } from '../actions/stock_actions';
 
 class StockChart extends React.Component {
@@ -166,6 +166,7 @@ class StockChart extends React.Component {
           <LineChart width={allData.width} height={190} data={allData.data}>
             <Line type="monotone" dataKey="price" stroke={allData.color} dot={false} strokeWidth={1.5}   />
             <YAxis type="number" domain={range} hide={true} />
+            <Tooltip contentStyle={{ backgroundColor: 'transparent', border: '0' }} />
             <ReferenceLine y={this.props.stock.quote.previousClose} strokeDasharray="1 6" stroke={allData.refColor} isFront={false}/>
           </LineChart>
         </div>
