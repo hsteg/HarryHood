@@ -87,6 +87,7 @@ class StockTransaction extends React.Component {
   }
 
   submitButton() {
+    if(this.state.num_shares < 0) { return (<button className="invalid-transaction-button">Value cannot be negative :)</button>);  }
     if(this.state.buy) {
       if (this.calculateCostCredit() > this.props.currentUser.cash_balance) {
         return (<button className="invalid-transaction-button">Insufficient Funds</button>);
