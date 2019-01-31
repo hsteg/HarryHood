@@ -27,6 +27,11 @@ class Api::UsersController < ApplicationController
       render 'api/users/show'
     end
 
+    def portfolio_data
+      @user = User.find(params[:id])
+      @portfolio_snapshots = @user.portfolio_snapshots.order(date: :asc)
+      render 'api/users/portfolio_data'
+    end
 
 
     private

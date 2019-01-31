@@ -55,7 +55,7 @@ export const getUserCashBalance = (userId) => dispatch => {
   );
 };
 
-export const getUserPortfolioSnapshots = (userId) = dispatch => {
+export const getUserPortfolioSnapshots = (userId) => dispatch => {
   dispatch(startLoadingUserPortfolioSnapshots());
   return APIUtil.getUserPortfolioSnapshots(userId).then(
     snapshots => {

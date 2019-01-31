@@ -34,3 +34,10 @@ export const getUserCashBalance = (userId) => {
     url: `/api/users/${userId}/cash_balance`
   });
 };
+
+export const getUserPortfolioSnapshots = (userId) => {
+  return $.ajax({
+    method: "GET",
+    url: `/api/users/${userId}/portfolio_data`
+  });
+};

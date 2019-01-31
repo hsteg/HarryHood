@@ -16,7 +16,8 @@ const sessionReducer = (state = _nullState, action) => {
       newState.heldStocks = action.heldStocks;
       return newState;
     case RECEIVE_USER_PORTFOLIO_SNAPSHOTS:
-      return newState.portfolioSnapshots = action.snapshots;
+      newState.portfolioSnapshots = action.snapshots;
+      return newState;
     default:
       return state;
   }
