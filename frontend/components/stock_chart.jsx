@@ -13,6 +13,8 @@ class StockChart extends React.Component {
     this.greaterThanOneWeekChartData = this.greaterThanOneWeekChartData.bind(this);
     this.oneWeekChartData = this.oneWeekChartData.bind(this);
     this.widthSelector = this.widthSelector.bind(this);
+    this.priceChange = this.priceChange.bind(this);
+    this.percentChange = this.percentChange.bind(this);
   }
 
 
@@ -126,6 +128,26 @@ class StockChart extends React.Component {
     }
   }
 
+  priceChange(range) {
+    const {change} = this.props.stock.quote;
+    switch(range) {
+      case "1D":
+        return (change < 0) ? (`-$${(change * -1).toFixed(2)}`) : (`+$${change.toFixed(2)}`);
+      default: 
+        return ("");
+    }
+  }
+
+  percentChange(range) {
+    const {changePercent} = this.props.stock.quote;
+    switch(range) {
+      case "1D":
+        return (changePercent < 0) ? (`(-${(changePercent * 100 * -1).toFixed(2)}%)`) : (`(${(changePercent * 100).toFixed(2)}%)`);
+      default:
+        return ("");
+    }
+  }
+
   // rangeSelector(range) {
   //   const { low, high } = this.props.stock.quote;
   //   switch(range) {
@@ -145,13 +167,12 @@ class StockChart extends React.Component {
 
   render() {
     if (this.props.loading) { return (<h1>loading :)</h1>); };
-    const {latestPrice, previousClose, high, low, change, changePercent} = this.props.stock.quote;
+    const {latestPrice, previousClose, high, low, changePercent} = this.props.stock.quote;
     const companyName = this.props.stock.company.companyName;
     const currentPrice = latestPrice;
     const allData = this.parseChartData();
     const range = latestPrice > previousClose ? [previousClose, high] : [low, previousClose];
-    const displayChangeDollar = (change < 0) ? (`-$${(change * -1).toFixed(2)}`) : (`+$${change.toFixed(2)}`);
-    const displayChangePercent = (changePercent < 0) ? (`(${(changePercent * 100 * -1).toFixed(2)}%)`) : (`(${(changePercent * 100).toFixed(2)}%)`);
+    const displayChangePercent = (changePercent < 0) ? (`(-${(changePercent * 100 * -1).toFixed(2)}%)`) : (`(${(changePercent * 100).toFixed(2)}%)`);
     
     return (
       <div className="dashboard-chart">
@@ -163,7 +184,7 @@ class StockChart extends React.Component {
             ${currentPrice.toFixed(2)}
           </div>
           <div className="chart-header-change-value-stock-page">
-            {displayChangeDollar}   {displayChangePercent}
+            {this.priceChange(this.props.range)}  {this.percentChange(this.props.range)} 
           </div>
         </div>
         <div className="chart-actual-chart">
