@@ -172,7 +172,6 @@ class StockChart extends React.Component {
     const currentPrice = latestPrice;
     const allData = this.parseChartData();
     const range = latestPrice > previousClose ? [previousClose, high] : [low, previousClose];
-    const displayChangePercent = (changePercent < 0) ? (`(-${(changePercent * 100 * -1).toFixed(2)}%)`) : (`(${(changePercent * 100).toFixed(2)}%)`);
     
     return (
       <div className="dashboard-chart">
