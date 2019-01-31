@@ -1,9 +1,14 @@
 class Api::TransactionsController < ApplicationController 
   def create
     @transaction = Transaction.new(transaction_params)
-    @transaction_total = @transaction.num_shares * @transaction.price_per_share
     @user = User.find(transaction_params[:user_id])
-    @new_cash_balance = @user.cash_balance - @transaction_total
+    if @transaction.num_shares < 0 
+      @transaction_total = (@transaction.num_shares * @transaction.price_per_share) * -1
+      @new_cash_balance = @user.cash_balance + @transaction_total
+    else
+      @transaction_total = @transaction.num_shares * @transaction.price_per_share
+      @new_cash_balance = @user.cash_balance - @transaction_total
+    end
 
     if @transaction.save
       @user.update(cash_balance: @new_cash_balance)
