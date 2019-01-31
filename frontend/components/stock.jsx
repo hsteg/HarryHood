@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getStockInfo, getStockObjectBySymbol } from '../actions/stock_actions';
+import { getUserWatches, createUserWatch } from '../actions/user_watch_actions'
 import Navbar from './navbar';
 import StockChart from './stock_chart';
 import StockTransaction from './stock_transaction';
@@ -15,11 +16,14 @@ class Stock extends React.Component {
       range: "1D"
     }
     this.handleSelector = this.handleSelector.bind(this);
+    this.addUserWatch = this.addUserWatch.bind(this);
+    this.removeUserWatch = this.removeUserWatch.bind(this);
   }
 
   componentDidMount() {
     this.props.getStockObjectBySymbol(this.props.symbol)
       .then(() => this.props.getStockInfo(this.props.symbol))
+      .then(() => this.props.getUserWatches(this.props.currentUser.id))
       .then(() => this.setState({ dataLoaded: true }));
   }
 
@@ -27,11 +31,34 @@ class Stock extends React.Component {
     this.setState({ range: e.currentTarget.innerText });
   }
 
+  displayAddWatchButton() {
+    debugger
+    const watches = Object.values(this.props.userWatches).filter(watch => watch.stock_id === this.props.stock.id)
+
+    if (watches.length % 2 === 0) {
+      return (<button onClick={this.addUserWatch}>Add to Watchlist</button>);
+    } else {
+      return (<button onClick={this.addUserWatch}>Remove from Watchlist</button>);
+    }
+  }
+
+  addUserWatch(e){
+    e.preventDefault();
+    this.props.createUserWatch(this.props.currentUser.id, this.props.stock.id)
+    .then(() => this.props.getUserWatches(this.props.currentUser.id))
+  }
+
+  removeUserWatch(e){
+    e.preventDefault();
+    this.props.createUserWatch(this.props.currentUser.id, this.props.stock.id)
+    .then(() => this.props.getUserWatches(this.props.currentUser.id))
+  }
+
 
 
   render() {
     if (this.state.dataLoaded === false) { return (<h1>loading :)</h1>); };
-    if (this.props.loading) { return (<h1>loading :)</h1>); };
+    if (this.props.loading.stockDataLoading || this.props.loading.userWatchListLoading) { return (<h1>loading :)</h1>); };
     return (
       <div className="dashboard-main">
         <div className="header-container">
@@ -65,6 +92,9 @@ class Stock extends React.Component {
               <div className="transaction-component">
                 <StockTransaction stock={this.props.stock} />
               </div>
+              <div className="watch-button-container">
+                {this.displayAddWatchButton()}
+              </div>
             </div>
           </div>
         </div>
@@ -75,9 +105,11 @@ class Stock extends React.Component {
 
 const msp = (state, ownProps) => {
   return {
+    currentUser: state.entities.users[state.session.id],
     stock: Object.values(state.entities.stocks).filter((stock) => stock.symbol === ownProps.match.params.symbol)[0],
     symbol: ownProps.match.params.symbol.toUpperCase(),
-    loading: state.ui.loading.stockDataLoading,
+    loading: state.ui.loading,
+    userWatches: state.entities.userWatches
   };
 }
 
@@ -85,6 +117,8 @@ const mdp = (dispatch) => {
   return {
     getStockInfo: (stock) => dispatch(getStockInfo(stock)),
     getStockObjectBySymbol: (symbol) => dispatch(getStockObjectBySymbol(symbol)),
+    getUserWatches: (userId) => dispatch(getUserWatches(userId)),
+    createUserWatch: (userId, stockId) => dispatch(createUserWatch(userId, stockId))
   };
 }
 

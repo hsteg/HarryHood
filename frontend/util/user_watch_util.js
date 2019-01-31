@@ -4,3 +4,10 @@ export const getUserWatches = (user) => {
     url: `/api/user_watches/${user}`
   });
 };
+
+export const createUserWatch = (user, stock) => {
+  return $.ajax({
+    method: "POST",
+    url: `/api/user_watches/${user}/${stock}`
+  });
+};

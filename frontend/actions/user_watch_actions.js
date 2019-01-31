@@ -6,8 +6,16 @@ export const getUserWatches = (user) => dispatch => {
   dispatch(startLoadingUserWatches());
   return APIUtil.getUserWatches(user).then(
     watches => {
-  
       return dispatch(receiveUserWatches(watches));
+    }
+  );
+};
+
+export const createUserWatch = (user, stock) => dispatch => {
+  return APIUtil.createUserWatch(user, stock).then(
+    watches => {
+      dispatch(startLoadingUserWatches());
+      return dispatch(receiveUserWatches(watches))
     }
   );
 };

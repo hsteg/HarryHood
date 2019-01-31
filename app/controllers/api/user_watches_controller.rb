@@ -5,6 +5,19 @@ class Api::UserWatchesController < ApplicationController
     render 'api/user_watches/show'
   end
 
+  def create
+    @user_id = params[:user_id]
+    @stock_id = params[:stock_id]
+    @user_watch = UserWatch.new({user_id: @user_id, stock_id: @stock_id})
+
+    if @user_watch.save
+      @user_watches = UserWatch.where("user_id = #{@user_id}")
+      render 'api/user_watches/show'
+    else 
+      render json: @user_watch.errors.full_messages, status: 422
+    end
+  end
+
   private
   def user_watch_params 
     params.require(:user_watch).permit(:stock_id, :user_id)

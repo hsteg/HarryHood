@@ -9,8 +9,10 @@ Rails.application.routes.draw do
       get 'cash_balance', on: :member
     end
     resources :transactions, only: [:show, :create]
-    resources :user_watches, only: [:show]
+    resources :user_watches, only: [:show]  do 
+    end
     resources :stocks, only: [:index, :show]
+    post 'user_watches/:user_id/:stock_id', to: 'user_watches#create'
   end
   
   root "static_pages#root"
