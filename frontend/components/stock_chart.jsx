@@ -145,10 +145,13 @@ class StockChart extends React.Component {
 
   render() {
     if (this.props.loading) { return (<h1>loading :)</h1>); };
+    const {latestPrice, previousClose, high, low, change, changePercent} = this.props.stock.quote;
     const companyName = this.props.stock.company.companyName;
-    const currentPrice = this.props.stock.quote.latestPrice;
+    const currentPrice = latestPrice;
     const allData = this.parseChartData();
-    const range = this.props.stock.quote.latestPrice > this.props.stock.quote.previousClose ? [this.props.stock.quote.previousClose, this.props.stock.quote.high] : [this.props.stock.quote.low, this.props.stock.quote.previousClose];
+    const range = latestPrice > previousClose ? [previousClose, high] : [low, previousClose];
+    const displayChangeDollar = (change < 0) ? (`-$${(change * -1).toFixed(2)}`) : (`+$${change.toFixed(2)}`);
+    const displayChangePercent = (changePercent < 0) ? (`(${(changePercent * 100 * -1).toFixed(2)}%)`) : (`(${(changePercent * 100).toFixed(2)}%)`);
     
     return (
       <div className="dashboard-chart">
@@ -160,7 +163,7 @@ class StockChart extends React.Component {
             ${currentPrice.toFixed(2)}
           </div>
           <div className="chart-header-change-value-stock-page">
-            +$420.69 (4.20%)
+            {displayChangeDollar}   {displayChangePercent}
           </div>
         </div>
         <div className="chart-actual-chart">
