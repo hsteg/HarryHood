@@ -35,6 +35,7 @@ transaction4 = Transaction.create!( {stock_id: stock4.id, user_id: user1.id, num
 transaction5 = Transaction.create!( {stock_id: stock5.id, user_id: user1.id, num_shares: 7, price_per_share: 34.91} )
 transaction6 = Transaction.create!( {stock_id: stock5.id, user_id: user1.id, num_shares: -3, price_per_share: 40.05} )
 transaction7 = Transaction.create!( {stock_id: stock3.id, user_id: user1.id, num_shares: 1, price_per_share: 135.05} )
+transaction8 = Transaction.create!( {stock_id: stock1.id, user_id: user1.id, num_shares: 1, price_per_share: 135.05} )
 
 user_watch1 = UserWatch.create( {stock_id: stock6.id, user_id: user1.id } )
 user_watch2 = UserWatch.create( {stock_id: stock7.id, user_id: user1.id } )
