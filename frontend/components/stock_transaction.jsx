@@ -12,7 +12,9 @@ class StockTransaction extends React.Component {
       buy: true,
       stock_id: this.props.stock.id,
       user_id: this.props.currentUser.id,
-      price_per_share: this.props.stock.quote.latestPrice
+      price_per_share: this.props.stock.quote.latestPrice,
+      success: false,
+      num_shares_transacted: 0
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateNumSharesField = this.updateNumSharesField.bind(this);
@@ -22,6 +24,7 @@ class StockTransaction extends React.Component {
     this.displaySellButton = this.displaySellButton.bind(this);
     this.activeButton = this.activeButton.bind(this);
     this.submitButton = this.submitButton.bind(this);
+    this.displaySuccess = this.displaySuccess.bind(this);
   }
 
   componentDidMount(){
@@ -32,12 +35,25 @@ class StockTransaction extends React.Component {
     e.preventDefault();
     this.props.createUserTransaction(this.state)
     .then(() => this.props.getUserCashBalance(this.props.currentUser.id))
-    .then(() => this.props.history.push('/'));
+    .then(() => this.setState({success: true, num_shares_transacted: this.state.num_shares}));
   }
 
   updateNumSharesField() {
     return (e) => {
       this.setState({ num_shares: e.target.value });
+    }
+  }
+
+  displaySuccess() {
+    if(this.state.success) {
+      const s = this.state.num_shares_transacted > 1 ? "s" : "";
+      return (
+      <div className="transaction-form-footer">
+        <h1 className="transaction-footer-text">Purchased {this.state.num_shares_transacted} share{s} of {this.props.currentSymbol}</h1>
+      </div>
+      );
+    } else {
+      return null;
     }
   }
 
@@ -126,6 +142,7 @@ class StockTransaction extends React.Component {
         <div className="transaction-form-footer">
           <h1 className="transaction-footer-text">{this.footerText()}</h1>
         </div>
+        {this.displaySuccess()}
       </>
     );
   }
