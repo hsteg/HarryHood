@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LineChart, Line, YAxis, ReferenceLine, Tooltip } from 'recharts';
+import { LineChart, Line, YAxis, ReferenceLine, Tooltip, XAxis } from 'recharts';
 import { getHistoricalStockData } from '../actions/stock_actions';
 
 class StockChart extends React.Component {
@@ -55,15 +55,15 @@ class StockChart extends React.Component {
     this.props.stock.chart.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.close;
+      dpObject['Price'] = dataPoint.close;
 
-      if (dpObject.price === null) { return }
+      if (dpObject.Price === null) { return }
       oneDayChartData.push(dpObject);
     }
     );
     let latestPrice = {};
-    latestPrice['time'] = "mostRecent";
-    latestPrice['price'] = this.props.stock.quote.latestPrice;
+    latestPrice['time'] = this.props.stock.quote.latestTime;
+    latestPrice['Price'] = this.props.stock.quote.latestPrice;
     oneDayChartData.push(latestPrice);
     return oneDayChartData;
   }
@@ -74,11 +74,11 @@ class StockChart extends React.Component {
     this.props.stock.historicalData.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.close;
+      dpObject['Price'] = dataPoint.close;
       oneWeekChartData.push(dpObject);
     }
     );
-    oneWeekChartData.push({ 'time': "most recent", 'price': this.props.stock.quote.latestPrice });
+    oneWeekChartData.push({ 'time': "most recent", 'Price': this.props.stock.quote.latestPrice });
     return oneWeekChartData.slice(-5);
   }
 
@@ -88,7 +88,7 @@ class StockChart extends React.Component {
     this.props.stock.historicalData.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.close;
+      dpObject['Price'] = dataPoint.close;
       greaterThanOneWeekChartData.push(dpObject);
     }
     );
@@ -149,6 +149,7 @@ class StockChart extends React.Component {
     const currentPrice = this.props.stock.quote.latestPrice;
     const allData = this.parseChartData();
     const range = this.props.stock.quote.latestPrice > this.props.stock.quote.previousClose ? [this.props.stock.quote.previousClose, this.props.stock.quote.high] : [this.props.stock.quote.low, this.props.stock.quote.previousClose];
+    
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container-stock">
@@ -164,7 +165,8 @@ class StockChart extends React.Component {
         </div>
         <div className="chart-actual-chart">
           <LineChart width={allData.width} height={190} data={allData.data}>
-            <Line type="monotone" dataKey="price" stroke={allData.color} dot={false} strokeWidth={1.5}   />
+            <Line type="monotone" dataKey="Price" stroke={allData.color} dot={false} strokeWidth={1.5}   />
+            <XAxis dataKey="time" hide={true} />
             <YAxis type="number" domain={range} hide={true} />
             <Tooltip contentStyle={{ backgroundColor: 'transparent', border: '0' }} />
             <ReferenceLine y={this.props.stock.quote.previousClose} strokeDasharray="1 6" stroke={allData.refColor} isFront={false}/>
