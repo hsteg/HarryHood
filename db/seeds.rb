@@ -14,7 +14,7 @@ User.destroy_all
 
 
 user1 = User.create( {cash_balance: 5873, email: "asdf@asdf.com", first_name: "Harry", last_name: "Test", username: "asdf", password: "asdfasdf"} )
-user2 = User.create( {cash_balance: 7843, email: "demo@demouser.com", first_name: "Demo", last_name: "McDemo", username: "DemoMcDemoface", password: "demodemo"} )
+user2 = User.create( {cash_balance: 50000, email: "demo@demouser.com", first_name: "Demo", last_name: "McDemo", username: "DemoMcDemoface", password: "demodemo"} )
 
 stock1 = Stock.create( {symbol: "AAPL", name: "Apple" } )
 stock2 = Stock.create( {symbol: "STWD", name: "Starwood"} )

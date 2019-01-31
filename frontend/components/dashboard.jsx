@@ -71,7 +71,7 @@ class Dashboard extends React.Component {
         <div className="content-main">
           <div className="left-col">
             <div className="content-chart">
-              <DashboardChart />
+              <DashboardChart currentUser={this.props.currentUser} />
             </div>
             <div className="content-news">
               News goes here
