@@ -61,10 +61,18 @@ class StockTransaction extends React.Component {
   }
 
   submitButton() {
-    if (this.calculateCostCredit() > this.props.currentUser.cash_balance) {
-      return (<button className="invalid-transaction-button">Insufficient Funds</button>);
+    if(this.state.buy) {
+      if (this.calculateCostCredit() > this.props.currentUser.cash_balance) {
+        return (<button className="invalid-transaction-button">Insufficient Funds</button>);
+      } else {
+        return (<button onClick={this.handleSubmit} className="transaction-button">Submit Order</button>);
+      }
     } else {
-      return (<button onClick={this.handleSubmit} className="transaction-button">Submit Order</button>);
+      if (this.state.num_shares > this.props.numSharesToSell[this.props.stock.id].num_shares) {
+        return (<button className="invalid-transaction-button">Insufficient Shares</button>);
+      } else {
+        return (<button onClick={this.handleSubmit} className="transaction-button">Submit Order</button>);
+      }
     }
   }
 
