@@ -1,8 +1,8 @@
-import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_USER_HELD_STOCKS } from '../actions/session_actions';
+import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_USER_HELD_STOCKS, RECEIVE_USER_PORTFOLIO_SNAPSHOTS } from '../actions/session_actions';
 import { merge } from 'lodash';
 
 
-const _nullState = { id: null, heldStocks: {} };
+const _nullState = { id: null, heldStocks: {}, portfolioSnapshots: {} };
 
 const sessionReducer = (state = _nullState, action) => {
   Object.freeze(state)
@@ -15,6 +15,8 @@ const sessionReducer = (state = _nullState, action) => {
     case RECEIVE_USER_HELD_STOCKS:
       newState.heldStocks = action.heldStocks;
       return newState;
+    case RECEIVE_USER_PORTFOLIO_SNAPSHOTS:
+      return newState.portfolioSnapshots = action.snapshots;
     default:
       return state;
   }

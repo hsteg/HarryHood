@@ -59,7 +59,7 @@ export const getUserPortfolioSnapshots = (userId) = dispatch => {
   dispatch(startLoadingUserPortfolioSnapshots());
   return APIUtil.getUserPortfolioSnapshots(userId).then(
     snapshots => {
-      return dispatch(receiveUserPortfolioSnapshots());
+      return dispatch(receiveUserPortfolioSnapshots(snapshots));
     }
   );
 };
@@ -115,3 +115,10 @@ const startLoadingUserPortfolioSnapshots = () => {
     type: START_LOADING_USER_PORTFOLIO_SNAPSHOTS,
   };
 }
+
+const receiveUserPortfolioSnapshots = (snapshots) => {
+  return {
+    type: RECEIVE_USER_PORTFOLIO_SNAPSHOTS,
+    snapshots
+  }
+};
