@@ -19,7 +19,11 @@ class DashboardWatchlist extends React.Component {
             graph here
           </div>
           <div className="list-stock-price">
-            ${stocks[watch.stock_id].quote.latestPrice}
+            {this.props.watchListValue === "currentPrice" ? (
+                `$${stocks[watch.stock_id].quote.latestPrice}`
+                ) : (
+                  `${((stocks[watch.stock_id].quote.changePercent) * 100)}%`
+              )}
           </div>
         </Link>
       );

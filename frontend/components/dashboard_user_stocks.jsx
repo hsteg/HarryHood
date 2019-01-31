@@ -7,6 +7,7 @@ class DashboardUserStockList extends React.Component {
     super(props);
   }
 
+
   render() {
     const { stocks } = this.props;
     const lis = Object.values(this.props.heldStocks).filter((stock) => stock.num_shares > 0).map(heldStock => {
@@ -24,7 +25,11 @@ class DashboardUserStockList extends React.Component {
               graph here
           </div>
             <div className="list-stock-price">
-              ${stocks[heldStock.stock_id].quote.latestPrice}
+              {this.props.stockListValue === "currentPrice" ? (
+                `$${stocks[heldStock.stock_id].quote.latestPrice}`
+                ) : (
+                  `${((stocks[heldStock.stock_id].quote.changePercent) * 100)}%`
+              )}
             </div>
         </Link>
       );
