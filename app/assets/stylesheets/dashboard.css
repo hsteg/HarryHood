@@ -92,14 +92,13 @@
 .right-col-loading-img {
   width: 100px;
   height: 100px;
-  padding: 0 95px;
+  padding: 30px 95px;
 }
 
 .left-col-loading-img {
   width: 100px;
   height: 100px;
-  margin: 0 287px;
-  margin-top: 50px;
+  margin: 50px 287px;
 }
 
 
