@@ -40,6 +40,55 @@
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(0, 0, 0, 0.6);
 }
 
+.dash-values-button {
+  text-decoration: none;
+  border: 0;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  background-color: transparent;
+  color: white;
+  margin-right: 7px;
+}
+
+.dash-values-button-green {
+  text-decoration: none;
+  border: 0;
+  margin-right: 7px;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  background-color: transparent;
+  color: #21ce99;
+  border-bottom: 2px solid #21ce99;
+  box-sizing: border-box;
+  padding-top: 7px;
+  padding-bottom: 5px;
+}
+
+.dash-dropdown-hidden {
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+}
+
+.dash-dropdown-open {
+  padding: 24px 0 0;
+  right: -12px;
+  transition: opacity 150ms, visibility 150ms;
+  border: none;
+  border-radius: 2px;
+  position: absolute;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(0, 0, 0, 0.6);
+  background-color: #1b1b1d;
+  margin-right: 75px;
+  color: white;
+}
+
 
 
 

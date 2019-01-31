@@ -13,6 +13,10 @@ import DashboardChart from './dashboard_chart';
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      stockListValue: "currentPrice",
+      watchListValue: "currentPrice", 
+    }
     this.getStockSymbols = this.getStockSymbols.bind(this);
     this.displayUserStockList = this.displayUserStockList.bind(this);
     this.displayUserWatchList = this.displayUserWatchList.bind(this);
@@ -43,7 +47,7 @@ class Dashboard extends React.Component {
     } else {
       if (numHeldStocks === 0 || numUserStocksInState < numHeldStocks ) { return null; }
 
-      return (<DashboardUserStockList stocks={this.props.stocks} heldStocks={this.props.heldStocks} />);
+      return (<DashboardUserStockList stocks={this.props.stocks} heldStocks={this.props.heldStocks} stockListValue={this.state.stockListValue} />);
     }
   }
 
@@ -54,7 +58,7 @@ class Dashboard extends React.Component {
     } else {
       if (Object.values(this.props.userWatches).length === 0 || Object.values(this.props.stocks).length === 0) { return null; }
 
-      return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} />);
+      return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} watchListValue={this.state.watchListValue} />);
     }
   }
 
@@ -76,7 +80,7 @@ class Dashboard extends React.Component {
           <div className="right-col">
             <div className="stocks-lists-container">
               <div className="stocks-list-header">
-                <h1 className="stocks-list-header-text">user stocks</h1>
+                <h1 className="stocks-list-header-text">Stocks</h1>
                 <h1 className="stocks-list-header-button">button</h1>
               </div>
                 {this.displayUserStockList()}
