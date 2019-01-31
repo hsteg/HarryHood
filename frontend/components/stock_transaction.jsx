@@ -114,7 +114,7 @@ class StockTransaction extends React.Component {
 
 
   render() {
-    if (Object.values(this.props.numSharesToSell).length < 1 || this.props.loading.userHeldStocks) {return <h1>loading</h1>}
+    if (Object.values(this.props.numSharesToSell).length < 1 || this.props.loading.userHeldStocks) {return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
 
     const { currentSymbol, latestStockPrice } = this.props;
 
