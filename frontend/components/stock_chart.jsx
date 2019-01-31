@@ -12,6 +12,7 @@ class StockChart extends React.Component {
     this.oneDayChartData = this.oneDayChartData.bind(this);
     this.greaterThanOneWeekChartData = this.greaterThanOneWeekChartData.bind(this);
     this.oneWeekChartData = this.oneWeekChartData.bind(this);
+    this.widthSelector = this.widthSelector.bind(this);
   }
 
 
@@ -33,17 +34,17 @@ class StockChart extends React.Component {
     const { range } = this.props;
     switch (range) {
       case "1D":
-        return { data: this.oneDayChartData(), color: this.chartColor(range) };
+        return { data: this.oneDayChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
       case "1W":
-        return { data: this.oneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.oneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
       case "1M":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
       case "3M":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
       case "1Y":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
       case "5Y":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range) };
       default:
         return null;
     }
@@ -55,9 +56,15 @@ class StockChart extends React.Component {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
       dpObject['price'] = dataPoint.close;
+
+      if (dpObject.price === null) { return }
       oneDayChartData.push(dpObject);
     }
     );
+    let latestPrice = {};
+    latestPrice['time'] = "mostRecent";
+    latestPrice['price'] = this.props.stock.quote.latestPrice;
+    oneDayChartData.push(latestPrice);
     return oneDayChartData;
   }
 
@@ -110,6 +117,15 @@ class StockChart extends React.Component {
     }
   }
 
+  widthSelector(range) {
+    switch(range) {
+      case "1D": 
+        return (((this.props.stock.chart.length) / 78) * 675);
+      default: 
+        return 675;
+    }
+  }
+
   // rangeSelector(range) {
   //   const { low, high } = this.props.stock.quote;
   //   switch(range) {
@@ -133,6 +149,7 @@ class StockChart extends React.Component {
     const currentPrice = this.props.stock.quote.latestPrice;
     const allData = this.parseChartData();
     const range = [this.props.stock.quote.low, this.props.stock.quote.high];
+    
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container-stock">
@@ -147,7 +164,7 @@ class StockChart extends React.Component {
           </div>
         </div>
         <div className="chart-actual-chart">
-          <LineChart width={675} height={200} data={allData.data}>
+          <LineChart width={allData.width} height={200} data={allData.data}>
             <Line type="monotone" dataKey="price" stroke={allData.color} dot={false} strokeWidth={1.5} />
             <YAxis type="number" domain={range} hide={true} />
           </LineChart>
