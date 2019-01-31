@@ -166,7 +166,7 @@ class StockChart extends React.Component {
   // }
 
   render() {
-    if (this.props.loading) { return (<h1>loading :)</h1>); };
+    if (this.props.loading) { return (<img className="left-col-loading-img" src={window.loadingIMG} />); };
     const {latestPrice, previousClose, high, low, changePercent} = this.props.stock.quote;
     const companyName = this.props.stock.company.companyName;
     const currentPrice = latestPrice;
