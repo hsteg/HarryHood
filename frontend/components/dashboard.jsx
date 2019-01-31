@@ -76,7 +76,7 @@ class Dashboard extends React.Component {
           <div className="right-col">
             <div className="stocks-lists-container">
               <div className="stocks-list-header">
-                <h1 className="stocks-list-header-text">user stocks</h1>
+                <h1 className="stocks-list-header-text">Stocks</h1>
                 <h1 className="stocks-list-header-button">button</h1>
               </div>
                 {this.displayUserStockList()}
