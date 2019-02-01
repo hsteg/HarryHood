@@ -16,8 +16,19 @@
   background-color: #171718;
 }
 
+.fa-search-dollar {
+  font-size: 25px;
+  color: #b1bfc4;
+  width: 50px;
+  margin-left: 32px;
+}
+
 .search-result-symbol{
   width: 40px;
+}
+
+.search-result-name {
+  padding-left: 40px;
 }
 
 .search-bar-container {
@@ -25,16 +36,24 @@
   width: 100%;
   background-color: #1b1b1d;
   transition: opacity 150ms, visibility 150ms;
-  border: 1px solid black;
+  border: 1px solid #b1bfc4;
   background-color: #1b1b1d;
+  display: flex;
+  flex-direction: column;
+  
+  
+}
+
+.search-holder {
+  display: flex;
+  align-items: center;
 }
 
 .search-bar-container:hover {
   border-radius: 4px;
-  width: 100%;
   background-color: #1b1b1d;
   transition: opacity 150ms, visibility 150ms;
-  border: 1px solid transparent;
+  border: 0px solid transparent;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.01), 0 3px 24px rgba(0, 0, 0, 0.6);
 }
 
@@ -46,7 +65,7 @@
 .search-bar{
   height: 36px;
   box-sizing: border-box;
-  width: 600px;
+  width: 500px;
   background-color: #1b1b1d;
   border: 1px solid transparent;
   border-bottom: none;
@@ -55,7 +74,7 @@
   color: white;
   font-family: inherit;
   font-size: 14px;
-  padding-left: 40px;
+  margin-left: 36px;
 }
 
 .emtpy-search {
