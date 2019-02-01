@@ -72,7 +72,7 @@ class Dashboard extends React.Component {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
       if(this.props.portfolioSnapshots.length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
-      return (<DashboardChart currentUser={this.props.currentUser} />);
+      return (<DashboardChart currentUser={this.props.currentUser} dateRange={this.state.range} />);
     }
   }
 
@@ -103,8 +103,8 @@ class Dashboard extends React.Component {
                         onClick={this.handleSelector}>3M</button>
                 <button className={this.state.range === "1Y" ? "chart-selector-button-a" : "chart-selector-button"} 
                         onClick={this.handleSelector}>1Y</button>
-                <button className={this.state.range === "5Y" ? "chart-selector-button-a" : "chart-selector-button"} 
-                        onClick={this.handleSelector}>5Y</button>
+                <button className={this.state.range === "ALL" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>ALL</button>
               </nav>
             <div className="content-news">
               News goes here
