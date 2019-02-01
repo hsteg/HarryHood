@@ -17,12 +17,19 @@ class SearchBar extends React.Component {
 
   handleInput(e) {
     this.setState({ searchVal: e.currentTarget.value }, () => {
+      const searchBarContainer = document.querySelector(".search-bar-container");
       if (this.state.searchVal.length > 0) {
+        searchBarContainer.classList.add("box-shadow");
         this.props.getStockSearchResults(this.state.searchVal);
       } else {
+        searchBarContainer.classList.remove("box-shadow");
         this.props.clearUserSearchResults();
       }
     });
+  }
+
+  componentWillUnmount() {
+    this.props.clearUserSearchResults();
   }
 
   results() {
@@ -32,7 +39,7 @@ class SearchBar extends React.Component {
         <div className="search-result-name">{result.name}</div>
       </Link>);
     });
-    return (this.props.searchResults !== {}) ? searchResults : (<div className="empty-search"></div>) ;
+    return (this.props.searchResults !== {}) ?  searchResults : (<div className="empty-search"></div>) ;
   }
 
 
@@ -41,7 +48,7 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="search-bar-container">
         <input type="text" onChange={this.handleInput} className="search-bar" />
         {this.results()}
       </div>

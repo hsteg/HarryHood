@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   flex: 0 0 72.2%;  
+  justify-content: space-around;
 }
 
 .loggedin-nav-logo {
@@ -19,16 +20,25 @@
 }
 
 .loggedin-nav-searchbar-container {
-  flex-basis: 480px;
-  min-width: 160px;
-
+  flex-basis: 600px;
+  min-width: 478px;
+  
 }
 
 .loggedin-nav-searchbar {
   border: 1px solid gray;
   border-radius: 4px;
   width: 100%;
+  background-color: #1b1b1d;
+  transition: opacity 150ms, visibility 150ms;
+  border: none;
+  border-radius: 2px;
+  background-color: #1b1b1d;
+  margin-right: 75px;
+  color: white;
+  height: 36px;
 } 
+
 
 .loggedin-nav-right-links {
   display: flex;

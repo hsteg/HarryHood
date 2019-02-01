@@ -25,6 +25,7 @@ class Stock extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    this.props.clearSearchResults;
     if(prevProps.match.params.symbol !== this.props.match.params.symbol) {
       this.setState({dataLoaded: false})
       this.props.getStockObjectBySymbol(this.props.symbol)
