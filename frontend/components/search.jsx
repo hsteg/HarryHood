@@ -26,14 +26,13 @@ class SearchBar extends React.Component {
   }
 
   results() {
-    const searchResults = Object.values(this.props.searchResults).map(result => {
+    const searchResults = Object.values(this.props.searchResults).map(result => { return (
       <Link to={`/stock/${result.symbol}`} className="search-result" key={result.id}>
         <div className="search-result-symbol">{result.symbol}</div>
         <div className="search-result-name">{result.name}</div>
-      </Link>
+      </Link>);
     });
-    debugger
-    return this.state.searchVal.length > 0 ? searchResults : (<div className="empty-search"></div>) ;
+    return (this.props.searchResults !== {}) ? searchResults : (<div className="empty-search"></div>) ;
   }
 
 

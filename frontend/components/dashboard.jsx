@@ -43,13 +43,15 @@ class Dashboard extends React.Component {
 
   displayUserStockList(){
     const { userHeldStocksLoading, userStocksLoading } = this.props.loading;
-    const numHeldStocks = Object.values(this.props.heldStocks).length;
-    const numUserStocksInState = Object.values(this.props.stocks).length;
+    const numHeldStocks = Object.keys(this.props.heldStocks);
+    const numUserStocksInState = Object.keys(this.props.stocks);
+
+    const arrEq = numHeldStocks.map(key => numUserStocksInState.includes(key) ? true : false );
 
     if ( userHeldStocksLoading || userStocksLoading ) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
-      if (numHeldStocks === 0 || numUserStocksInState < numHeldStocks ) { return null; }
+      if (numHeldStocks.length === 0 || arrEq.includes(false) ) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); }
 
       return (<DashboardUserStockList stocks={this.props.stocks} heldStocks={this.props.heldStocks} stockListValue={this.state.stockListValue} />);
     }
@@ -60,7 +62,7 @@ class Dashboard extends React.Component {
     if ( userWatchListLoading || userStocksLoading) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
-      if (Object.values(this.props.userWatches).length === 0 || Object.values(this.props.stocks).length === 0) { return null; }
+      if (Object.values(this.props.userWatches).length === 0 || Object.values(this.props.stocks).length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); }
 
       return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} watchListValue={this.state.watchListValue} />);
     }

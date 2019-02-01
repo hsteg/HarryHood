@@ -4,6 +4,7 @@ import { getStockInfo, getStockObjectBySymbol } from '../actions/stock_actions';
 import Navbar from './navbar';
 import StockChart from './stock_chart';
 import StockTransaction from './stock_transaction';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -23,6 +24,15 @@ class Stock extends React.Component {
       .then(() => this.setState({ dataLoaded: true }));
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.match.params.symbol !== this.props.match.params.symbol) {
+      this.setState({dataLoaded: false})
+      this.props.getStockObjectBySymbol(this.props.symbol)
+      .then(() => this.props.getStockInfo(this.props.symbol))
+      .then(() => this.setState({ dataLoaded: true }));
+    } 
+  }
+
   handleSelector(e) {
     this.setState({ range: e.currentTarget.innerText });
   }
@@ -30,7 +40,7 @@ class Stock extends React.Component {
 
 
   render() {
-    if (this.state.dataLoaded === false || this.props.loading ) {return (<div className="page-loading"><img className="page-loading-spinner" src={window.loadingIMG} /></div>); };
+    if (this.state.dataLoaded === false || this.props.loading || !(this.props.stock)  ) {return (<div className="page-loading"><img className="page-loading-spinner" src={window.loadingIMG} /></div>); };
     return (
       <div className="dashboard-main">
         <div className="header-container">
@@ -87,4 +97,4 @@ const mdp = (dispatch) => {
   };
 }
 
-export default connect(msp, mdp)(Stock);
+export default withRouter(connect(msp, mdp)(Stock));
