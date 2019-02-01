@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
     this.state = {
       stockListValue: "currentPrice",
       watchListValue: "currentPrice", 
-      range: "1Y"
+      range: "ALL"
     }
     this.getStockSymbols = this.getStockSymbols.bind(this);
     this.displayUserStockList = this.displayUserStockList.bind(this);
@@ -72,7 +72,7 @@ class Dashboard extends React.Component {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
       if(this.props.portfolioSnapshots.length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
-      return (<DashboardChart currentUser={this.props.currentUser} dateRange={this.state.range} />);
+      return (<DashboardChart currentUser={this.props.currentUser} dateRange={this.state.range} chartData={this.props.portfolioSnapshots} />);
     }
   }
 
