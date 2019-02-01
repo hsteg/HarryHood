@@ -10,10 +10,8 @@ class Api::StocksController < ApplicationController
 
   def search
     key = params[:search_string]
-    @stock = Stock.where("symbol LIKE '%#{key}%' OR name LIKE '%#{key}%'")
-    debugger
+    @stock = Stock.where("symbol LIKE '%#{key.upcase}%' OR name LIKE '%#{key}%'")
     render 'api/stocks/show'
-
   end
 
   private
