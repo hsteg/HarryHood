@@ -1,16 +1,18 @@
-import { RECEIVE_FULL_STOCK_INFO, 
-        RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
-        RECEIVE_USER_STOCKS,
-        RECEIVE_USER_STOCK_OBJECT,
-        RECEIVE_HISTORICAL_STOCK_DATA } from '../actions/stock_actions';
+import {
+  RECEIVE_FULL_STOCK_INFO,
+  RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
+  RECEIVE_USER_STOCKS,
+  RECEIVE_USER_STOCK_OBJECT,
+  RECEIVE_HISTORICAL_STOCK_DATA
+} from '../actions/stock_actions';
 import { merge } from 'lodash';
 
-const stocksReducer = (state={}, action) => {
+const stocksReducer = (state = {}, action) => {
   Object.freeze(state);
   let newState = merge({}, state);
   let marriage = {};
   let stockIds;
-  switch(action.type) {
+  switch (action.type) {
     case RECEIVE_FULL_STOCK_INFO:
       stockIds = Object.values(newState);
       stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stock));
@@ -28,7 +30,8 @@ const stocksReducer = (state={}, action) => {
       stockIds.forEach(stock => {
         marriage[stock.id] = stock;
         marriage[stock.id].historicalData = action.stockData;
-      }); 
+      });
+      return marriage;
     default:
       return newState;
   }

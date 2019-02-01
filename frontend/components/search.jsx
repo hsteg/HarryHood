@@ -1,47 +1,67 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getStockSearchResults, clearUserSearchResults } from '../actions/stock_actions';
+import { Link } from 'react-router-dom';
 
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       searchVal: ''
     }
+
     this.handleInput = this.handleInput.bind(this);
+    this.results = this.results.bind(this);
   }
 
   handleInput(e) {
-    this.setState({searchVal: e.currentTarget.value})
-  }
-
-  matches() {
-    const matches = [];
-    if (this.state.inputVal.length === 0) {
-      return this.props.names;
-    }
-
-    this.props.names.forEach(name => {
-      const sub = name.slice(0, this.state.inputVal.length);
-      if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
-        matches.push(name);
+    this.setState({ searchVal: e.currentTarget.value }, () => {
+      if (this.state.searchVal.length > 0) {
+        this.props.getStockSearchResults(this.state.searchVal);
+      } else {
+        this.props.clearUserSearchResults();
       }
     });
-
-    if (matches.length === 0) {
-      matches.push('No matches');
-    }
-
-    return matches;
   }
 
-  
+  results() {
+    const searchResults = Object.values(this.props.searchResults).map(result => {
+      <Link to={`/stock/${result.symbol}`} className="search-result" key={result.id}>
+        <div className="search-result-symbol">{result.symbol}</div>
+        <div className="search-result-name">{result.name}</div>
+      </Link>
+    });
+    debugger
+    return this.state.searchVal.length > 0 ? searchResults : (<div className="empty-search"></div>) ;
+  }
+
+
+
+
 
   render() {
-    return ;
+    return (
+      <div>
+        <input type="text" onChange={this.handleInput} className="search-bar" />
+        {this.results()}
+      </div>
+    );
   }
 }
 
-export default connect(null, null)(SearchBar);
+const msp = (state) => {
+  return {
+    searchResults: state.ui.searchResults
+  };
+}
+
+const mdp = (dispatch) => {
+  return {
+    getStockSearchResults: (searchTerm) => dispatch(getStockSearchResults(searchTerm)),
+    clearUserSearchResults: () => dispatch(clearUserSearchResults())
+  };
+}
+
+export default connect(msp, mdp)(SearchBar);
 

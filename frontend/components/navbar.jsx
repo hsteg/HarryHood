@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/session_actions';
+import SearchBar from './search'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Navbar extends React.Component {
           <img className="loggedin-nav-logo" src={window.logoURL} />
           <div className="loggedin-nav-searchbar-container">
             <div className="loggedin-nav-searchbar">
-              Searchbar here
+              <SearchBar />
               </div>
           </div>
         </div>
