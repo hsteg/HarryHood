@@ -5,6 +5,8 @@ export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS"
 export const RECEIVE_USER_HELD_STOCKS = "RECEIVE_USER_HELD_STOCKS";
 export const START_LOADING_USER_HELD_STOCKS = "START_LOADING_USER_HELD_STOCKS";
 export const RECEIVE_USER_CASH_BALANCE = "RECEIVE_USER_CASH_BALANCE";
+export const START_LOADING_USER_PORTFOLIO_SNAPSHOTS = "START_LOADING_USER_PORTFOLIO_SNAPSHOTS";
+export const RECEIVE_USER_PORTFOLIO_SNAPSHOTS = "RECEIVE_USER_PORTFOLIO_SNAPSHOTS";  
 
 import * as APIUtil from '../util/session_api_util';
 
@@ -49,6 +51,15 @@ export const getUserCashBalance = (userId) => dispatch => {
   return APIUtil.getUserCashBalance(userId).then(
     cashBalance => {
       return dispatch(receiveUserCashBalance(cashBalance));
+    }
+  );
+};
+
+export const getUserPortfolioSnapshots = (userId) => dispatch => {
+  dispatch(startLoadingUserPortfolioSnapshots());
+  return APIUtil.getUserPortfolioSnapshots(userId).then(
+    snapshots => {
+      return dispatch(receiveUserPortfolioSnapshots(snapshots));
     }
   );
 };
@@ -98,3 +109,16 @@ const receiveUserCashBalance = (cashBalance) => {
     cashBalance
   }
 }
+
+const startLoadingUserPortfolioSnapshots = () => {
+  return {
+    type: START_LOADING_USER_PORTFOLIO_SNAPSHOTS,
+  };
+}
+
+const receiveUserPortfolioSnapshots = (snapshots) => {
+  return {
+    type: RECEIVE_USER_PORTFOLIO_SNAPSHOTS,
+    snapshots
+  }
+};

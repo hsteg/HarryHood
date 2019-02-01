@@ -15,8 +15,8 @@ class StockChart extends React.Component {
     this.widthSelector = this.widthSelector.bind(this);
     this.priceChange = this.priceChange.bind(this);
     this.percentChange = this.percentChange.bind(this);
+    this.rangeSelector = this.rangeSelector.bind(this);
   }
-
 
   componentDidMount() {
     this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);
@@ -36,17 +36,46 @@ class StockChart extends React.Component {
     const { range } = this.props;
     switch (range) {
       case "1D":
-        return { data: this.oneDayChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "gray" };
+        return { data: this.oneDayChartData(), 
+                color: this.chartColor(range), 
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "gray" };
       case "1W":
-        return { data: this.oneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
+        return { data: this.oneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       case "1M":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
+        return { data: this.greaterThanOneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       case "3M":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
+        return { data: this.greaterThanOneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       case "1Y":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
+        return { data: this.greaterThanOneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       case "5Y":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range), width: this.widthSelector(range), refColor: "transparent" };
+        return { data: this.greaterThanOneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       default:
         return null;
     }
@@ -148,30 +177,37 @@ class StockChart extends React.Component {
     }
   }
 
-  // rangeSelector(range) {
-  //   const { low, high } = this.props.stock.quote;
-  //   switch(range) {
-  //     case "1D":
-  //       return [low, high];
-  //     case "1W":
+  rangeSelector(range) {
+    const { low, high, latestPrice, previousClose } = this.props.stock.quote;
+    let values, min, max;
 
-  //     case "1M":
-  //     case "3M":
-  //     case "1Y":
-  //     case "5Y":
-
-  //     default: 
-  //       return null;
-  //   }
-  // }
+    switch(range) {
+      case "1D":
+        const range = latestPrice > previousClose ? [previousClose, high] : [low, previousClose];
+        return range;
+      case "1W":
+        let week = this.props.stock.historicalData.slice(-4).map(dataPoint => dataPoint.close);
+        week.push(this.props.stock.quote.latestPrice);
+        min = Math.min(...week)
+        max = Math.max(...week)
+      case "1M":
+      case "3M":
+      case "1Y":
+      case "5Y":
+        values = this.props.stock.historicalData.map(dataPoint => dataPoint.close)
+        min = Math.min(...values)
+        max = Math.max(...values)
+        return [min, max]
+      default: 
+        return null;
+    }
+  }
 
   render() {
     if (this.props.loading) { return (<img className="left-col-loading-img" src={window.loadingIMG} />); };
-    const {latestPrice, previousClose, high, low, changePercent} = this.props.stock.quote;
     const companyName = this.props.stock.company.companyName;
-    const currentPrice = latestPrice;
+    const currentPrice = this.props.stock.quote.latestPrice;
     const allData = this.parseChartData();
-    const range = latestPrice > previousClose ? [previousClose, high] : [low, previousClose];
     
     return (
       <div className="dashboard-chart">
@@ -190,7 +226,7 @@ class StockChart extends React.Component {
           <LineChart width={allData.width} height={190} data={allData.data}>
             <Line type="monotone" dataKey="Price" stroke={allData.color} dot={false} strokeWidth={1.5}   />
             <XAxis dataKey="time" hide={true} />
-            <YAxis type="number" domain={range} hide={true} />
+            <YAxis type="number" domain={allData.range} hide={true} />
             <Tooltip contentStyle={{ backgroundColor: 'transparent', border: '0' }} />
             <ReferenceLine y={this.props.stock.quote.previousClose} strokeDasharray="1 6" stroke={allData.refColor} isFront={false}/>
           </LineChart>
