@@ -116,12 +116,12 @@ class Dashboard extends React.Component {
             <div className="stocks-lists-container">
               <div className="stocks-list-header">
                 <h1 className="stocks-list-header-text">Stocks</h1>
-                <h1 className="stocks-list-header-button">button</h1>
+                <h1 className="stocks-list-header-button"></h1>
               </div>
                 {this.displayUserStockList()}
               <div className="watch-list-header">
                 <h1 className="stocks-list-header-text">Watchlist</h1>
-                <h1 className="stocks-list-header-button">button</h1>
+                <h1 className="stocks-list-header-button"></h1>
               </div>
                 {this.displayUserWatchList()}
             </div>

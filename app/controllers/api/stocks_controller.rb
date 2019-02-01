@@ -10,7 +10,7 @@ class Api::StocksController < ApplicationController
 
   def search
     key = params[:search_string].upcase
-    @stock = Stock.where("symbol ILIKE '%#{key}%' OR name ILIKE '%#{key}%'")
+    @stock = Stock.where("symbol ILIKE '%#{key}%' OR name ILIKE '%#{key}%'").order(name: :asc)
     render 'api/stocks/show'
   end
 

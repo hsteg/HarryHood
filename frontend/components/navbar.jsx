@@ -57,7 +57,7 @@ class Navbar extends React.Component {
                   </h3>
                   <div className="dropdown-menu-header-finances">
                     <div className="dropdown-finances-porfolio-value">
-                      <h1 className="dropdown-portfolio-value-numbers">$12345.67</h1>
+                      <h1 className="dropdown-portfolio-value-numbers">$53200.98</h1>
                       <h1 className="dropdown-portfolio-value-text">Portfolio Value</h1>
                     </div>
                     <div className="dropdown-finances-cash-balance">
