@@ -2,7 +2,7 @@ import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_USER_HELD_STOCKS, RE
 import { merge } from 'lodash';
 
 
-const _nullState = { id: null, heldStocks: {}, portfolioSnapshots: {} };
+const _nullState = { id: null, heldStocks: {}, portfolioSnapshots: [] };
 
 const sessionReducer = (state = _nullState, action) => {
   Object.freeze(state)

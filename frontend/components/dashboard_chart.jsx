@@ -7,17 +7,15 @@ class DashboardChart extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.getUserPortfolioSnapshots(this.props.currentUser.id)
-  }
-
   render() {
     if(this.props.loading.userPortfolioDataLoading) {return (<img className="right-col-loading-img" src={window.loadingIMG} />); };
+    
+    const lastDataPoint = this.props.chartData[this.props.chartData.length-1].total_portfolio_value
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container">
           <div className="chart-header-price-value">
-            $23,951.37
+            <h1>${lastDataPoint}</h1>
           </div>
           <div className="chart-header-change-value">
             +$420.69 (4.20%) 
@@ -26,9 +24,6 @@ class DashboardChart extends React.Component {
         <div className="chart-actual-chart">
           chart here
         </div>
-        <nav className="chart-timeline-selector">
-          1s 3d etc
-        </nav>
       </div>
     );
   }
@@ -37,6 +32,7 @@ class DashboardChart extends React.Component {
 const msp = (state) => {
   return {
     loading: state.ui.loading,
+    chartData: state.session.portfolioSnapshots
   };
 };
 

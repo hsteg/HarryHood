@@ -18,8 +18,9 @@ const initialState = {
   userWatchListLoading: false,
   userTransactionsLoading: false,
   userHeldStocksLoading: false,
-  userPortfolioDataLoading: false
+  userPortfolioDataLoading: true
 };
+
 
 const loadingReducer = (state = initialState, action) => {
   Object.freeze(state);

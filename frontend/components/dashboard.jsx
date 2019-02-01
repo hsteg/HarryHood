@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getDayStocksPriceData, getUserStocks } from '../actions/stock_actions';
 import { getUserTransactions } from '../actions/transaction_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
-import { getUserHeldStocks } from '../actions/session_actions';
+import { getUserHeldStocks, getUserPortfolioSnapshots } from '../actions/session_actions';
 import DashboardWatchlist from './dashboard_watchlist';
 import DashboardUserStockList from './dashboard_user_stocks';
 import Navbar from './navbar';
@@ -16,13 +16,17 @@ class Dashboard extends React.Component {
     this.state = {
       stockListValue: "currentPrice",
       watchListValue: "currentPrice", 
+      range: "1Y"
     }
     this.getStockSymbols = this.getStockSymbols.bind(this);
     this.displayUserStockList = this.displayUserStockList.bind(this);
     this.displayUserWatchList = this.displayUserWatchList.bind(this);
+    this.handleSelector = this.handleSelector.bind(this);
+    this.displayUserPortfolioChart = this.displayUserPortfolioChart.bind(this);
   }
 
   componentDidMount() {
+    this.props.getUserPortfolioSnapshots(this.props.currentUser.id)
     this.props.getUserHeldStocks(this.props.currentUser.id);
     this.props.getUserTransactions(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
@@ -62,6 +66,21 @@ class Dashboard extends React.Component {
     }
   }
 
+  displayUserPortfolioChart() {
+    const { userPortfolioDataLoading } = this.props.loading;
+    if ( userPortfolioDataLoading ) {
+      return (<img className="right-col-loading-img" src={window.loadingIMG} />);
+    } else {
+      if(this.props.portfolioSnapshots.length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
+      return (<DashboardChart currentUser={this.props.currentUser} />);
+    }
+  }
+
+
+  handleSelector(e) {
+    this.setState({ range: e.currentTarget.innerText });
+  }
+
   render() {
     return (
       <div className="dashboard-main">
@@ -71,8 +90,22 @@ class Dashboard extends React.Component {
         <div className="content-main">
           <div className="left-col">
             <div className="content-chart">
-              <DashboardChart currentUser={this.props.currentUser} />
+              {this.displayUserPortfolioChart()}
             </div>
+            <nav className="chart-timeline-selector">
+                <button className={this.state.range === "1D" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>1D</button>
+                <button className={this.state.range === "1W" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>1W</button>
+                <button className={this.state.range === "1M" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>1M</button>
+                <button className={this.state.range === "3M" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>3M</button>
+                <button className={this.state.range === "1Y" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>1Y</button>
+                <button className={this.state.range === "5Y" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>5Y</button>
+              </nav>
             <div className="content-news">
               News goes here
             </div>
@@ -104,7 +137,8 @@ const msp = (state) => {
     transactions: state.entities.transactions,
     userWatches: state.entities.userWatches,
     heldStocks: state.session.heldStocks,
-    loading: state.ui.loading
+    loading: state.ui.loading,
+    portfolioSnapshots: state.session.portfolioSnapshots
   };
 };
 
@@ -114,7 +148,8 @@ const mdp = (dispatch) => {
     getUserTransactions: (user) => dispatch(getUserTransactions(user)),
     getUserWatches: (user) => dispatch(getUserWatches(user)),
     getUserStocks: (stockIds) => dispatch(getUserStocks(stockIds)),
-    getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(userId))
+    getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(userId)),
+    getUserPortfolioSnapshots: (userId) => dispatch(getUserPortfolioSnapshots(userId))
   };
 }
 
