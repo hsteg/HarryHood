@@ -7,7 +7,7 @@ class SearchBar extends React.Component {
     super(props);
 
     this.state = {
-      searchVal: '';
+      searchVal: ''
     }
     this.handleInput = this.handleInput.bind(this);
   }
@@ -42,4 +42,6 @@ class SearchBar extends React.Component {
     return ;
   }
 }
+
+export default connect(null, null)(SearchBar);
 
