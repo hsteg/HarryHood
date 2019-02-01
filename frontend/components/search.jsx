@@ -16,7 +16,25 @@ class SearchBar extends React.Component {
     this.setState({searchVal: e.currentTarget.value})
   }
 
-  
+  matches() {
+    const matches = [];
+    if (this.state.inputVal.length === 0) {
+      return this.props.names;
+    }
+
+    this.props.names.forEach(name => {
+      const sub = name.slice(0, this.state.inputVal.length);
+      if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
+        matches.push(name);
+      }
+    });
+
+    if (matches.length === 0) {
+      matches.push('No matches');
+    }
+
+    return matches;
+  }
 
   
 

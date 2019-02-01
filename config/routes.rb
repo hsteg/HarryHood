@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :transactions, only: [:show, :create]
     resources :user_watches, only: [:show]
     resources :stocks, only: [:index, :show]
+    get 'stocks/search/:search_string', to: 'stocks#search'
   end
   
   root "static_pages#root"
