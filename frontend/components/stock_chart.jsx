@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { LineChart, Line, YAxis, ReferenceLine, Tooltip, XAxis } from 'recharts';
 import { getHistoricalStockData } from '../actions/stock_actions';
-import { timingSafeEqual } from 'crypto';
 
 class StockChart extends React.Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class StockChart extends React.Component {
     this.percentChange = this.percentChange.bind(this);
     this.rangeSelector = this.rangeSelector.bind(this);
   }
-
 
   componentDidMount() {
     this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);

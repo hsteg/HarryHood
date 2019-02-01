@@ -83,9 +83,7 @@ class DashboardChart extends React.Component {
 
   chartRange(length) {
     let first;
-
     let last = this.props.chartData[this.props.chartData.length - 1].total_portfolio_value;
-
     let beginningIdx = this.props.chartData.length - length;
 
     if (beginningIdx < 0) {
