@@ -28,6 +28,16 @@ stock9 = Stock.create( {symbol: "F", name: "Ford"} )
 stock10 = Stock.create( {symbol: "NOK", name: "Nokia"} )
 stock11 = Stock.create( {symbol: "SNAP", name: "Snapchat"} )
 stock12 = Stock.create( {symbol: "FB", name: "Facebook"} )
+stock13 = Stock.create( {symbol: "GOOG", name: "Alphabet"} )
+stock14 = Stock.create( {symbol: "AMZN", name: "Amazon"} )
+stock15 = Stock.create( {symbol: "NKE", name: "Nike"} )
+stock16 = Stock.create( {symbol: "MSFT", name: "Microsoft"} )
+stock17 = Stock.create( {symbol: "SBUX", name: "Starbucks"} )
+stock18 = Stock.create( {symbol: "CTXS", name: "Citrix"} )
+stock19 = Stock.create( {symbol: "SQ", name: "Square"} )
+stock20 = Stock.create( {symbol: "PYPL", name: "Paypal"} )
+
+
 
 transaction1 = Transaction.create!( {stock_id: stock1.id, user_id: user1.id, num_shares: 3, price_per_share: 130.2} )
 transaction2 = Transaction.create!( {stock_id: stock2.id, user_id: user1.id, num_shares: 10, price_per_share: 20.58} )
