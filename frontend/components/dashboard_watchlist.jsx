@@ -10,6 +10,7 @@ class DashboardWatchlist extends React.Component {
 
   render() {
     const { stocks } = this.props;
+    
     const lis = Object.values(this.props.watches).map(watch => {
       return (
         <Link to={`/stock/${stocks[watch.stock_id].symbol}`} className="list-item" key={watch.id}>

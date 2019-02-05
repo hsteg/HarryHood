@@ -48,11 +48,11 @@ class Dashboard extends React.Component {
 
   displayUserWatchList(){
     const { userWatchListLoading, dashboardStocksLoading } = this.props.loading;
+    
     if ( userWatchListLoading || dashboardStocksLoading) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
-      if (Object.values(this.props.stocks).length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); }
-
+      // if (Object.values(this.props.stocks).length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); }
       return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} watchListValue={this.state.watchListValue} />);
     }
   }

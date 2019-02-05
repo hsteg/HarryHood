@@ -50,7 +50,7 @@ class Stock extends React.Component {
   }
 
   handleAddWatch(e) {
-
+    this.props.createUserWatch(this.props.currentUser, this.props.stock.id).then(() => this.props.getUserWatch(this.props.currentUser))
   }
 
   displayWatchButton() {

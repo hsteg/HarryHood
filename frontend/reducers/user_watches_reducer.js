@@ -5,8 +5,7 @@ const userWatchReducer = (state={}, action) => {
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_USER_WATCHES:
-      let newState = merge({}, state, action.watches)
-      return newState
+      return action.watches;
     default:
       return state;
   }
