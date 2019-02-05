@@ -5,7 +5,6 @@ import {
   RECEIVE_HISTORICAL_STOCK_DATA,
   START_LOADING_DASHBOARD_STOCKS,
   RECEIVE_DASHBOARD_STOCKS,
-  FINISH_LOADING_DASHBOARD_STOCKS
 } from '../actions/stock_actions';
 
 import { START_LOADING_USER_WATCHES, RECEIVE_USER_WATCHES } from '../actions/user_watch_actions';
@@ -48,7 +47,7 @@ const loadingReducer = (state = initialState, action) => {
       return Object.assign({}, state, { userHeldStocksLoading: false })
     case START_LOADING_DASHBOARD_STOCKS:
       return Object.assign({}, state, { dashboardStocksLoading: true })
-    case FINISH_LOADING_DASHBOARD_STOCKS:
+    case RECEIVE_DASHBOARD_STOCKS:
       return Object.assign({}, state, { dashboardStocksLoading: false })
     case START_LOADING_USER_PORTFOLIO_SNAPSHOTS:
       return Object.assign({}, state, { userPortfolioDataLoading: true })
