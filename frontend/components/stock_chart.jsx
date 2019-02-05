@@ -170,18 +170,24 @@ class StockChart extends React.Component {
   }
 
   priceChange(range) {
-    const { change } = this.props.stock.quote;
+    const { change, latestPrice } = this.props.stock.quote;
     const { historicalData } = this.props.stock
+    let start, end, difference;
     switch (range) {
       case "1D":
         return (change < 0) ? (`-$${(change * -1).toFixed(2)}`) : (`+$${change.toFixed(2)}`);
+      case "1W":
+        start = historicalData.slice(-4)[0].close;
+        end = latestPrice;
+        difference = end - start;
+        return (difference < 0) ? (`-$${(difference * -1).toFixed(2)}`) : (`+$${difference.toFixed(2)}`);
       case "1M":
       case "3M":
       case "1Y":
       case "5Y":
-        let start = historicalData[0].close;
-        let end = historicalData[historicalData.length - 1].close;
-        let difference = end - start;
+        start = historicalData[0].close;
+        end = historicalData[historicalData.length - 1].close;
+        difference = end - start;
         return (difference < 0) ? (`-$${(difference * -1).toFixed(2)}`) : (`+$${difference.toFixed(2)}`);
       default:
         return ("");
@@ -189,18 +195,24 @@ class StockChart extends React.Component {
   }
 
   percentChange(range) {
-    const { changePercent } = this.props.stock.quote;
+    const { changePercent, latestPrice } = this.props.stock.quote;
     const { historicalData } = this.props.stock;
+    let start, end, difference;
     switch (range) {
       case "1D":
         return (changePercent < 0) ? (`(-${(changePercent * 100 * -1).toFixed(2)}%)`) : (`(${(changePercent * 100).toFixed(2)}%)`);
+      case "1W":
+        start = historicalData.slice(-4)[0].close;
+        end = latestPrice;
+        difference = ((end - start) / start);
+        return (difference < 0) ? (`(-${(difference * 100 * -1).toFixed(2)}%)`) : (`(${(difference * 100).toFixed(2)}%)`);
       case "1M":
       case "3M":
       case "1Y":
       case "5Y":
-        let start = historicalData[0].close;
-        let end = historicalData[historicalData.length - 1].close;
-        let difference = ((end - start) / start);
+        start = historicalData[0].close;
+        end = historicalData[historicalData.length - 1].close;
+        difference = ((end - start) / start);
         return (difference < 0) ? (`(-${(difference * 100 * -1).toFixed(2)}%)`) : (`(${(difference * 100).toFixed(2)}%)`);
       default:
         return ("");
