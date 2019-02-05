@@ -3,7 +3,8 @@ import {
   RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
   RECEIVE_USER_STOCKS,
   RECEIVE_USER_STOCK_OBJECT,
-  RECEIVE_HISTORICAL_STOCK_DATA
+  RECEIVE_HISTORICAL_STOCK_DATA,
+  RECEIVE_DASHBOARD_STOCKS
 } from '../actions/stock_actions';
 import { merge } from 'lodash';
 
@@ -31,6 +32,9 @@ const stocksReducer = (state = {}, action) => {
         marriage[stock.id] = stock;
         marriage[stock.id].historicalData = action.stockData;
       });
+      return marriage;
+    case RECEIVE_DASHBOARD_STOCKS:
+      Object.values(action.stocks).forEach(stock => marriage[stock.id] = Object.assign({id: stock.id, symbol: stock.symbol}, action.stockData[stock.symbol]))
       return marriage;
     default:
       return newState;

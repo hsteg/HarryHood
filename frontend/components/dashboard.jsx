@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getDayStocksPriceData, getUserStocks } from '../actions/stock_actions';
-import { getUserTransactions } from '../actions/transaction_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
 import { getUserHeldStocks, getUserPortfolioSnapshots } from '../actions/session_actions';
 import DashboardWatchlist from './dashboard_watchlist';
@@ -17,8 +16,7 @@ class Dashboard extends React.Component {
       stockListValue: "currentPrice",
       watchListValue: "currentPrice", 
       range: "ALL"
-    }
-    this.getStockSymbols = this.getStockSymbols.bind(this);
+    } 
     this.displayUserStockList = this.displayUserStockList.bind(this);
     this.displayUserWatchList = this.displayUserWatchList.bind(this);
     this.handleSelector = this.handleSelector.bind(this);
@@ -26,43 +24,34 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getUserStocks(this.props.currentUser.id);
     this.props.getUserPortfolioSnapshots(this.props.currentUser.id)
     this.props.getUserHeldStocks(this.props.currentUser.id);
-    this.props.getUserTransactions(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
-    this.props.getUserStocks(this.props.currentUser.id).then(() => this.getStockSymbols());
-  }
-
-  getStockSymbols() {
-    const stockSymbols = [];
-    Object.values(this.props.stocks).forEach(
-      stock => stockSymbols.push(stock.symbol)
-    );
-    this.props.getDayStocksPriceData(stockSymbols.join(','));
   }
 
   displayUserStockList(){
-    const { userHeldStocksLoading, userStocksLoading } = this.props.loading;
+    const { userHeldStocksLoading, dashboardStocksLoading } = this.props.loading;
     const numHeldStocks = Object.keys(this.props.heldStocks);
     const numUserStocksInState = Object.keys(this.props.stocks);
 
     const arrEq = numHeldStocks.map(key => numUserStocksInState.includes(key) ? true : false );
 
-    if ( userHeldStocksLoading || userStocksLoading ) {
+    if ( userHeldStocksLoading || dashboardStocksLoading ) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
-      if (numHeldStocks.length === 0 || arrEq.includes(false) ) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); }
+      if (arrEq.includes(false) ) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); }
 
       return (<DashboardUserStockList stocks={this.props.stocks} heldStocks={this.props.heldStocks} stockListValue={this.state.stockListValue} />);
     }
   }
 
   displayUserWatchList(){
-    const { userWatchListLoading, userStocksLoading } = this.props.loading;
-    if ( userWatchListLoading || userStocksLoading) {
+    const { userWatchListLoading, dashboardStocksLoading } = this.props.loading;
+    if ( userWatchListLoading || dashboardStocksLoading) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
-      if (Object.values(this.props.userWatches).length === 0 || Object.values(this.props.stocks).length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); }
+      if (Object.values(this.props.stocks).length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); }
 
       return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} watchListValue={this.state.watchListValue} />);
     }
@@ -136,7 +125,6 @@ const msp = (state) => {
   return {
     currentUser: state.entities.users[state.session.id],
     stocks: state.entities.stocks,
-    transactions: state.entities.transactions,
     userWatches: state.entities.userWatches,
     heldStocks: state.session.heldStocks,
     loading: state.ui.loading,
@@ -147,7 +135,6 @@ const msp = (state) => {
 const mdp = (dispatch) => {
   return {
     getDayStocksPriceData: (stocks) => dispatch(getDayStocksPriceData(stocks)),
-    getUserTransactions: (user) => dispatch(getUserTransactions(user)),
     getUserWatches: (user) => dispatch(getUserWatches(user)),
     getUserStocks: (stockIds) => dispatch(getUserStocks(stockIds)),
     getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(userId)),

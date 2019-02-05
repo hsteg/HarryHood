@@ -6,9 +6,10 @@ export const START_LOADING_FULL_STOCK_INFO = "START_LOADING_FULL_STOCK_INFO";
 export const RECEIVE_USER_STOCK_OBJECT = "RECEIVE_USER_STOCK_OBJECT";
 export const START_LOADING_HISTORICAL_STOCK_DATA = "START_LOADING_HISTORICAL_STOCK_DATA";
 export const RECEIVE_HISTORICAL_STOCK_DATA = "RECEIVE_HISTORICAL_STOCK_DATA";
-export const START_LOADING_USER_STOCKS = "START_LOADING_USER_STOCKS";
+export const START_LOADING_DASHBOARD_STOCKS = "START_LOADING_DASHBOARD_STOCKS";
 export const RECEIVE_STOCK_SEARCH_RESULTS = "RECEIVE_STOCK_SEARCH_RESULTS";
 export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
+export const RECEIVE_DASHBOARD_STOCKS = "RECEIVE_DASHBOARD_STOCKS";
 
 export const getStockObjectBySymbol = (symbol) => dispatch => {
   dispatch(startLoadingFullStockInfo());
@@ -29,10 +30,16 @@ export const getHistoricalStockData = (symbol, period) => dispatch => {
 };
 
 export const getUserStocks = (user) => dispatch => {
-  dispatch(startLoadingUserStocks());
+  dispatch(startLoadingDashboardStocks());
   return APIUtil.getUserStocks(user).then(
     stocks => {
-      return dispatch(receiveUserStocks(stocks));
+      const symbols = Object.values(stocks).map(stock => stock.symbol).join(',');
+      return APIUtil.getDayStocksPriceData(symbols).then(
+        stockData => {
+          return dispatch(receiveDashboardStocks(stocks, stockData));
+        }
+      )
+      
     }
   );
 };
@@ -120,9 +127,9 @@ export const startLoadingHistoricalStockData = () => {
   };
 };
 
-const startLoadingUserStocks = () => {
+const startLoadingDashboardStocks = () => {
   return {
-    type: START_LOADING_USER_STOCKS,
+    type: START_LOADING_DASHBOARD_STOCKS,
   };
 };
 
@@ -131,3 +138,11 @@ const clearSearchResults = () => {
     type: CLEAR_SEARCH_RESULTS,
   };
 }
+
+const receiveDashboardStocks = (stocks, stockData) => {
+  return {
+    type: RECEIVE_DASHBOARD_STOCKS, 
+    stocks,
+    stockData
+  };
+};
