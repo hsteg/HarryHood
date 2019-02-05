@@ -1,7 +1,6 @@
 import {
   RECEIVE_FULL_STOCK_INFO,
   RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
-  RECEIVE_USER_STOCKS,
   RECEIVE_USER_STOCK_OBJECT,
   RECEIVE_HISTORICAL_STOCK_DATA,
   RECEIVE_DASHBOARD_STOCKS
@@ -18,8 +17,6 @@ const stocksReducer = (state = {}, action) => {
       stockIds = Object.values(newState);
       stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stock));
       return marriage;
-    case RECEIVE_USER_STOCKS:
-      return merge(newState, action.stocks);
     case RECEIVE_DAY_STOCK_GROUP_PRICE_DATA:
       stockIds = Object.values(newState);
       stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stocks[stock.symbol]))
