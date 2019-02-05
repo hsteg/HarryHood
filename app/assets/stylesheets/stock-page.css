@@ -71,3 +71,30 @@
   border-bottom: 2px solid #21ce99;
 }
 
+.stock-watch-button {
+  background: #1b1b1d;
+  border-color: #21ce99;
+  color: #21ce99;
+  margin-top: 30px;
+  width: 100%;
+  border: 1px solid #21ce99;
+  border-radius: 4px;
+  padding: 0 0;
+  letter-spacing: .2px;
+  cursor: pointer;
+  height: 48px;
+  min-width: 120px;
+  font-size: 13px;
+  font-weight: 600;
+  outline: none;
+}
+
+.stock-watch-button:hover{
+  border-color: #1ae9aa;
+  color: #1ae9aa;
+}
+
+.watch-button-container{
+  padding: 0 30px;
+}
+

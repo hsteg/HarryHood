@@ -56,9 +56,9 @@ class Stock extends React.Component {
   displayWatchButton() {
     const userWatchedStocks = Object.values(this.props.watches).map(stock => stock.stock_id);
     if (userWatchedStocks.includes(this.props.stock.id)) {
-      return (<button onClick={this.handleRemoveWatch}>Remove from Watchlist</button>);
+      return (<button className="stock-watch-button" onClick={this.handleRemoveWatch}>Remove from Watchlist</button>);
     } else {
-      return (<button onClick={this.handleAddWatch}>Add to Watchlist</button>);
+      return (<button className="stock-watch-button" onClick={this.handleAddWatch}>Add to Watchlist</button>);
     }
   }
 
