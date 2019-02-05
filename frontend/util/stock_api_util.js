@@ -19,6 +19,12 @@ export const getHistoricalStockData = (symbol, period) => {
   });
 };
 
+export const getStockSearchResults = (search) => {
+  return $.ajax({
+    method: "GET",
+    url: `/api/stocks/search/${search}`
+  });
+};
 
 
 export const getUserStocks = (user) => {

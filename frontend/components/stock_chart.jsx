@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { LineChart, Line, YAxis } from 'recharts';
+import { LineChart, Line, YAxis, ReferenceLine, Tooltip, XAxis } from 'recharts';
 import { getHistoricalStockData } from '../actions/stock_actions';
 
 class StockChart extends React.Component {
@@ -12,8 +12,11 @@ class StockChart extends React.Component {
     this.oneDayChartData = this.oneDayChartData.bind(this);
     this.greaterThanOneWeekChartData = this.greaterThanOneWeekChartData.bind(this);
     this.oneWeekChartData = this.oneWeekChartData.bind(this);
+    this.widthSelector = this.widthSelector.bind(this);
+    this.priceChange = this.priceChange.bind(this);
+    this.percentChange = this.percentChange.bind(this);
+    this.rangeSelector = this.rangeSelector.bind(this);
   }
-
 
   componentDidMount() {
     this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);
@@ -33,17 +36,46 @@ class StockChart extends React.Component {
     const { range } = this.props;
     switch (range) {
       case "1D":
-        return { data: this.oneDayChartData(), color: this.chartColor(range) };
+        return { data: this.oneDayChartData(), 
+                color: this.chartColor(range), 
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "gray" };
       case "1W":
-        return { data: this.oneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.oneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       case "1M":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.greaterThanOneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       case "3M":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.greaterThanOneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       case "1Y":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.greaterThanOneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       case "5Y":
-        return { data: this.greaterThanOneWeekChartData(), color: this.chartColor(range) };
+        return { data: this.greaterThanOneWeekChartData(), 
+                color: this.chartColor(range), 
+                range: this.rangeSelector(range),
+                width: this.widthSelector(range), 
+                range: this.rangeSelector(range),
+                refColor: "transparent" };
       default:
         return null;
     }
@@ -54,10 +86,16 @@ class StockChart extends React.Component {
     this.props.stock.chart.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.close;
+      dpObject['Price'] = dataPoint.close;
+
+      if (dpObject.Price === null) { return }
       oneDayChartData.push(dpObject);
     }
     );
+    let latestPrice = {};
+    latestPrice['time'] = this.props.stock.quote.latestTime;
+    latestPrice['Price'] = this.props.stock.quote.latestPrice;
+    oneDayChartData.push(latestPrice);
     return oneDayChartData;
   }
 
@@ -67,11 +105,11 @@ class StockChart extends React.Component {
     this.props.stock.historicalData.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.close;
+      dpObject['Price'] = dataPoint.close;
       oneWeekChartData.push(dpObject);
     }
     );
-    oneWeekChartData.push({ 'time': "most recent", 'price': this.props.stock.quote.latestPrice });
+    oneWeekChartData.push({ 'time': "most recent", 'Price': this.props.stock.quote.latestPrice });
     return oneWeekChartData.slice(-5);
   }
 
@@ -81,7 +119,7 @@ class StockChart extends React.Component {
     this.props.stock.historicalData.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.label).toString();
-      dpObject['price'] = dataPoint.close;
+      dpObject['Price'] = dataPoint.close;
       greaterThanOneWeekChartData.push(dpObject);
     }
     );
@@ -110,29 +148,67 @@ class StockChart extends React.Component {
     }
   }
 
-  // rangeSelector(range) {
-  //   const { low, high } = this.props.stock.quote;
-  //   switch(range) {
-  //     case "1D":
-  //       return [low, high];
-  //     case "1W":
+  widthSelector(range) {
+    switch(range) {
+      case "1D": 
+        return (((this.props.stock.chart.length) / 78) * 675);
+      default: 
+        return 675;
+    }
+  }
 
-  //     case "1M":
-  //     case "3M":
-  //     case "1Y":
-  //     case "5Y":
+  priceChange(range) {
+    const {change} = this.props.stock.quote;
+    switch(range) {
+      case "1D":
+        return (change < 0) ? (`-$${(change * -1).toFixed(2)}`) : (`+$${change.toFixed(2)}`);
+      default: 
+        return ("");
+    }
+  }
 
-  //     default: 
-  //       return null;
-  //   }
-  // }
+  percentChange(range) {
+    const {changePercent} = this.props.stock.quote;
+    switch(range) {
+      case "1D":
+        return (changePercent < 0) ? (`(-${(changePercent * 100 * -1).toFixed(2)}%)`) : (`(${(changePercent * 100).toFixed(2)}%)`);
+      default:
+        return ("");
+    }
+  }
+
+  rangeSelector(range) {
+    const { low, high, latestPrice, previousClose } = this.props.stock.quote;
+    let values, min, max;
+
+    switch(range) {
+      case "1D":
+        const range = latestPrice > previousClose ? [previousClose, high] : [low, previousClose];
+        return range;
+      case "1W":
+        let week = this.props.stock.historicalData.slice(-4).map(dataPoint => dataPoint.close);
+        week.push(this.props.stock.quote.latestPrice);
+        min = Math.min(...week)
+        max = Math.max(...week)
+      case "1M":
+      case "3M":
+      case "1Y":
+      case "5Y":
+        values = this.props.stock.historicalData.map(dataPoint => dataPoint.close)
+        min = Math.min(...values)
+        max = Math.max(...values)
+        return [min, max]
+      default: 
+        return null;
+    }
+  }
 
   render() {
-    if (this.props.loading) { return (<h1>loading :)</h1>); };
+    if (this.props.loading || this.props.stock === {}) { return (<img className="left-col-loading-img" src={window.loadingIMG} />); };
     const companyName = this.props.stock.company.companyName;
     const currentPrice = this.props.stock.quote.latestPrice;
     const allData = this.parseChartData();
-    const range = [this.props.stock.quote.low, this.props.stock.quote.high];
+    
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container-stock">
@@ -140,16 +216,19 @@ class StockChart extends React.Component {
             {companyName}
           </div>
           <div className="chart-header-price-value-stock-view">
-            ${currentPrice}
+            ${currentPrice.toFixed(2)}
           </div>
           <div className="chart-header-change-value-stock-page">
-            +$420.69 (4.20%)
+            {this.priceChange(this.props.range)}  {this.percentChange(this.props.range)} 
           </div>
         </div>
         <div className="chart-actual-chart">
-          <LineChart width={675} height={200} data={allData.data}>
-            <Line type="monotone" dataKey="price" stroke={allData.color} dot={false} strokeWidth={1.5} />
-            <YAxis type="number" domain={range} hide={true} />
+          <LineChart width={allData.width} height={190} data={allData.data}>
+            <Line type="monotone" dataKey="Price" stroke={allData.color} dot={false} strokeWidth={1.5}   />
+            <XAxis dataKey="time" hide={true} />
+            <YAxis type="number" domain={allData.range} hide={true} />
+            <Tooltip contentStyle={{ backgroundColor: 'transparent', border: '0' }} />
+            <ReferenceLine y={this.props.stock.quote.previousClose} strokeDasharray="1 6" stroke={allData.refColor} isFront={false}/>
           </LineChart>
         </div>
 

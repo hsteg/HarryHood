@@ -8,6 +8,12 @@ class Api::StocksController < ApplicationController
     render 'api/stocks/show'
   end
 
+  def search
+    key = params[:search_string].upcase
+    @stock = Stock.where("symbol ILIKE '%#{key}%' OR name ILIKE '%#{key}%'").order(name: :asc)
+    render 'api/stocks/show'
+  end
+
   private
   def stock_params 
     params.require(:stock).permit(:symbol, :name)

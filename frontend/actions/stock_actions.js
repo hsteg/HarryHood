@@ -7,6 +7,8 @@ export const RECEIVE_USER_STOCK_OBJECT = "RECEIVE_USER_STOCK_OBJECT";
 export const START_LOADING_HISTORICAL_STOCK_DATA = "START_LOADING_HISTORICAL_STOCK_DATA";
 export const RECEIVE_HISTORICAL_STOCK_DATA = "RECEIVE_HISTORICAL_STOCK_DATA";
 export const START_LOADING_USER_STOCKS = "START_LOADING_USER_STOCKS";
+export const RECEIVE_STOCK_SEARCH_RESULTS = "RECEIVE_STOCK_SEARCH_RESULTS";
+export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
 
 export const getStockObjectBySymbol = (symbol) => dispatch => {
   dispatch(startLoadingFullStockInfo());
@@ -25,8 +27,6 @@ export const getHistoricalStockData = (symbol, period) => dispatch => {
     }
   );
 };
-
-
 
 export const getUserStocks = (user) => dispatch => {
   dispatch(startLoadingUserStocks());
@@ -49,17 +49,35 @@ export const getStockInfo = (stock) => dispatch => {
 export const getDayStocksPriceData = (stocks) => dispatch => {
   return APIUtil.getDayStocksPriceData(stocks).then(
     stocks => {
-  
       return dispatch(receiveDayStockGroupPriceData(stocks));
     },
   );
+};
+
+export const getStockSearchResults = (search) => dispatch => {
+  return APIUtil.getStockSearchResults(search).then(
+    results => {
+      return dispatch(receiveStockSearchResults(results));
+    }
+  )
+};
+
+export const clearUserSearchResults = () => dispatch => {
+  return dispatch(clearSearchResults());
+}
+
+const receiveStockSearchResults = (searchResults) => {
+  return {
+    type: RECEIVE_STOCK_SEARCH_RESULTS, 
+    searchResults
+  };
 };
 
 export const receiveHistoricalStockData = (stockData) => {
   return {
     type: RECEIVE_HISTORICAL_STOCK_DATA,
     stockData
-  }
+  };
 };
 
 const receiveFullStockInfo = (stock) => {
@@ -81,7 +99,7 @@ const receiveUserStocks = (stocks) => {
     type: RECEIVE_USER_STOCKS,
     stocks
   };
-}
+};
 
 export const startLoadingFullStockInfo = () => {
   return {
@@ -107,3 +125,9 @@ const startLoadingUserStocks = () => {
     type: START_LOADING_USER_STOCKS,
   };
 };
+
+const clearSearchResults = () => {
+  return {
+    type: CLEAR_SEARCH_RESULTS,
+  };
+}

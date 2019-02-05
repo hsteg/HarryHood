@@ -5,6 +5,7 @@ import { getUserWatches, createUserWatch, removeUserWatch } from '../actions/use
 import Navbar from './navbar';
 import StockChart from './stock_chart';
 import StockTransaction from './stock_transaction';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -25,6 +26,16 @@ class Stock extends React.Component {
       .then(() => this.props.getStockInfo(this.props.symbol))
       .then(() => this.props.getUserWatches(this.props.currentUser.id))
       .then(() => this.setState({ dataLoaded: true }));
+  }
+
+  componentDidUpdate(prevProps) {
+    this.props.clearSearchResults;
+    if(prevProps.match.params.symbol !== this.props.match.params.symbol) {
+      this.setState({dataLoaded: false})
+      this.props.getStockObjectBySymbol(this.props.symbol)
+      .then(() => this.props.getStockInfo(this.props.symbol))
+      .then(() => this.setState({ dataLoaded: true }));
+    } 
   }
 
   handleSelector(e) {
@@ -56,8 +67,7 @@ class Stock extends React.Component {
 
 
   render() {
-    if (this.state.dataLoaded === false) { return (<h1>loading :)</h1>); };
-    if (this.props.loading.stockDataLoading || this.props.loading.userWatchListLoading) { return (<h1>loading :)</h1>); };
+    if (this.state.dataLoaded === false || this.props.loading || !(this.props.stock)  ) {return (<div className="page-loading"><img className="page-loading-spinner" src={window.loadingIMG} /></div>); };
     return (
       <div className="dashboard-main">
         <div className="header-container">
@@ -122,4 +132,4 @@ const mdp = (dispatch) => {
   };
 }
 
-export default connect(msp, mdp)(Stock);
+export default withRouter(connect(msp, mdp)(Stock));

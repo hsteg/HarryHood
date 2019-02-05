@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/session_actions';
+import SearchBar from './search'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Navbar extends React.Component {
           <img className="loggedin-nav-logo" src={window.logoURL} />
           <div className="loggedin-nav-searchbar-container">
             <div className="loggedin-nav-searchbar">
-              Searchbar here
+              <SearchBar />
               </div>
           </div>
         </div>
@@ -56,7 +57,7 @@ class Navbar extends React.Component {
                   </h3>
                   <div className="dropdown-menu-header-finances">
                     <div className="dropdown-finances-porfolio-value">
-                      <h1 className="dropdown-portfolio-value-numbers">$12345.67</h1>
+                      <h1 className="dropdown-portfolio-value-numbers">$53200.98</h1>
                       <h1 className="dropdown-portfolio-value-text">Portfolio Value</h1>
                     </div>
                     <div className="dropdown-finances-cash-balance">

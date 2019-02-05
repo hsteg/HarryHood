@@ -7,11 +7,13 @@ Rails.application.routes.draw do
     resources :users do
       get 'held_stocks', on: :member
       get 'cash_balance', on: :member
+      get 'portfolio_data', on: :member
     end
     resources :transactions, only: [:show, :create]
     resources :user_watches, only: [:show, :destroy]
     resources :stocks, only: [:index, :show]
     post 'user_watches/:user_id/:stock_id', to: 'user_watches#create'
+    get 'stocks/search/:search_string', to: 'stocks#search'
   end
   
   root "static_pages#root"

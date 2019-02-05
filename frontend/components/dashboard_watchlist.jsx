@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import WatchListChart from './watchlist_chart'
 
 class DashboardWatchlist extends React.Component {
   constructor(props) {
@@ -16,11 +17,11 @@ class DashboardWatchlist extends React.Component {
             {stocks[watch.stock_id].symbol}
           </div>
           <div className="list-stock-graph">
-            graph here
+            <WatchListChart chartData={stocks[watch.stock_id].chart} quote={stocks[watch.stock_id].quote} />
           </div>
           <div className="list-stock-price">
             {this.props.watchListValue === "currentPrice" ? (
-                `$${stocks[watch.stock_id].quote.latestPrice}`
+                `$${(stocks[watch.stock_id].quote.latestPrice).toFixed(2)}`
                 ) : (
                   `${((stocks[watch.stock_id].quote.changePercent) * 100)}%`
               )}
