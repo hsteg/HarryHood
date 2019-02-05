@@ -159,9 +159,18 @@ class StockChart extends React.Component {
 
   priceChange(range) {
     const {change} = this.props.stock.quote;
+    const {chart} = this.props.stock
     switch(range) {
       case "1D":
         return (change < 0) ? (`-$${(change * -1).toFixed(2)}`) : (`+$${change.toFixed(2)}`);
+      case "1M":
+      case "3M":
+      case "1Y":
+      case "5Y":
+        let start = chart[0].close;
+        let end = chart[chart.length - 1].close;
+        let difference = end - start;
+        return (difference < 0) ? (`-$${(difference * -1).toFixed(2)}`) : (`+$${difference.toFixed(2)}`);
       default: 
         return ("");
     }
