@@ -119,3 +119,9 @@
   background-color: #171718;
 }
 
+.news-list-item-image > img {
+  height: 135px;
+  width: 200px;
+  object-fit: cover;
+}
+
