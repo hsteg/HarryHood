@@ -9,7 +9,7 @@ class StockNewslist extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getStockNews(this.props.stock.symbol);
+    this.props.getStockNews(this.props.stock.name);
   }
 
   render() {

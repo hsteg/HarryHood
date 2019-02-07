@@ -19,15 +19,16 @@ export const getHistoricalStockData = (symbol, period) => {
   });
 };
 
-export const getStockNews = (symbol) => {
+export const getStockNews = (name) => {
   const date = new Date;
   const lastMonthRaw = new Date(date.getTime() - (60*60*24*30*1000));
+  const sources = "financial-post,financial-times,the-wall-street-journal,bloomberg,business-insider,cnbc,fortune,reuters,the-economist,the-new-york-times,the-washington-post,time,associated-press";
 
   const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   const lastMonth = `${lastMonthRaw.getFullYear()}-${lastMonthRaw.getMonth() + 1}-${lastMonthRaw.getDate()}`;
   return $.ajax({
     method: "GET",
-    url: `https://newsapi.org/v2/everything?q=${symbol}&language=en&from=${lastMonth}&to=${today}&sortBy=publishedAt&pageSize=10&apiKey=9345391bfd414fef81f23c2939844ad5`
+    url: `https://newsapi.org/v2/everything?q=${name}&language=en&from=${lastMonth}&to=${today}&sortBy=popular&pageSize=10&apiKey=9345391bfd414fef81f23c2939844ad5&sources=${sources}`
   })
 }
 
