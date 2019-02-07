@@ -13,8 +13,7 @@ class StockNewslist extends React.Component {
   }
 
   render() {
-    // debugger
-    if(this.props.loading.stockNewsLoading) { return (<div>"loading"</div>); };
+    if(this.props.loading.stockNewsLoading) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); };
 
 
     let { news } = this.props.stock

@@ -23,7 +23,7 @@ const stocksReducer = (state = {}, action) => {
       stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stocks[stock.symbol]))
       return marriage;
     case RECEIVE_USER_STOCK_OBJECT:
-      return merge(newState, action.stockObject);
+      return action.stockObject;
     case RECEIVE_HISTORICAL_STOCK_DATA:
       stockIds = Object.values(newState)
       stockIds.forEach(stock => {
@@ -36,9 +36,10 @@ const stocksReducer = (state = {}, action) => {
       return marriage;
     case RECEIVE_STOCK_NEWS:
       let stockWithNews = Object.values(newState)[0];
-      let id = stockWithNews.id
       stockWithNews.news = action.news.articles;
-      return {id: stockWithNews};
+      const obj = {};
+      obj[stockWithNews.id] = stockWithNews;
+      return obj;
     default:
       return newState;
   }

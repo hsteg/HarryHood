@@ -66,7 +66,7 @@ class Stock extends React.Component {
 
 
   render() {
-    if (this.state.dataLoaded === false || this.props.loading.stockDataLoading || this.props.loading.userWatchListLoading || !(this.props.stock)) { return (<div className="page-loading"><img className="page-loading-spinner" src={window.loadingIMG} /></div>); };
+    if (!this.state.dataLoaded || this.props.loading.stockDataLoading || this.props.loading.userWatchListLoading || !(this.props.stock)) { return (<div className="page-loading"><img className="page-loading-spinner" src={window.loadingIMG} /></div>); };
     return (
       <div className="dashboard-main">
         <div className="header-container">
