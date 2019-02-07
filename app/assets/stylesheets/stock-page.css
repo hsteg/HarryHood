@@ -113,6 +113,9 @@
   display: flex;
   justify-content: space-between;
   height: 194px;
+  text-decoration: none;
+  color: white;
+  align-items: center;
 }
 
 .stock-news-list-item:hover {
@@ -123,5 +126,32 @@
   height: 135px;
   width: 200px;
   object-fit: cover;
+}
+
+.stock-news-text-items {
+  padding-left: 25px;
+  padding-right: 30px;
+  height: 135px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-bottom: 1px;
+}
+
+.stock-news-text-source {
+  font-size: 13px;
+  letter-spacing: .5px;
+  padding-bottom: 5px;
+}
+
+.stock-news-text-headline {
+  font-size: 15px;
+  letter-spacing: .5px;
+  padding-bottom: 5px;
+}
+
+.stock-news-text-summary {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: .5px;
 }
 

@@ -22,7 +22,7 @@ class StockNewslist extends React.Component {
 
     const newsItems = news.map(newsItem => {
       return (
-      <div className="stock-news-list-item" key={newsItem.url}>
+      <a href={newsItem.url} className="stock-news-list-item" key={newsItem.url}>
 
         <div className="news-list-item-image">
           <img src={newsItem.urlToImage} />
@@ -42,7 +42,7 @@ class StockNewslist extends React.Component {
           </div>
 
         </div>
-      </div>
+      </a>
       );
     });
     return (
