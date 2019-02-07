@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 
 class StockNewslist extends React.Component {
   constructor(props) {
@@ -8,26 +8,35 @@ class StockNewslist extends React.Component {
   }
 
   render() {
-    return (
+    const { news } = this.props.stock
+    const newsItems = news.map(newsItem => {
+      // debugger
+      return (
       <div className="stock-news-list-item">
+
         <div className="news-list-item-image">
           img here
         </div>
+        
         <div className="stock-news-text-items">
           <div className="stock-news-text-source">
-            source
+            {newsItem.source}
           </div>
+          
           <div className="stock-news-text-headline">
-            headline
+            {newsItem.headline}
           </div>
-          <div className="stock-news-text-source">
-            source
-          </div>
+
           <div className="stock-news-text-summary">
-            summary
+            {newsItem.summary}
           </div>
+
         </div>
       </div>
+      );
+    });
+    return (
+      <div>{newsItems}</div>
     );
   }
 }

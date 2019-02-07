@@ -19,6 +19,18 @@ export const getHistoricalStockData = (symbol, period) => {
   });
 };
 
+export const getStockNews = (symbol) => {
+  const date = new Date;
+  const lastMonthRaw = new Date(date.getTime() - (60*60*24*30*1000));
+
+  const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  const lastMonth = `${lastMonthRaw.getFullYear()}-${lastMonthRaw.getMonth() + 1}-${lastMonthRaw.getDate()}`;
+  return $.ajax({
+    method: "GET",
+    url: `https://newsapi.org/v2/everything?q=${symbol}&language=en&from=${lastMonth}&to=${today}&sortBy=publishedAt&pageSize=10&apiKey=9345391bfd414fef81f23c2939844ad5`
+  })
+}
+
 export const getStockSearchResults = (search) => {
   return $.ajax({
     method: "GET",

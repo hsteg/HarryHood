@@ -97,7 +97,7 @@ class Stock extends React.Component {
                   News
                 </div>
               </div>
-              <StockNewslist />
+              <StockNewslist stock={this.props.stock} />
             </div>
           </div>
           <div className="right-col">
