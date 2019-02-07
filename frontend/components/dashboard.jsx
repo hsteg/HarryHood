@@ -48,8 +48,8 @@ class Dashboard extends React.Component {
 
   displayUserWatchList(){
     const { userWatchListLoading, dashboardStocksLoading } = this.props.loading;
-    
-    if ( userWatchListLoading || dashboardStocksLoading) {
+    const notEnoguhStocks = Object.values(this.props.stocks).length === Object.values(this.props.userWatches).length
+    if ( userWatchListLoading || dashboardStocksLoading || !notEnoguhStocks) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
       return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} watchListValue={this.state.watchListValue} />);
