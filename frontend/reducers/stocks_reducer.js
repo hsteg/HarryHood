@@ -3,7 +3,8 @@ import {
   RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
   RECEIVE_USER_STOCK_OBJECT,
   RECEIVE_HISTORICAL_STOCK_DATA,
-  RECEIVE_DASHBOARD_STOCKS
+  RECEIVE_DASHBOARD_STOCKS,
+  RECEIVE_STOCK_NEWS
 } from '../actions/stock_actions';
 import { merge } from 'lodash';
 
@@ -33,6 +34,11 @@ const stocksReducer = (state = {}, action) => {
     case RECEIVE_DASHBOARD_STOCKS:
       Object.values(action.stocks).forEach(stock => marriage[stock.id] = Object.assign({id: stock.id, symbol: stock.symbol}, action.stockData[stock.symbol]))
       return marriage;
+    case RECEIVE_STOCK_NEWS:
+      let stockWithNews = Object.values(newState)[0];
+      let id = stockWithNews.id
+      stockWithNews.news = action.news.articles;
+      return {id: stockWithNews};
     default:
       return newState;
   }

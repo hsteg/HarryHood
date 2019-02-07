@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getStockNews } from '../actions/stock_actions';
 
 
 class StockNewslist extends React.Component {
@@ -7,10 +8,19 @@ class StockNewslist extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.getStockNews(this.props.stock.symbol);
+  }
+
   render() {
-    const { news } = this.props.stock
+    // debugger
+    if(this.props.loading.stockNewsLoading) { return (<div>"loading"</div>); };
+
+
+    let { news } = this.props.stock
+    news = news || [];
+
     const newsItems = news.map(newsItem => {
-      // debugger
       return (
       <div className="stock-news-list-item">
 
@@ -20,15 +30,15 @@ class StockNewslist extends React.Component {
         
         <div className="stock-news-text-items">
           <div className="stock-news-text-source">
-            {newsItem.source}
+            {newsItem.source.name}
           </div>
           
           <div className="stock-news-text-headline">
-            {newsItem.headline}
+            {newsItem.title}
           </div>
 
           <div className="stock-news-text-summary">
-            {newsItem.summary}
+            {newsItem.description}
           </div>
 
         </div>
@@ -41,4 +51,16 @@ class StockNewslist extends React.Component {
   }
 }
 
-export default connect(null, null)(StockNewslist)
+const msp = (state) => {
+  return {
+    
+  };
+};
+
+const mdp = (dispatch) => {
+  return {
+    getStockNews: (symbol) => dispatch(getStockNews(symbol)),
+  };
+};
+ 
+export default connect(msp, mdp)(StockNewslist)
