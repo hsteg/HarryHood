@@ -89,12 +89,33 @@
   outline: none;
 }
 
-.stock-watch-button:hover{
+.stock-watch-button:hover {
   border-color: #1ae9aa;
   color: #1ae9aa;
 }
 
-.watch-button-container{
+.watch-button-container {
   padding: 0 30px;
+}
+
+.stock-news-header-container {
+  border-bottom: 1px solid #0e0d0d;
+  margin-top: 30px;
+}
+
+.stock-news-header-text {
+  font-size: 30px;
+  padding-bottom: 20px;
+}
+
+.stock-news-list-item {
+  width: 675px;
+  display: flex;
+  justify-content: space-between;
+  height: 194px;
+}
+
+.stock-news-list-item:hover {
+  background-color: #171718;
 }
 
