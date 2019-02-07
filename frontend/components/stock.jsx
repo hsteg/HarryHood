@@ -5,6 +5,7 @@ import { getUserWatches, createUserWatch, removeUserWatch } from '../actions/use
 import Navbar from './navbar';
 import StockChart from './stock_chart';
 import StockTransaction from './stock_transaction';
+import StockNewslist from './stock_newslist';
 import { withRouter } from 'react-router-dom';
 
 
@@ -96,46 +97,8 @@ class Stock extends React.Component {
                   News
                 </div>
               </div>
-              <div className="stock-news-list-item">
-                <div className="news-list-item-image">
-                  img here
-                </div>
-                <div className="stock-news-text-items">
-                  <div className="stock-news-text-source">
-                    source
-                  </div>
-                  <div className="stock-news-text-headline">
-                    headline
-                  </div>
-                  <div className="stock-news-text-source">
-                    source
-                  </div>
-                  <div className="stock-news-text-summary">
-                    summary
-                  </div>
-                </div>
-              </div>
-              <div className="stock-news-list-item">
-                <div className="news-list-item-image">
-                  img here
-                </div>
-                <div className="stock-news-text-items">
-                  <div className="stock-news-text-source">
-                    source
-                  </div>
-                  <div className="stock-news-text-headline">
-                    headline
-                  </div>
-                  <div className="stock-news-text-source">
-                    source
-                  </div>
-                  <div className="stock-news-text-summary">
-                    summary
-                  </div>
-                </div>
-              </div>
+              <StockNewslist />
             </div>
-            
           </div>
           <div className="right-col">
             <div className="transaction-container">
