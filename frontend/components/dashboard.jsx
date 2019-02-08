@@ -76,8 +76,7 @@ class Dashboard extends React.Component {
       const newsStocks = Object.values(this.props.stocks).map(stock => {
         return stock.symbol;
       }).join('%20OR%20');
-      debugger
-      <DashboardNewslist stocks={newsStocks} />
+      return <DashboardNewslist stocks={newsStocks} />;
     }
   }
 
