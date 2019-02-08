@@ -98,13 +98,14 @@
   padding: 0 30px;
 }
 
-.stock-news-header-container {
+.right-lower-header-container {
   border-bottom: 1px solid #0e0d0d;
   margin-top: 30px;
 }
 
-.stock-news-header-text {
-  font-size: 30px;
+.right-lower-header-text {
+  font-size: 26px;
+  font-weight: 600;
   padding-bottom: 20px;
 }
 
@@ -147,11 +148,57 @@
   font-size: 15px;
   letter-spacing: .5px;
   padding-bottom: 5px;
+  line-height: 16px;
 }
 
 .stock-news-text-summary {
   font-size: 14px;
   font-weight: 300;
   letter-spacing: .5px;
+  line-height: 16px;
+}
+
+.company-profile-attributes-container {
+  width: 675px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.company-profile-attributes-row {
+  width: 675px;
+  display: flex;
+  
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-right: 60px;
+  box-sizing: border-box;
+}
+
+.company-profile-summary {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  letter-spacing: .6px;
+  line-height: 21px;
+  font-size: 15px;
+  font-weight: 400;
+  padding-right: 60px;
+}
+
+.company-profile-attribute-header {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  padding-right: 30px;
+  width: 150px;
+  padding-bottom: 3px;
+}
+
+.company-profile-attribute-content {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .3px;
+  padding-right: 30px;
+  width: 150px;
 }
 

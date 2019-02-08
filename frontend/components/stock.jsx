@@ -6,6 +6,7 @@ import Navbar from './navbar';
 import StockChart from './stock_chart';
 import StockTransaction from './stock_transaction';
 import StockNewslist from './stock_newslist';
+import StockCompanyProfile from './stock_company_profile';
 import { withRouter } from 'react-router-dom';
 
 
@@ -91,9 +92,10 @@ class Stock extends React.Component {
                   onClick={this.handleSelector}>5Y</button>
               </nav>
             </div>
+            <StockCompanyProfile stock={this.props.stock} />
             <div className="content-news">
-              <div className="stock-news-header-container">
-                <div className="stock-news-header-text">
+              <div className="right-lower-header-container">
+                <div className="right-lower-header-text">
                   News
                 </div>
               </div>
