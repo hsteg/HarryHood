@@ -40,7 +40,7 @@ class StockTransaction extends React.Component {
     this.props.createUserTransaction({stock_id: this.state.stock_id, user_id: this.state.user_id, price_per_share: this.state.price_per_share, num_shares: num_shares})
     .then(() => this.props.getUserCashBalance(this.props.currentUser.id))
     .then(() => this.props.getUserHeldStocks(this.props.currentUser.id))
-    .then(() => this.setState({success: true, num_shares_transacted: this.state.num_shares, numShares: 0, prevTransaction: prevTransaction }));
+    .then(() => this.setState({success: true, num_shares_transacted: this.state.num_shares, num_shares: 0, prevTransaction: prevTransaction }));
   }
 
   updateNumSharesField() {
