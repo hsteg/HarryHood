@@ -136,6 +136,7 @@
   box-sizing: border-box;
   overflow: hidden;
   margin-bottom: 1px;
+  width: 475px;
 }
 
 .stock-news-text-source {
