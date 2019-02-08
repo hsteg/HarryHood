@@ -14,7 +14,8 @@ class StockTransaction extends React.Component {
       user_id: this.props.currentUser.id,
       price_per_share: this.props.stock.quote.latestPrice,
       success: false,
-      num_shares_transacted: 0
+      num_shares_transacted: 0,
+      prevTransaction: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateNumSharesField = this.updateNumSharesField.bind(this);
@@ -33,11 +34,13 @@ class StockTransaction extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const prevTransaction = this.state.buy ? "buy" : "sell" ;
+    debugger
     const num_shares = this.state.buy ? this.state.num_shares : (this.state.num_shares * -1)
     this.props.createUserTransaction({stock_id: this.state.stock_id, user_id: this.state.user_id, price_per_share: this.state.price_per_share, num_shares: num_shares})
     .then(() => this.props.getUserCashBalance(this.props.currentUser.id))
     .then(() => this.props.getUserHeldStocks(this.props.currentUser.id))
-    .then(() => this.setState({success: true, num_shares_transacted: this.state.num_shares}));
+    .then(() => this.setState({success: true, num_shares_transacted: this.state.num_shares, numShares: 0, prevTransaction: prevTransaction }));
   }
 
   updateNumSharesField() {
@@ -49,7 +52,7 @@ class StockTransaction extends React.Component {
   displaySuccess() {
     const s = this.state.num_shares_transacted > 1 ? "s" : "";
     if(this.state.success) {
-      if(this.state.buy) {
+      if(this.state.prevTransaction === "buy") {
         return (
         <div className="transaction-form-footer">
           <h1 className="transaction-footer-text">Purchased {this.state.num_shares_transacted} share{s} of {this.props.currentSymbol}</h1>
@@ -109,7 +112,8 @@ class StockTransaction extends React.Component {
 
   displaySellButton(){
     const { numSharesToSell, currentSymbol } = this.props;
-    if ((numSharesToSell).hasOwnProperty(this.props.stock.id)) {
+  
+    if ((numSharesToSell[this.props.stock.id].num_shares) > 0) {
       return (<button className={this.activeButton(false)} onClick={this.selectForm(false)}>Sell {currentSymbol}</button>);
     } else {
       return (<div className="transaction-empty-sell-button"></div>);
@@ -118,9 +122,10 @@ class StockTransaction extends React.Component {
 
 
   render() {
+    
     if (Object.values(this.props.numSharesToSell).length < 1 || this.props.loading.userHeldStocks) {return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
-
-    const { currentSymbol } = this.props;
+    const { currentSymbol, numSharesToSell } = this.props;
+    if(!this.state.buy && ((numSharesToSell[this.props.stock.id].num_shares) < 1)) { this.setState({buy: true}) } 
 
     return (
       <>
@@ -136,7 +141,7 @@ class StockTransaction extends React.Component {
               <h1 className="transaction-shares-text">Shares</h1>
               <input type="number" 
                     className="transaction-shares-field" 
-                    placeholder="0" 
+                    placeholder="0"
                     onChange={this.updateNumSharesField()} />
             </div>
             <div className="transaction-form-row">
