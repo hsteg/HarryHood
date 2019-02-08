@@ -6,6 +6,7 @@ class StockCompanyProfile extends React.Component {
     super(props);
     this.displayMarketCap = this.displayMarketCap.bind(this);
     this.displayAvgVolume = this.displayAvgVolume.bind(this);
+    this.displayDividendYield = this.displayDividendYield.bind(this);
   }
 
   displayMarketCap() {
@@ -25,6 +26,13 @@ class StockCompanyProfile extends React.Component {
     const avgVolume = this.props.stock.quote.avgTotalVolume;
     formattedVolume = (avgVolume / 1000000).toFixed(2);
     return `${formattedVolume}M`
+  }
+
+  displayDividendYield() {
+    let formattedDiv;
+    const dividendYield = this.props.stock.stats.dividendYield;
+    formattedDiv = (dividendYield === 0) ? "N/A" : dividendYield.toFixed(2);
+    return formattedDiv; 
   }
 
   render() {
@@ -95,7 +103,7 @@ class StockCompanyProfile extends React.Component {
                 Dividend Yield
               </div>
               <div className="company-profile-attribute-content">
-                {this.props.stock.stats.dividendYield.toFixed(2)}
+                {this.displayDividendYield()}
               </div>
             </div>
             <div className="company-profile-attribute">
