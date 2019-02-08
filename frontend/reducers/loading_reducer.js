@@ -7,6 +7,8 @@ import {
   RECEIVE_DASHBOARD_STOCKS,
   START_LOADING_STOCK_NEWS,
   RECEIVE_STOCK_NEWS,
+  START_LOADING_DASHBOARD_NEWS,
+  RECEIVE_DASHBOARD_NEWS,
 } from '../actions/stock_actions';
 
 import { START_LOADING_USER_WATCHES, RECEIVE_USER_WATCHES } from '../actions/user_watch_actions';
@@ -22,6 +24,7 @@ const initialState = {
   userHeldStocksLoading: false,
   userPortfolioDataLoading: true,
   stockNewsLoading: false,
+  dashboardNewsLoading: false,
 };
 
 
@@ -60,6 +63,10 @@ const loadingReducer = (state = initialState, action) => {
       return Object.assign({}, state, { stockNewsLoading: true })
     case RECEIVE_STOCK_NEWS:
       return Object.assign({}, state, { stockNewsLoading: false })
+    case START_LOADING_DASHBOARD_NEWS:
+      return Object.assign({}, state, { dashboardNewsLoading: true })
+    case RECEIVE_DASHBOARD_NEWS:
+      return Object.assign({}, state, { dashboardNewsLoading: false })
     default:
       return state;
   }
