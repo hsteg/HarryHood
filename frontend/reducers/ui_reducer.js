@@ -6,7 +6,7 @@ import news from './dashboard_news_reducer';
 
 
 export default combineReducers({
-  loading,
-  searchResults,
   news,
+  searchResults,
+  loading,
 });

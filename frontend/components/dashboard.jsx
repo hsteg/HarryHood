@@ -16,7 +16,8 @@ class Dashboard extends React.Component {
     this.state = {
       stockListValue: "currentPrice",
       watchListValue: "currentPrice", 
-      range: "ALL"
+      range: "ALL",
+      newsStocks: "",
     } 
     this.displayUserStockList = this.displayUserStockList.bind(this);
     this.displayUserWatchList = this.displayUserWatchList.bind(this);
@@ -26,7 +27,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUserStocks(this.props.currentUser.id);
+    this.props.getUserStocks(this.props.currentUser.id).then(() => this.displayDashboardNewslist());
     this.props.getUserPortfolioSnapshots(this.props.currentUser.id)
     this.props.getUserHeldStocks(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
@@ -76,7 +77,7 @@ class Dashboard extends React.Component {
       const newsStocks = Object.values(this.props.stocks).map(stock => {
         return stock.symbol;
       }).join('%20OR%20');
-      return <DashboardNewslist stocks={newsStocks} />;
+      this.setState({newsStocks: newsStocks});
     }
   }
 
@@ -111,7 +112,7 @@ class Dashboard extends React.Component {
                         onClick={this.handleSelector}>ALL</button>
               </nav>
             <div className="content-news">
-              {this.displayDashboardNewslist()}
+              {this.state.newsStocks ? <DashboardNewslist newsStocks={this.state.newsStocks}/> : <img className="right-col-loading-img" src={window.loadingIMG} />  }
             </div>
           </div>
           <div className="right-col">
@@ -141,7 +142,8 @@ const msp = (state) => {
     userWatches: state.entities.userWatches,
     heldStocks: state.session.heldStocks,
     loading: state.ui.loading,
-    portfolioSnapshots: state.session.portfolioSnapshots
+    portfolioSnapshots: state.session.portfolioSnapshots,
+    news: state.ui.news,
   };
 };
 

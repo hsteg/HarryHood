@@ -14,7 +14,7 @@ class WatchListChart extends React.Component {
     const oneDayChartData = [];
     this.props.chartData.forEach(dataPoint => {
       let dpObject = {};
-      dpObject['time'] = (dataPoint.label).toString();
+      dpObject['time'] = (dataPoint.minute).toString();
       dpObject['price'] = dataPoint.close;
 
       if(dpObject.price === null) {return}

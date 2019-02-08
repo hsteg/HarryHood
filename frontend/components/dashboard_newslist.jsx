@@ -8,14 +8,13 @@ class DashboardNewslist extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getDashboardNews(this.props.stocks);
+    this.props.getDashboardNews(this.props.newsStocks);
   }
 
   render() {
+    if(this.props.loading.dashboardNewsLoading) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); };
+    let { news } = this.props;
     // debugger
-    if(this.props.loading) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); };
-    debugger
-    let { news } = this.props.news;
     news = news || [];
 
     const newsItems = news.map(newsItem => {
@@ -51,7 +50,7 @@ class DashboardNewslist extends React.Component {
 
 const msp = (state) => {
   return {
-    loading: state.ui.loading.dashboardNewsLoading,
+    loading: state.ui.loading,
     news: state.ui.news,
   };
 };
