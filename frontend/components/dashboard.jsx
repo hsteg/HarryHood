@@ -112,6 +112,11 @@ class Dashboard extends React.Component {
                         onClick={this.handleSelector}>ALL</button>
               </nav>
             <div className="content-news">
+              <div className="left-lower-header-container">
+                <div className="left-lower-header-text">
+                  News
+                </div>
+              </div>
               {this.state.newsStocks ? <DashboardNewslist newsStocks={this.state.newsStocks}/> : <img className="right-col-loading-img" src={window.loadingIMG} />  }
             </div>
           </div>

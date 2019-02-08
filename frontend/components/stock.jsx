@@ -94,8 +94,8 @@ class Stock extends React.Component {
             </div>
             <StockCompanyProfile stock={this.props.stock} />
             <div className="content-news">
-              <div className="right-lower-header-container">
-                <div className="right-lower-header-text">
+              <div className="left-lower-header-container">
+                <div className="left-lower-header-text">
                   News
                 </div>
               </div>
