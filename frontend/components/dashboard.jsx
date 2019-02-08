@@ -8,6 +8,7 @@ import DashboardWatchlist from './dashboard_watchlist';
 import DashboardUserStockList from './dashboard_user_stocks';
 import Navbar from './navbar';
 import DashboardChart from './dashboard_chart';
+import DashboardNewslist from './dashboard_newslist';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class Dashboard extends React.Component {
     this.displayUserWatchList = this.displayUserWatchList.bind(this);
     this.handleSelector = this.handleSelector.bind(this);
     this.displayUserPortfolioChart = this.displayUserPortfolioChart.bind(this);
+    this.displayDashboardNewslist = this.displayDashboardNewslist.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +68,19 @@ class Dashboard extends React.Component {
     }
   }
 
+  displayDashboardNewslist() {
+    const { dashboardStocksLoading } = this.props.loading;
+    if(dashboardStocksLoading) {
+      return (<img className="right-col-loading-img" src={window.loadingIMG} />);
+    } else {
+      const newsStocks = Object.values(this.props.stocks).map(stock => {
+        return stock.symbol;
+      }).join('%20OR%20');
+      debugger
+      <DashboardNewslist stocks={newsStocks} />
+    }
+  }
+
 
   handleSelector(e) {
     this.setState({ range: e.currentTarget.innerText });
@@ -97,7 +112,7 @@ class Dashboard extends React.Component {
                         onClick={this.handleSelector}>ALL</button>
               </nav>
             <div className="content-news">
-              News goes here
+              {this.displayDashboardNewslist()}
             </div>
           </div>
           <div className="right-col">

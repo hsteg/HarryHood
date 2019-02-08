@@ -32,6 +32,19 @@ export const getStockNews = (name) => {
   })
 }
 
+export const getDashboardNews = (stocks) => {
+  const date = new Date;
+  const lastWeekRaw = new Date(date.getTime() - (60*60*24*7*1000));
+  const sources = "financial-post,financial-times,the-wall-street-journal,bloomberg,cnbc,fortune,the-economist";
+
+  const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  const lastWeek = `${lastWeekRaw.getFullYear()}-${lastWeekRaw.getMonth() + 1}-${lastWeekRaw.getDate()}`;
+  return $.ajax({
+    method: "GET",
+    url: `https://newsapi.org/v2/everything?q=%28${stocks}%29&language=en&from=${lastWeek}&to=${today}&sortBy=popular&pageSize=10&apiKey=9345391bfd414fef81f23c2939844ad5&sources=${sources}`
+  })
+}
+
 export const getStockSearchResults = (search) => {
   return $.ajax({
     method: "GET",

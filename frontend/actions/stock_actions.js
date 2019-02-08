@@ -11,6 +11,9 @@ export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
 export const RECEIVE_DASHBOARD_STOCKS = "RECEIVE_DASHBOARD_STOCKS";
 export const RECEIVE_STOCK_NEWS = "RECEIVE_STOCK_NEWS";
 export const START_LOADING_STOCK_NEWS = "START_LOADING_STOCK_NEWS";
+export const START_LOADING_DASHBOARD_NEWS = "START_LOADING_DASHBOARD_NEWS";
+export const RECEIVE_DASHBOARD_NEWS = "RECEIVE_DASHBOARD_NEWS";
+
 
 export const getStockObjectBySymbol = (symbol) => dispatch => {
   dispatch(startLoadingFullStockInfo());
@@ -60,7 +63,16 @@ export const getStockNews = (symbol) => dispatch => {
       return dispatch(receiveStockNews(news));
     }
   );
-}
+};
+
+export const getDashboardNews = (stocks) => dispatch => {
+  dispatch(startLoadingDashboardNews());
+  return APIUtil.getDashboardNews(stocks).then(
+    news => {
+      return dispatch(receiveDashboardNews(news));
+    }
+  );
+};
 
 export const getDayStocksPriceData = (stocks) => dispatch => {
   return APIUtil.getDayStocksPriceData(stocks).then(
@@ -159,5 +171,18 @@ const receiveStockNews = (news) => {
 const startLoadingStockNews = () => {
   return {
     type: START_LOADING_STOCK_NEWS,
+  };
+};
+
+const startLoadingDashboardNews = () => {
+  return {
+    type: START_LOADING_DASHBOARD_NEWS,
+  };
+};
+
+const receiveDashboardNews = (news) => {
+  return {
+    type: RECEIVE_DASHBOARD_NEWS,
+    news
   };
 };

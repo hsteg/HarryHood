@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getStockNews } from '../actions/stock_actions';
+import { stat } from 'fs';
 
 
 class StockNewslist extends React.Component {
@@ -52,7 +53,7 @@ class StockNewslist extends React.Component {
 
 const msp = (state) => {
   return {
-    
+    dashboardNewsItems: state.ui.newsItems,
   };
 };
 
