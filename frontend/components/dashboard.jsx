@@ -28,10 +28,12 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getUserStocks(this.props.currentUser.id).then(() => this.displayDashboardNewslist());
-    this.props.getUserPortfolioSnapshots(this.props.currentUser.id)
+    this.props.getUserPortfolioSnapshots(this.props.currentUser.id);
     this.props.getUserHeldStocks(this.props.currentUser.id);
     this.props.getUserWatches(this.props.currentUser.id);
   }
+
+
 
   displayUserStockList(){
     const { userHeldStocksLoading, dashboardStocksLoading } = this.props.loading;
@@ -65,7 +67,7 @@ class Dashboard extends React.Component {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
       if(this.props.portfolioSnapshots.length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
-      return (<DashboardChart currentUser={this.props.currentUser} dateRange={this.state.range} chartData={this.props.portfolioSnapshots} />);
+      return (<DashboardChart stocks={this.props.stocks} currentUser={this.props.currentUser} dateRange={this.state.range} chartData={this.props.portfolioSnapshots} />);
     }
   }
 

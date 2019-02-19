@@ -12,18 +12,32 @@ class DashboardChart extends React.Component {
     this.chartRange = this.chartRange.bind(this);
     this.priceChange = this.priceChange.bind(this);
     this.percentChange = this.percentChange.bind(this);
+    this.oneDayChartData = this.oneDayChartData.bind(this);
+
+    this.state = {
+      oneDayChartData: [],
+    }
   }
 
   parseChartData() {
     const { dateRange } = this.props;
     switch (dateRange) {
       case "1D":
-        return { data: this.oneDayChartData(), width: 675, refColor: "gray" };
+        const chartData = this.oneDayChartData();
+        return { data: chartData,
+                color: this.chartColor(chartData),
+                range: null,
+                width: 675, 
+                dataKey: "Time", 
+                refColor: "transparent",
+                change: this.priceChange(1),
+                percentChange: this.percentChange(1) };
       case "1W":
         return { data: this.greaterThanOneDayChartData(5), 
                 color: this.chartColor(5), 
                 range: this.chartRange(5),  
-                width: 675, 
+                width: 675,
+                dataKey: "Date", 
                 refColor: "transparent" ,
                 change: this.priceChange(5),
                 percentChange: this.percentChange(5) };
@@ -31,7 +45,8 @@ class DashboardChart extends React.Component {
         return { data: this.greaterThanOneDayChartData(22), 
                 color: this.chartColor(22), 
                 range: this.chartRange(22), 
-                width: 675, 
+                width: 675,
+                dataKey: "Date", 
                 refColor: "transparent",
                 change: this.priceChange(22),
                 percentChange: this.percentChange(22) };
@@ -39,7 +54,8 @@ class DashboardChart extends React.Component {
         return { data: this.greaterThanOneDayChartData(66), 
                 color: this.chartColor(66), 
                 range: this.chartRange(66), 
-                width: 675, 
+                width: 675,
+                dataKey: "Date", 
                 refColor: "transparent",
                 change: this.priceChange(66),
                 percentChange: this.percentChange(66) };
@@ -47,7 +63,8 @@ class DashboardChart extends React.Component {
         return { data: this.greaterThanOneDayChartData(264), 
                 color: this.chartColor(264), 
                 range: this.chartRange(264), 
-                width: 675, 
+                width: 675,
+                dataKey: "Date", 
                 refColor: "transparent", 
                 change: this.priceChange(264),
                 percentChange: this.percentChange(264) };
@@ -55,7 +72,8 @@ class DashboardChart extends React.Component {
         return { data: this.greaterThanOneDayChartData(this.props.chartData.length), 
                 color: this.chartColor(this.props.chartData.length), 
                 range: this.chartRange(this.props.chartData.length), 
-                width: 675, 
+                width: 675,
+                dataKey: "Date", 
                 refColor: "transparent",
                 change: this.priceChange(this.props.chartData.length),
                 percentChange: this.percentChange(this.props.chartData.length) };
@@ -65,9 +83,30 @@ class DashboardChart extends React.Component {
   }
 
   oneDayChartData() {
-    
-    debugger
-    return [];
+    if(!this.props.stocks) { return []; }
+    const { userHeldStocks, stocks } = this.props;
+    const heldStockKeys = Object.keys(userHeldStocks);
+    const oneDayChartData = [];
+    const numDataPoints = stocks[heldStockKeys[0]].chart.length;
+    for (let i = 0; i < numDataPoints; i++) {
+      let dpObject = {};
+      dpObject['Time'] = '';
+      dpObject['Value'] = 0;
+      let lastValidPrice;
+      heldStockKeys.forEach(stockKey => {
+        lastValidPrice = stocks[stockKey].quote.latestPrice;
+
+        dpObject['Time'] = stocks[stockKey].chart[i].label;
+        
+        if (stocks[stockKey].chart[i].marketClose === null) {
+          dpObject['Value'] += (lastValidPrice * userHeldStocks[stockKey].num_shares);
+        } else {
+          dpObject['Value'] += (stocks[stockKey].chart[i].marketClose * userHeldStocks[stockKey].num_shares);
+        }
+      });
+      oneDayChartData.push(dpObject);
+    }
+    return oneDayChartData;
   }
 
   greaterThanOneDayChartData(length) {
@@ -86,10 +125,17 @@ class DashboardChart extends React.Component {
     return greaterThanOneDayChartData;
   }
 
-  chartColor(length) {
-    let first;
-    let last = this.props.chartData[this.props.chartData.length - 1].total_portfolio_value;
-    let beginningIdx = this.props.chartData.length - length;
+  chartColor(range) {
+    let first, last, beginningIdx;
+    
+    if (Array.isArray(range)) {
+      first = range[0]["Value"];
+      last = range[range.length - 1]["Value"];
+      return (first <= last) ? ("#21ce99") : ("#f45531");
+    }
+
+    last = this.props.chartData[this.props.chartData.length - 1].total_portfolio_value;
+    beginningIdx = this.props.chartData.length - range;
 
     if (beginningIdx < 0) {
       first = this.props.chartData[0].total_portfolio_value;
@@ -166,7 +212,7 @@ class DashboardChart extends React.Component {
         <div className="chart-actual-chart">
           <LineChart width={allData.width} height={190} data={allData.data}>
             <Line type="monotone" dataKey="Value" stroke={allData.color} dot={false} strokeWidth={2} />
-            <XAxis dataKey="Date" hide={true} />
+            <XAxis dataKey={allData.dataKey} hide={true} />
             <YAxis type="number" domain={allData.range} hide={true} />
             <Tooltip contentStyle={{ backgroundColor: 'transparent', border: '0' }} />
           </LineChart>
@@ -186,6 +232,7 @@ const msp = (state) => {
 const mdp = (dispatch) => {
   return {
     getUserPortfolioSnapshots: (userId) => dispatch(getUserPortfolioSnapshots(userId))
+    
   };
 };
 
