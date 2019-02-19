@@ -27,7 +27,7 @@ class DashboardChart extends React.Component {
         return { data: chartData,
                 color: this.chartColor(chartData),
                 range: null,
-                width: 675, 
+                width: (((chartData.length) / 390) * 675), 
                 dataKey: "Time", 
                 refColor: "transparent",
                 change: this.priceChange(1),
@@ -93,9 +93,9 @@ class DashboardChart extends React.Component {
       dpObject['Time'] = '';
       dpObject['Value'] = 0;
       let lastValidPrice;
+
       heldStockKeys.forEach(stockKey => {
         lastValidPrice = stocks[stockKey].quote.latestPrice;
-
         dpObject['Time'] = stocks[stockKey].chart[i].label;
         
         if (stocks[stockKey].chart[i].marketClose === null) {
@@ -104,6 +104,7 @@ class DashboardChart extends React.Component {
           dpObject['Value'] += (stocks[stockKey].chart[i].marketClose * userHeldStocks[stockKey].num_shares);
         }
       });
+
       oneDayChartData.push(dpObject);
     }
     return oneDayChartData;
@@ -127,7 +128,7 @@ class DashboardChart extends React.Component {
 
   chartColor(range) {
     let first, last, beginningIdx;
-    
+
     if (Array.isArray(range)) {
       first = range[0]["Value"];
       last = range[range.length - 1]["Value"];

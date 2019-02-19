@@ -35,7 +35,6 @@ class StockTransaction extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const prevTransaction = this.state.buy ? "buy" : "sell" ;
-    debugger
     const num_shares = this.state.buy ? this.state.num_shares : (this.state.num_shares * -1)
     this.props.createUserTransaction({stock_id: this.state.stock_id, user_id: this.state.user_id, price_per_share: this.state.price_per_share, num_shares: num_shares})
     .then(() => this.props.getUserCashBalance(this.props.currentUser.id))
