@@ -85,9 +85,11 @@ class DashboardChart extends React.Component {
   oneDayChartData() {
     if(!this.props.stocks) { return []; }
     const { userHeldStocks, stocks } = this.props;
+    const { cash_balance } = this.props.currentUser;
     const heldStockKeys = Object.keys(userHeldStocks);
     const oneDayChartData = [];
     const numDataPoints = stocks[heldStockKeys[0]].chart.length;
+
     for (let i = 0; i < numDataPoints; i++) {
       let dpObject = {};
       dpObject['Time'] = '';
@@ -104,7 +106,9 @@ class DashboardChart extends React.Component {
           dpObject['Value'] += (stocks[stockKey].chart[i].marketClose * userHeldStocks[stockKey].num_shares);
         }
       });
-
+      
+      dpObject['Value'] += cash_balance;
+      dpObject['Value'] = (dpObject['Value']).toFixed(2);
       oneDayChartData.push(dpObject);
     }
     return oneDayChartData;
