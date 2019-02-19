@@ -64,6 +64,12 @@ class DashboardChart extends React.Component {
     }
   }
 
+  oneDayChartData() {
+    
+    debugger
+    return [];
+  }
+
   greaterThanOneDayChartData(length) {
     if (!this.props.chartData) { return []; }
     let beginningIdx = this.props.chartData.length - length;
@@ -173,6 +179,7 @@ class DashboardChart extends React.Component {
 const msp = (state) => {
   return {
     loading: state.ui.loading,
+    userHeldStocks: state.session.heldStocks,
   };
 };
 

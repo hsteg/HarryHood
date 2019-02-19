@@ -64,12 +64,13 @@ class User < ApplicationRecord
         self.password_digest = BCrypt::Password.create(password)
     end
 
-    def self.get_num_asset_shares(user_id, stock_id)
-      Transaction.where("user_id = #{user_id} and stock_id = #{stock_id}").sum(:num_shares)
-    end
+    # def self.get_num_asset_shares(user_id, stock_id)
+    #   Transaction.where("user_id = #{user_id} and stock_id = #{stock_id}").sum(:num_shares)
+    # end
 
     def get_all_shares()
       transactions = Transaction.where("user_id = #{self.id}").group(:stock_id).sum(:num_shares)
+      transactions.select {|k,v| v > 0}
     end
 
 
