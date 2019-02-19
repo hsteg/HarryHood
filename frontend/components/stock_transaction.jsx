@@ -112,8 +112,7 @@ class StockTransaction extends React.Component {
 
   displaySellButton(){
     const { numSharesToSell, currentSymbol } = this.props;
-  
-    if ((numSharesToSell[this.props.stock.id].num_shares) > 0) {
+    if (numSharesToSell[this.props.stock.id] && ((numSharesToSell[this.props.stock.id].num_shares) > 0)) {
       return (<button className={this.activeButton(false)} onClick={this.selectForm(false)}>Sell {currentSymbol}</button>);
     } else {
       return (<div className="transaction-empty-sell-button"></div>);
