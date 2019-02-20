@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { LineChart, Line, YAxis, ReferenceLine, Tooltip, XAxis } from 'recharts';
-import { getHistoricalStockData } from '../actions/stock_actions';
+import { getHistoricalStockData, finishLoadingDashboardChartData } from '../actions/stock_actions';
 
 class StockChart extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class StockChart extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);
+    this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range).then(() => this.props.finishLoadingDashboardChartData());
   }
 
   componentDidUpdate(prevProps) {
@@ -289,6 +289,7 @@ const msp = (state, ownProps) => {
 const mdp = (dispatch) => {
   return {
     getHistoricalStockData: (symbol, period) => dispatch(getHistoricalStockData(symbol, period)),
+    finishLoadingDashboardChartData: () => dispatch(finishLoadingDashboardChartData()),
   };
 };
 

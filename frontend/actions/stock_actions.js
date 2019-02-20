@@ -34,8 +34,11 @@ export const getDashboardChartData = (stocks) => dispatch => {
   dispatch(startLoadingHistoricalStockData());
   return APIUtil.getDashboardChartData(symbols).then(
     stockData => {
+      // new Promise(function(resolve, reject){
+
+      // })
       dispatch(receiveHistoricalStockData(stockData));
-      setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
+      // setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
     }
   );
 };
@@ -45,7 +48,7 @@ export const getHistoricalStockData = (symbol, period) => dispatch => {
   return APIUtil.getHistoricalStockData(symbol, period).then(
     stockData => {
       dispatch(receiveHistoricalStockData(stockData));
-      setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
+      // setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
     }
   );
 };
@@ -204,7 +207,7 @@ const receiveDashboardNews = (news) => {
   };
 };
 
-const finishLoadingDashboardChartData = () => {
+export const finishLoadingDashboardChartData = () => {
   return {
     type: FINISH_LOADING_DASHBOARD_CHART_DATA,
   };

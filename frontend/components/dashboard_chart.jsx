@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getUserPortfolioSnapshots } from '../actions/session_actions';
-import { getDashboardChartData } from '../actions/stock_actions';
+import { getDashboardChartData, finishLoadingDashboardChartData } from '../actions/stock_actions';
 import { LineChart, Line, YAxis, ReferenceLine, Tooltip, XAxis } from 'recharts';
 
 
@@ -15,10 +15,12 @@ class DashboardChart extends React.Component {
     this.priceChange = this.priceChange.bind(this);
     this.percentChange = this.percentChange.bind(this);
     this.oneDayChartData = this.oneDayChartData.bind(this);
+
   }
 
   componentDidMount() {
-    this.props.getDashboardChartData(this.props.stocks);
+    this.props.getDashboardChartData(this.props.stocks).then(() => {
+      this.props.finishLoadingDashboardChartData()});
   }
 
   parseChartData() {
@@ -229,9 +231,8 @@ class DashboardChart extends React.Component {
   render() {
     if (this.props.loading.userPortfolioDataLoading || this.props.loading.historicalStockDataLoading) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); };
 
-    const lastDataPoint = this.props.chartData[this.props.chartData.length - 1].total_portfolio_value
-
     const allData = this.parseChartData();
+    const lastDataPoint = allData.data[allData.data.length - 1]['Value'];
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container">
@@ -268,7 +269,8 @@ const msp = (state) => {
 const mdp = (dispatch) => {
   return {
     getUserPortfolioSnapshots: (userId) => dispatch(getUserPortfolioSnapshots(userId)),
-    getDashboardChartData: (stocks) => dispatch(getDashboardChartData(stocks))
+    getDashboardChartData: (stocks) => dispatch(getDashboardChartData(stocks)),
+    finishLoadingDashboardChartData: () => dispatch(finishLoadingDashboardChartData()),
   };
 };
 

@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
     this.state = {
       stockListValue: "currentPrice",
       watchListValue: "currentPrice", 
-      range: "5Y",
+      range: "1D",
       newsStocks: "",
     } 
     this.displayUserStockList = this.displayUserStockList.bind(this);
@@ -83,7 +83,6 @@ class Dashboard extends React.Component {
       this.setState({newsStocks: newsStocks});
     }
   }
-
 
   handleSelector(e) {
     this.setState({ range: e.currentTarget.innerText });
