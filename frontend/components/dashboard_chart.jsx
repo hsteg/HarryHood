@@ -33,7 +33,7 @@ class DashboardChart extends React.Component {
         chartData = this.oneDayChartData();
         return {
           data: chartData,
-          // color: this.chartColor(chartData),
+          color: this.chartColor(chartData),
           range: null,
           width: (((chartData.length) / 390) * 675),
           dataKey: "Time",
@@ -45,7 +45,7 @@ class DashboardChart extends React.Component {
         chartData = this.greaterThanOneDayChartData(5);
         return {
           data: chartData,
-          // color: this.chartColor(chartData), 
+          color: this.chartColor(chartData),
           range: null,
           width: 675,
           dataKey: "Date",
@@ -57,7 +57,7 @@ class DashboardChart extends React.Component {
         chartData = this.greaterThanOneDayChartData(22);
         return {
           data: chartData,
-          // color: this.chartColor(chartData), 
+          color: this.chartColor(chartData),
           range: null,
           width: 675,
           dataKey: "Date",
@@ -69,7 +69,7 @@ class DashboardChart extends React.Component {
         chartData = this.greaterThanOneDayChartData(66);
         return {
           data: chartData,
-          // color: this.chartColor(chartData), 
+          color: this.chartColor(chartData),
           range: null,
           width: 675,
           dataKey: "Date",
@@ -81,7 +81,7 @@ class DashboardChart extends React.Component {
         chartData = this.greaterThanOneDayChartData(264);
         return {
           data: chartData,
-          // color: this.chartColor(chartData), 
+          color: this.chartColor(chartData),
           range: null,
           width: 675,
           dataKey: "Date",
@@ -93,7 +93,7 @@ class DashboardChart extends React.Component {
         chartData = this.greaterThanOneDayChartData(1258);
         return {
           data: chartData,
-          // color: this.chartColor(chartData), 
+          color: this.chartColor(chartData),
           range: null,
           width: 675,
           dataKey: "Date",
@@ -123,7 +123,7 @@ class DashboardChart extends React.Component {
 
       heldStockKeys.forEach(stockKey => {
         lastValidPrice = stocks[stockKey].quote.latestPrice;
-        
+
         dpObject['Time'] = stocks[stockKey].chart[i].label;
 
         if (stocks[stockKey].chart[i].marketClose === null) {
@@ -147,7 +147,7 @@ class DashboardChart extends React.Component {
     const { cash_balance } = this.props.currentUser;
 
     const heldStockKeys = Object.values(userHeldStocks).filter(stock => stock.num_shares > 0).map(stock => stock.stock_id.toString());
-    
+
     const holdingObject = {};
 
     heldStockKeys.forEach(stockKey => {
@@ -165,24 +165,24 @@ class DashboardChart extends React.Component {
         dpObject['Value'] = 0;
         let lastValidPrice = stocks[stockKey].quote.latestPrice;
 
-        if(i >= chartData.length) {
+        if (i >= chartData.length) {
           continue;
         }
 
         dpObject['Time'] = chartData[i].date;
-        
+
         if (!chartData[i].close || chartData[i].close === null) {
           dpObject['Value'] += (lastValidPrice * userHeldStocks[stockKey].num_shares);
         } else {
           dpObject['Value'] += (chartData[i].close * userHeldStocks[stockKey].num_shares);
         }
 
-        if(!(chartData[i].date in holdingObject)) {
+        if (!(chartData[i].date in holdingObject)) {
           holdingObject[chartData[i].date] = dpObject;
         } else {
           holdingObject[chartData[i].date]['Value'] += dpObject['Value'];
         }
-        
+
       }
     });
     let chartArray = Object.values(holdingObject);
@@ -190,23 +190,11 @@ class DashboardChart extends React.Component {
     return chartArray;
   }
 
-  chartColor(range) {
-    let first, last, beginningIdx;
-
-    if (Array.isArray(range)) {
-      first = range[0]["Value"];
-      last = range[range.length - 1]["Value"];
-      return (first <= last) ? ("#21ce99") : ("#f45531");
-    }
-
-    last = this.props.chartData[this.props.chartData.length - 1].total_portfolio_value;
-    beginningIdx = this.props.chartData.length - range;
-
-    if (beginningIdx < 0) {
-      first = this.props.chartData[0].total_portfolio_value;
-    } else {
-      first = this.props.chartData[beginningIdx].total_portfolio_value;
-    }
+  chartColor(data) {
+    let first, last;
+    
+    first = data[0]["Value"];
+    last = data[data.length - 1]["Value"];
     return (first <= last) ? ("#21ce99") : ("#f45531");
   }
 
