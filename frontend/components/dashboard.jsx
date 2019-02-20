@@ -30,9 +30,9 @@ class Dashboard extends React.Component {
     this.props.getUserStocks(this.props.currentUser.id).then(() => this.displayDashboardNewslist());
     this.props.getUserPortfolioSnapshots(this.props.currentUser.id);
     this.props.getUserHeldStocks(this.props.currentUser.id);
-    // this.props.getDashboardChartData(this.props.stocks);
     this.props.getUserWatches(this.props.currentUser.id);
   }
+
 
 
 

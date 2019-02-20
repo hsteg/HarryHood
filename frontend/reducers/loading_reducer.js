@@ -38,6 +38,8 @@ const loadingReducer = (state = initialState, action) => {
       return Object.assign({}, state, { stockDataLoading: true });
     case START_LOADING_HISTORICAL_STOCK_DATA:
       return Object.assign({}, state, { historicalStockDataLoading: true })
+    case RECEIVE_HISTORICAL_STOCK_DATA:
+      return Object.assign({}, state, { historicalStockDataLoading: false })
     case FINISH_LOADING_DASHBOARD_CHART_DATA:
       return Object.assign({}, state, { historicalStockDataLoading: false })
     case START_LOADING_USER_WATCHES:
