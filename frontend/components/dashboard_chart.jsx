@@ -90,7 +90,7 @@ class DashboardChart extends React.Component {
           percentChange: this.percentChange(264)
         };
       case "ALL":
-        chartData = this.greaterThanOneDayChartData(265);
+        chartData = this.greaterThanOneDayChartData(1258);
         return {
           data: chartData,
           // color: this.chartColor(chartData), 
@@ -148,9 +148,7 @@ class DashboardChart extends React.Component {
 
     const heldStockKeys = Object.values(userHeldStocks).filter(stock => stock.num_shares > 0).map(stock => stock.stock_id.toString());
     
-    
     const holdingObject = {};
-
 
     heldStockKeys.forEach(stockKey => {
       let chartData;
@@ -165,9 +163,12 @@ class DashboardChart extends React.Component {
         let dpObject = {};
         dpObject['Time'] = '';
         dpObject['Value'] = 0;
-        let lastValidPrice;
+        let lastValidPrice = stocks[stockKey].quote.latestPrice;
 
-        lastValidPrice = stocks[stockKey].quote.latestPrice;
+        if(i >= chartData.length) {
+          continue;
+        }
+
         dpObject['Time'] = chartData[i].date;
         
         if (!chartData[i].close || chartData[i].close === null) {
@@ -175,20 +176,17 @@ class DashboardChart extends React.Component {
         } else {
           dpObject['Value'] += (chartData[i].close * userHeldStocks[stockKey].num_shares);
         }
-        
-        // dpObject['Value'] += cash_balance;
-        // dpObject['Value'] = (dpObject['Value']).toFixed(2);
-        // debugger
+
         if(!(chartData[i].date in holdingObject)) {
           holdingObject[chartData[i].date] = dpObject;
         } else {
           holdingObject[chartData[i].date]['Value'] += dpObject['Value'];
         }
-        // greaterThanOneDayChartData.push(dpObject);
+        
       }
     });
     let chartArray = Object.values(holdingObject);
-    chartArray.forEach(chartEl => chartEl['Value'] = chartEl['Value'].toFixed(2));
+    chartArray.forEach(chartEl => chartEl['Value'] = ((chartEl['Value'] + cash_balance).toFixed(2)));
     return chartArray;
   }
 
