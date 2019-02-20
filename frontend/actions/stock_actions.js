@@ -13,6 +13,11 @@ export const RECEIVE_STOCK_NEWS = "RECEIVE_STOCK_NEWS";
 export const START_LOADING_STOCK_NEWS = "START_LOADING_STOCK_NEWS";
 export const START_LOADING_DASHBOARD_NEWS = "START_LOADING_DASHBOARD_NEWS";
 export const RECEIVE_DASHBOARD_NEWS = "RECEIVE_DASHBOARD_NEWS";
+export const RECEIVE_DASHBOARD_CHART_DATA = "RECEIVE_DASHBOARD_CHART_DATA";
+export const START_LOADING_DASHBOARD_CHART_DATA = "START_LOADING_DASHBOARD_CHART_DATA";
+export const FINISH_LOADING_DASHBOARD_CHART_DATA = "FINISH_LOADING_DASHBOARD_CHART_DATA";
+
+
 
 
 export const getStockObjectBySymbol = (symbol) => dispatch => {
@@ -20,6 +25,17 @@ export const getStockObjectBySymbol = (symbol) => dispatch => {
   return APIUtil.getStockObjectBySymbol(symbol).then(
     stockObject => {
       return dispatch(receiveStockObject(stockObject));
+    }
+  );
+};
+
+export const getDashboardChartData = (stocks) => dispatch => {
+  const symbols = Object.values(stocks).map(stock => stock.symbol).join(',');
+  dispatch(startLoadingHistoricalStockData());
+  return APIUtil.getDashboardChartData(symbols).then(
+    stockData => {
+      dispatch(receiveHistoricalStockData(stockData));
+      setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0)
     }
   );
 };
@@ -187,3 +203,15 @@ const receiveDashboardNews = (news) => {
   };
 };
 
+const finishLoadingDashboardChartData = () => {
+  return {
+    type: FINISH_LOADING_DASHBOARD_CHART_DATA,
+  };
+};
+
+// const receiveDashboardChartData = (stockData) => {
+//   return {
+//     type: RECEIVE_DASHBOARD_CHART_DATA,
+//     stockData
+//   }
+// }

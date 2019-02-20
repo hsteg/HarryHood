@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getDayStocksPriceData, getUserStocks } from '../actions/stock_actions';
+import { getDayStocksPriceData, getUserStocks, getDashboardChartData } from '../actions/stock_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
 import { getUserHeldStocks, getUserPortfolioSnapshots } from '../actions/session_actions';
 import DashboardWatchlist from './dashboard_watchlist';
@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
     this.state = {
       stockListValue: "currentPrice",
       watchListValue: "currentPrice", 
-      range: "ALL",
+      range: "3M",
       newsStocks: "",
     } 
     this.displayUserStockList = this.displayUserStockList.bind(this);
@@ -30,6 +30,7 @@ class Dashboard extends React.Component {
     this.props.getUserStocks(this.props.currentUser.id).then(() => this.displayDashboardNewslist());
     this.props.getUserPortfolioSnapshots(this.props.currentUser.id);
     this.props.getUserHeldStocks(this.props.currentUser.id);
+    // this.props.getDashboardChartData(this.props.stocks);
     this.props.getUserWatches(this.props.currentUser.id);
   }
 
@@ -62,12 +63,12 @@ class Dashboard extends React.Component {
   }
 
   displayUserPortfolioChart() {
-    const { userPortfolioDataLoading } = this.props.loading;
-    if ( userPortfolioDataLoading ) {
+    const { dashboardStocksLoading, userHeldStocksLoading } = this.props.loading;
+    if ( dashboardStocksLoading || userHeldStocksLoading || Object.keys(this.props.stocks).length < Object.keys(this.props.heldStocks).length ) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
-      if(this.props.portfolioSnapshots.length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
-      return (<DashboardChart stocks={this.props.stocks} currentUser={this.props.currentUser} dateRange={this.state.range} chartData={this.props.portfolioSnapshots} />);
+      // if(this.props.portfolioSnapshots.length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
+      return (<DashboardChart currentUser={this.props.currentUser} dateRange={this.state.range} chartData={this.props.portfolioSnapshots} />);
     }
   }
 
@@ -160,7 +161,8 @@ const mdp = (dispatch) => {
     getUserWatches: (user) => dispatch(getUserWatches(user)),
     getUserStocks: (stockIds) => dispatch(getUserStocks(stockIds)),
     getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(userId)),
-    getUserPortfolioSnapshots: (userId) => dispatch(getUserPortfolioSnapshots(userId))
+    getUserPortfolioSnapshots: (userId) => dispatch(getUserPortfolioSnapshots(userId)),
+    getDashboardChartData: (stocks) => dispatch(getDashboardChartData(stocks))
   };
 }
 

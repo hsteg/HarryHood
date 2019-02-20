@@ -14,7 +14,6 @@ class DashboardNewslist extends React.Component {
   render() {
     if(this.props.loading.dashboardNewsLoading) { return (<img className="right-col-loading-img" src={window.loadingIMG} />); };
     let { news } = this.props;
-    // debugger
     news = news || [];
 
     const newsItems = news.map(newsItem => {

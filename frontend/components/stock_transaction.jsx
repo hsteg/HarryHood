@@ -120,8 +120,7 @@ class StockTransaction extends React.Component {
 
 
   render() {
-    
-    if (Object.values(this.props.numSharesToSell).length < 1 || this.props.loading.userHeldStocks) {return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
+    if (this.props.loading.userHeldStocks) {return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
     const { currentSymbol, numSharesToSell } = this.props;
     if(!this.state.buy && ((numSharesToSell[this.props.stock.id].num_shares) < 1)) { this.setState({buy: true}) } 
 

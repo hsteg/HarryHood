@@ -70,7 +70,6 @@ class User < ApplicationRecord
 
     def get_all_shares()
       transactions = Transaction.where("user_id = #{self.id}").group(:stock_id).sum(:num_shares)
-      transactions.select {|k,v| v > 0}
     end
 
 

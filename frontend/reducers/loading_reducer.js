@@ -9,6 +9,7 @@ import {
   RECEIVE_STOCK_NEWS,
   START_LOADING_DASHBOARD_NEWS,
   RECEIVE_DASHBOARD_NEWS,
+  FINISH_LOADING_DASHBOARD_CHART_DATA,
 } from '../actions/stock_actions';
 
 import { START_LOADING_USER_WATCHES, RECEIVE_USER_WATCHES } from '../actions/user_watch_actions';
@@ -18,7 +19,7 @@ import { RECEIVE_USER_HELD_STOCKS, START_LOADING_USER_HELD_STOCKS, RECEIVE_USER_
 const initialState = {
   stockDataLoading: false,
   dashboardStocksLoading: false,
-  historicalStockDataLoading: false,
+  historicalStockDataLoading: true,
   userWatchListLoading: false,
   userTransactionsLoading: false,
   userHeldStocksLoading: false,
@@ -37,7 +38,7 @@ const loadingReducer = (state = initialState, action) => {
       return Object.assign({}, state, { stockDataLoading: true });
     case START_LOADING_HISTORICAL_STOCK_DATA:
       return Object.assign({}, state, { historicalStockDataLoading: true })
-    case RECEIVE_HISTORICAL_STOCK_DATA:
+    case FINISH_LOADING_DASHBOARD_CHART_DATA:
       return Object.assign({}, state, { historicalStockDataLoading: false })
     case START_LOADING_USER_WATCHES:
       return Object.assign({}, state, { userWatchListLoading: true })

@@ -25,14 +25,21 @@ const stocksReducer = (state = {}, action) => {
     case RECEIVE_USER_STOCK_OBJECT:
       return action.stockObject;
     case RECEIVE_HISTORICAL_STOCK_DATA:
-      stockIds = Object.values(newState)
-      stockIds.forEach(stock => {
-        marriage[stock.id] = stock;
-        marriage[stock.id].historicalData = action.stockData;
-      });
+      stockIds = Object.values(newState);
+      if(stockIds.length > 1) {
+        stockIds.forEach(stock => {
+          marriage[stock.id] = stock;
+          marriage[stock.id].historicalData = action.stockData[stock.symbol].chart;
+        });
+      } else {
+        stockIds.forEach(stock => {
+          marriage[stock.id] = stock;
+          marriage[stock.id].historicalData = action.stockData;
+        });
+      }
       return marriage;
     case RECEIVE_DASHBOARD_STOCKS:
-      Object.values(action.stocks).forEach(stock => marriage[stock.id] = Object.assign({id: stock.id, symbol: stock.symbol}, action.stockData[stock.symbol]))
+      Object.values(action.stocks).forEach(stock => marriage[stock.id] = Object.assign({ id: stock.id, symbol: stock.symbol }, action.stockData[stock.symbol]))
       return marriage;
     case RECEIVE_STOCK_NEWS:
       let stockWithNews = Object.values(newState)[0];

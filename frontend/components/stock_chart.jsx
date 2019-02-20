@@ -116,7 +116,7 @@ class StockChart extends React.Component {
     const oneWeekChartData = [];
     this.props.stock.historicalData.forEach(dataPoint => {
       let dpObject = {};
-      dpObject['time'] = (dataPoint.label).toString();
+      dpObject['time'] = (dataPoint.date).toString();
       dpObject['Price'] = dataPoint.close;
       oneWeekChartData.push(dpObject);
     }
@@ -130,7 +130,7 @@ class StockChart extends React.Component {
     const greaterThanOneWeekChartData = [];
     this.props.stock.historicalData.forEach(dataPoint => {
       let dpObject = {};
-      dpObject['time'] = (dataPoint.label).toString();
+      dpObject['time'] = (dataPoint.date).toString();
       dpObject['Price'] = dataPoint.close;
       greaterThanOneWeekChartData.push(dpObject);
     }

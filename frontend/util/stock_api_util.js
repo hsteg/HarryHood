@@ -19,6 +19,13 @@ export const getHistoricalStockData = (symbol, period) => {
   });
 };
 
+export const getDashboardChartData = (symbols) => {
+  return $.ajax({
+    method: "GET",
+    url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=chart&range=5y`
+  });
+};
+
 export const getStockNews = (name) => {
   const date = new Date;
   const lastMonthRaw = new Date(date.getTime() - (60*60*24*30*1000));
