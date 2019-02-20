@@ -15,10 +15,6 @@ class DashboardChart extends React.Component {
     this.priceChange = this.priceChange.bind(this);
     this.percentChange = this.percentChange.bind(this);
     this.oneDayChartData = this.oneDayChartData.bind(this);
-
-    this.state = {
-      oneDayChartData: [],
-    }
   }
 
   componentDidMount() {
@@ -39,7 +35,7 @@ class DashboardChart extends React.Component {
           dataKey: "Time",
           refColor: "transparent",
           change: this.priceChange(chartData),
-          percentChange: this.percentChange(1)
+          percentChange: this.percentChange(chartData),
         };
       case "1W":
         chartData = this.greaterThanOneDayChartData(5);
@@ -51,7 +47,7 @@ class DashboardChart extends React.Component {
           dataKey: "Date",
           refColor: "transparent",
           change: this.priceChange(chartData),
-          percentChange: this.percentChange(5)
+          percentChange: this.percentChange(chartData),
         };
       case "1M":
         chartData = this.greaterThanOneDayChartData(22);
@@ -63,7 +59,7 @@ class DashboardChart extends React.Component {
           dataKey: "Date",
           refColor: "transparent",
           change: this.priceChange(chartData),
-          percentChange: this.percentChange(22)
+          percentChange: this.percentChange(chartData),
         };
       case "3M":
         chartData = this.greaterThanOneDayChartData(66);
@@ -75,7 +71,7 @@ class DashboardChart extends React.Component {
           dataKey: "Date",
           refColor: "transparent",
           change: this.priceChange(chartData),
-          percentChange: this.percentChange(66)
+          percentChange: this.percentChange(chartData),
         };
       case "1Y":
         chartData = this.greaterThanOneDayChartData(264);
@@ -87,9 +83,9 @@ class DashboardChart extends React.Component {
           dataKey: "Date",
           refColor: "transparent",
           change: this.priceChange(chartData),
-          percentChange: this.percentChange(264)
+          percentChange: this.percentChange(chartData),
         };
-      case "ALL":
+      case "5Y":
         chartData = this.greaterThanOneDayChartData(1258);
         return {
           data: chartData,
@@ -99,7 +95,7 @@ class DashboardChart extends React.Component {
           dataKey: "Date",
           refColor: "transparent",
           change: this.priceChange(chartData),
-          percentChange: this.percentChange(this.props.chartData.length)
+          percentChange: this.percentChange(chartData),
         };
       default:
         return null;
@@ -110,11 +106,10 @@ class DashboardChart extends React.Component {
     if (!this.props.stocks) { return []; }
     const { userHeldStocks, stocks } = this.props;
     const { cash_balance } = this.props.currentUser;
-
     const heldStockKeys = Object.keys(userHeldStocks);
     const oneDayChartData = [];
-
     const numDataPoints = stocks[heldStockKeys[0]].chart.length;
+
     for (let i = 0; i < numDataPoints; i++) {
       let dpObject = {};
       dpObject['Time'] = '';
@@ -161,7 +156,7 @@ class DashboardChart extends React.Component {
 
       for (let i = 0; i < length; i++) {
         let dpObject = {};
-        dpObject['Time'] = '';
+        dpObject['Date'] = '';
         dpObject['Value'] = 0;
         let lastValidPrice = stocks[stockKey].quote.latestPrice;
 
@@ -169,7 +164,7 @@ class DashboardChart extends React.Component {
           continue;
         }
 
-        dpObject['Time'] = chartData[i].date;
+        dpObject['Date'] = chartData[i].date;
 
         if (!chartData[i].close || chartData[i].close === null) {
           dpObject['Value'] += (lastValidPrice * userHeldStocks[stockKey].num_shares);
@@ -223,16 +218,10 @@ class DashboardChart extends React.Component {
     }
   }
 
-  percentChange(length) {
-    let first;
-    let last = this.props.chartData[this.props.chartData.length - 1].total_portfolio_value;
-    let beginningIdx = this.props.chartData.length - length;
-
-    if (beginningIdx < 0) {
-      first = this.props.chartData[0].total_portfolio_value;
-    } else {
-      first = this.props.chartData[beginningIdx].total_portfolio_value;
-    }
+  percentChange(data) {
+    let first, last;
+    first = data[0]['Value'];
+    last = data[data.length - 1]['Value'];
 
     if (last - first > 0) {
       return `(${(((last - first) / last) * 100).toFixed(2)}%)`;

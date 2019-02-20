@@ -35,7 +35,7 @@ export const getDashboardChartData = (stocks) => dispatch => {
   return APIUtil.getDashboardChartData(symbols).then(
     stockData => {
       dispatch(receiveHistoricalStockData(stockData));
-      setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0)
+      setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
     }
   );
 };
@@ -44,7 +44,8 @@ export const getHistoricalStockData = (symbol, period) => dispatch => {
   dispatch(startLoadingHistoricalStockData());
   return APIUtil.getHistoricalStockData(symbol, period).then(
     stockData => {
-      return dispatch(receiveHistoricalStockData(stockData));
+      dispatch(receiveHistoricalStockData(stockData));
+      setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
     }
   );
 };

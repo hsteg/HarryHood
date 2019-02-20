@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
     this.state = {
       stockListValue: "currentPrice",
       watchListValue: "currentPrice", 
-      range: "3M",
+      range: "5Y",
       newsStocks: "",
     } 
     this.displayUserStockList = this.displayUserStockList.bind(this);
@@ -111,8 +111,8 @@ class Dashboard extends React.Component {
                         onClick={this.handleSelector}>3M</button>
                 <button className={this.state.range === "1Y" ? "chart-selector-button-a" : "chart-selector-button"} 
                         onClick={this.handleSelector}>1Y</button>
-                <button className={this.state.range === "ALL" ? "chart-selector-button-a" : "chart-selector-button"} 
-                        onClick={this.handleSelector}>ALL</button>
+                <button className={this.state.range === "5Y" ? "chart-selector-button-a" : "chart-selector-button"} 
+                        onClick={this.handleSelector}>5Y</button>
               </nav>
             <div className="content-news">
               <div className="left-lower-header-container">
