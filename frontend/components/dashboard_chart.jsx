@@ -38,7 +38,7 @@ class DashboardChart extends React.Component {
           width: (((chartData.length) / 390) * 675),
           dataKey: "Time",
           refColor: "transparent",
-          change: this.priceChange(1),
+          change: this.priceChange(chartData),
           percentChange: this.percentChange(1)
         };
       case "1W":
@@ -50,7 +50,7 @@ class DashboardChart extends React.Component {
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
-          change: this.priceChange(5),
+          change: this.priceChange(chartData),
           percentChange: this.percentChange(5)
         };
       case "1M":
@@ -62,7 +62,7 @@ class DashboardChart extends React.Component {
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
-          change: this.priceChange(22),
+          change: this.priceChange(chartData),
           percentChange: this.percentChange(22)
         };
       case "3M":
@@ -74,7 +74,7 @@ class DashboardChart extends React.Component {
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
-          change: this.priceChange(66),
+          change: this.priceChange(chartData),
           percentChange: this.percentChange(66)
         };
       case "1Y":
@@ -86,7 +86,7 @@ class DashboardChart extends React.Component {
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
-          change: this.priceChange(264),
+          change: this.priceChange(chartData),
           percentChange: this.percentChange(264)
         };
       case "ALL":
@@ -98,7 +98,7 @@ class DashboardChart extends React.Component {
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
-          change: this.priceChange(this.props.chartData.length),
+          change: this.priceChange(chartData),
           percentChange: this.percentChange(this.props.chartData.length)
         };
       default:
@@ -211,16 +211,10 @@ class DashboardChart extends React.Component {
     return [first, last];
   }
 
-  priceChange(length) {
-    let first;
-    let last = this.props.chartData[this.props.chartData.length - 1].total_portfolio_value;
-    let beginningIdx = this.props.chartData.length - length;
-
-    if (beginningIdx < 0) {
-      first = this.props.chartData[0].total_portfolio_value;
-    } else {
-      first = this.props.chartData[beginningIdx].total_portfolio_value;
-    }
+  priceChange(data) {
+    let first, last;
+    first = data[0]['Value'];
+    last = data[data.length - 1]['Value'];
 
     if (last - first > 0) {
       return `+$${(last - first).toFixed(2)}`;
