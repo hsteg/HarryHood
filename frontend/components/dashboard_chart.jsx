@@ -109,8 +109,9 @@ class DashboardChart extends React.Component {
     const { userHeldStocks, stocks } = this.props;
     const { cash_balance } = this.props.currentUser;
     const heldStockKeys = Object.keys(userHeldStocks);
-    const oneDayChartData = [];
     
+    if(heldStockKeys.length === 0) {return [{'Date': 0, 'Value': cash_balance}, {'Date': 1, 'Value': cash_balance}]; }
+    const oneDayChartData = [];
     const numDataPoints = stocks[heldStockKeys[0]].chart.length;
 
     for (let i = 0; i < numDataPoints; i++) {
