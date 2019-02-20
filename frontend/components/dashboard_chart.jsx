@@ -30,7 +30,7 @@ class DashboardChart extends React.Component {
         return {
           data: chartData,
           color: this.chartColor(chartData),
-          range: null,
+          range: this.chartRange(chartData),
           width: (((chartData.length) / 390) * 675),
           dataKey: "Time",
           refColor: "transparent",
@@ -42,7 +42,7 @@ class DashboardChart extends React.Component {
         return {
           data: chartData,
           color: this.chartColor(chartData),
-          range: null,
+          range: this.chartRange(chartData),
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
@@ -54,7 +54,7 @@ class DashboardChart extends React.Component {
         return {
           data: chartData,
           color: this.chartColor(chartData),
-          range: null,
+          range: this.chartRange(chartData),
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
@@ -66,7 +66,7 @@ class DashboardChart extends React.Component {
         return {
           data: chartData,
           color: this.chartColor(chartData),
-          range: null,
+          range: this.chartRange(chartData),
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
@@ -78,7 +78,7 @@ class DashboardChart extends React.Component {
         return {
           data: chartData,
           color: this.chartColor(chartData),
-          range: null,
+          range: this.chartRange(chartData),
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
@@ -90,7 +90,7 @@ class DashboardChart extends React.Component {
         return {
           data: chartData,
           color: this.chartColor(chartData),
-          range: null,
+          range: this.chartRange(chartData),
           width: 675,
           dataKey: "Date",
           refColor: "transparent",
@@ -108,6 +108,7 @@ class DashboardChart extends React.Component {
     const { cash_balance } = this.props.currentUser;
     const heldStockKeys = Object.keys(userHeldStocks);
     const oneDayChartData = [];
+    
     const numDataPoints = stocks[heldStockKeys[0]].chart.length;
 
     for (let i = 0; i < numDataPoints; i++) {
@@ -132,7 +133,7 @@ class DashboardChart extends React.Component {
       dpObject['Value'] = (dpObject['Value']).toFixed(2);
       oneDayChartData.push(dpObject);
     }
-
+    
     return oneDayChartData;
   }
 
@@ -142,7 +143,7 @@ class DashboardChart extends React.Component {
     const { cash_balance } = this.props.currentUser;
 
     const heldStockKeys = Object.values(userHeldStocks).filter(stock => stock.num_shares > 0).map(stock => stock.stock_id.toString());
-
+    if(heldStockKeys.length === 0) {return [{'Date': 0, 'Value': cash_balance}, {'Date': 1, 'Value': cash_balance}]; }
     const holdingObject = {};
 
     heldStockKeys.forEach(stockKey => {
@@ -193,17 +194,12 @@ class DashboardChart extends React.Component {
     return (first <= last) ? ("#21ce99") : ("#f45531");
   }
 
-  chartRange(length) {
-    let first;
-    let last = this.props.chartData[this.props.chartData.length - 1].total_portfolio_value;
-    let beginningIdx = this.props.chartData.length - length;
+  chartRange(data) {
+    let values = data.map(dataPoint => parseFloat(dataPoint['Value']));
+    let min = Math.min(...values)
+    let max = Math.max(...values)
 
-    if (beginningIdx < 0) {
-      first = this.props.chartData[0].total_portfolio_value;
-    } else {
-      first = this.props.chartData[beginningIdx].total_portfolio_value;
-    }
-    return [first, last];
+    return [min, max];
   }
 
   priceChange(data) {
