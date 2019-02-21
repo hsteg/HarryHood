@@ -56,10 +56,10 @@ class Navbar extends React.Component {
                     {this.props.currentUser.first_name} {this.props.currentUser.last_name}
                   </h3>
                   <div className="dropdown-menu-header-finances">
-                    <div className="dropdown-finances-porfolio-value">
+                    {/* <div className="dropdown-finances-porfolio-value">
                       <h1 className="dropdown-portfolio-value-numbers">$53200.98</h1>
                       <h1 className="dropdown-portfolio-value-text">Portfolio Value</h1>
-                    </div>
+                    </div> */}
                     <div className="dropdown-finances-cash-balance">
                       <h1 className="dropdown-portfolio-value-numbers">${this.props.currentUser.cash_balance}</h1>
                       <h1 className="dropdown-portfolio-value-text">Buying Power</h1>

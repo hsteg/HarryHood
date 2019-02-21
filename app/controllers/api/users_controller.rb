@@ -2,12 +2,13 @@ class Api::UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         @user.cash_balance = 1000000
-        free_stock = Stock.all.map {|stock| stock.id }.sample
-        watch_stock = Stock.all.map {|stock| stock.id }.sample
+        free_stock = Stock.all.select{|stock| stock.symbol == "AAPL"}[0].id
+        watch_stock1 = Stock.all.select{|stock| stock.symbol == "V"}[0].id
+        watch_stock2 = Stock.all.select{|stock| stock.symbol == "XRX"}[0].id
         if @user.save
             Transaction.create!({user_id: @user.id, stock_id: free_stock, num_shares: 1, price_per_share: 0})
-            Transaction.create!({user_id: @user.id, stock_id: watch_stock, num_shares: 1, price_per_share: 0})
-            UserWatch.create!({stock_id: watch_stock, user_id: @user.id })
+            Transaction.create!({user_id: @user.id, stock_id: watch_stock1, num_shares: 1, price_per_share: 0})
+            UserWatch.create!({stock_id: watch_stock2, user_id: @user.id })
             login(@user)
             render 'api/users/show'
         else

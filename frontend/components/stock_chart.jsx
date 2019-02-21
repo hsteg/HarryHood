@@ -95,7 +95,7 @@ class StockChart extends React.Component {
     const oneDayChartData = [];
     this.props.stock.chart.forEach(dataPoint => {
       let dpObject = {};
-      dpObject['time'] = (dataPoint.label).toString();
+      dpObject['time'] = (dataPoint.label);
       dpObject['Price'] = dataPoint.close;
 
       if (dpObject.Price === null) { return }
@@ -159,7 +159,6 @@ class StockChart extends React.Component {
     let first, last;
     first = data[0]['Price'];
     last = data[data.length - 1]['Price'];
-
     if (last - first > 0) {
       return `(${(((last - first) / last) * 100).toFixed(2)}%)`;
     } else {
