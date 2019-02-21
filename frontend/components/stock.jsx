@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getStockObjectBySymbol } from '../actions/stock_actions';
+import { getStockObjectBySymbol, getHistoricalStockData } from '../actions/stock_actions';
 import { getUserWatches, createUserWatch, removeUserWatch } from '../actions/user_watch_actions';
 import Navbar from './navbar';
 import StockChart from './stock_chart';
@@ -8,9 +8,6 @@ import StockTransaction from './stock_transaction';
 import StockNewslist from './stock_newslist';
 import StockCompanyProfile from './stock_company_profile';
 import { withRouter } from 'react-router-dom';
-
-
-
 
 class Stock extends React.Component {
   constructor(props) {
@@ -28,6 +25,7 @@ class Stock extends React.Component {
   componentDidMount() {
     this.props.getStockObjectBySymbol(this.props.symbol)
       .then(() => this.props.getUserWatches(this.props.currentUser))
+      .then(() => this.props.getHistoricalStockData(this.props.symbol))
       .then(() => this.setState({ dataLoaded: true }));
   }
 
@@ -61,8 +59,6 @@ class Stock extends React.Component {
       return (<button className="stock-watch-button" onClick={this.handleAddWatch}>Add to Watchlist</button>);
     }
   }
-
-
 
   render() {
     if (!this.state.dataLoaded || this.props.loading.stockDataLoading || this.props.loading.userWatchListLoading || !(this.props.stock)) { return (<div className="page-loading"><img className="page-loading-spinner" src={window.loadingIMG} /></div>); };
@@ -132,6 +128,7 @@ const mdp = (dispatch) => {
     getUserWatches: (user) => dispatch(getUserWatches(user)),
     createUserWatch: (user, stock) => dispatch(createUserWatch(user, stock)),
     removeUserWatch: (stockId) => dispatch(removeUserWatch(stockId)),
+    getHistoricalStockData: (symbol) => dispatch(getHistoricalStockData(symbol))
   };
 }
 

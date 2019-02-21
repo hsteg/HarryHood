@@ -10,82 +10,80 @@ class StockChart extends React.Component {
     this.chartColor = this.chartColor.bind(this);
     this.parseChartData = this.parseChartData.bind(this);
     this.oneDayChartData = this.oneDayChartData.bind(this);
-    this.greaterThanOneWeekChartData = this.greaterThanOneWeekChartData.bind(this);
-    this.oneWeekChartData = this.oneWeekChartData.bind(this);
-    this.widthSelector = this.widthSelector.bind(this);
+    this.greaterThanOneDayChartData = this.greaterThanOneDayChartData.bind(this);
     this.priceChange = this.priceChange.bind(this);
     this.percentChange = this.percentChange.bind(this);
     this.rangeSelector = this.rangeSelector.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.range !== this.props.range) {
-      if (this.props.range === "1W") {
-        this.props.getHistoricalStockData(this.props.stock.symbol, "1M");
-      } else {
-        this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);
-      }
-    }
-  }
-
   parseChartData() {
     const { range } = this.props;
+    let chartData;
     switch (range) {
       case "1D":
+        chartData = this.oneDayChartData();
         return {
-          data: this.oneDayChartData(),
-          color: this.chartColor(range),
-          width: this.widthSelector(range),
-          range: this.rangeSelector(range),
+          data: chartData,
+          color: this.chartColor(chartData),
+          width: ((chartData.length / 390) * 675),
+          range: this.rangeSelector(chartData),
+          priceChange: this.priceChange(chartData),
+          percentChange: this.percentChange(chartData),
           refColor: "gray"
         };
       case "1W":
+        chartData = this.greaterThanOneDayChartData(4);
         return {
-          data: this.oneWeekChartData(),
-          color: this.chartColor(range),
-          range: this.rangeSelector(range),
-          width: this.widthSelector(range),
-          range: this.rangeSelector(range),
+          data: chartData,
+          color: this.chartColor(chartData),
+          range: this.rangeSelector(chartData),
+          priceChange: this.priceChange(chartData),
+          percentChange: this.percentChange(chartData),
+          width: 675,
           refColor: "transparent"
         };
       case "1M":
+        chartData = this.greaterThanOneDayChartData(22);
         return {
-          data: this.greaterThanOneWeekChartData(),
-          color: this.chartColor(range),
-          range: this.rangeSelector(range),
-          width: this.widthSelector(range),
-          range: this.rangeSelector(range),
+          data: chartData,
+          color: this.chartColor(chartData),
+          range: this.rangeSelector(chartData),
+          priceChange: this.priceChange(chartData),
+          percentChange: this.percentChange(chartData),
+          width: 675,
           refColor: "transparent"
         };
       case "3M":
+        chartData = this.greaterThanOneDayChartData(66);
         return {
-          data: this.greaterThanOneWeekChartData(),
-          color: this.chartColor(range),
-          range: this.rangeSelector(range),
-          width: this.widthSelector(range),
-          range: this.rangeSelector(range),
+          data: chartData,
+          color: this.chartColor(chartData),
+          range: this.rangeSelector(chartData),
+          priceChange: this.priceChange(chartData),
+          percentChange: this.percentChange(chartData),
+          width: 675,
           refColor: "transparent"
         };
       case "1Y":
+        chartData = this.greaterThanOneDayChartData(264);
         return {
-          data: this.greaterThanOneWeekChartData(),
-          color: this.chartColor(range),
-          range: this.rangeSelector(range),
-          width: this.widthSelector(range),
-          range: this.rangeSelector(range),
+          data: chartData,
+          color: this.chartColor(chartData),
+          range: this.rangeSelector(chartData),
+          priceChange: this.priceChange(chartData),
+          percentChange: this.percentChange(chartData),
+          width: 675,
           refColor: "transparent"
         };
       case "5Y":
+        chartData = this.greaterThanOneDayChartData(1258);
         return {
-          data: this.greaterThanOneWeekChartData(),
-          color: this.chartColor(range),
-          range: this.rangeSelector(range),
-          width: this.widthSelector(range),
-          range: this.rangeSelector(range),
+          data: chartData,
+          color: this.chartColor(chartData),
+          range: this.rangeSelector(chartData),
+          priceChange: this.priceChange(chartData),
+          percentChange: this.percentChange(chartData),
+          width: 675,
           refColor: "transparent"
         };
       default:
@@ -111,138 +109,70 @@ class StockChart extends React.Component {
     return oneDayChartData;
   }
 
-  oneWeekChartData() {
+  greaterThanOneDayChartData(length) {
     if (!this.props.stock.historicalData) { return []; }
-    const oneWeekChartData = [];
-    this.props.stock.historicalData.forEach(dataPoint => {
+    const { stock } = this.props;
+    const greaterThanOneDayChartData = [];
+    let chartData;
+
+    let totalDataLength = stock.historicalData.length;
+    if (totalDataLength < length) {
+      chartData = stock.historicalData;
+    } else {
+      chartData = stock.historicalData.slice(totalDataLength - length);
+    }
+
+    chartData.forEach(dataPoint => {
       let dpObject = {};
       dpObject['time'] = (dataPoint.date).toString();
       dpObject['Price'] = dataPoint.close;
-      oneWeekChartData.push(dpObject);
+      greaterThanOneDayChartData.push(dpObject);
     }
     );
-    oneWeekChartData.push({ 'time': "most recent", 'Price': this.props.stock.quote.latestPrice });
-    return oneWeekChartData.slice(-5);
-  }
 
-  greaterThanOneWeekChartData() {
-    if (!this.props.stock.historicalData) { return []; }
-    const greaterThanOneWeekChartData = [];
-    this.props.stock.historicalData.forEach(dataPoint => {
-      let dpObject = {};
-      dpObject['time'] = (dataPoint.date).toString();
-      dpObject['Price'] = dataPoint.close;
-      greaterThanOneWeekChartData.push(dpObject);
+    if (length === 4) {
+      greaterThanOneDayChartData.push({ 'time': "most recent", 'Price': this.props.stock.quote.latestPrice });
     }
-    );
-    return greaterThanOneWeekChartData;
+    return greaterThanOneDayChartData;
   }
 
-  chartColor(range) {
-    const { previousClose, latestPrice } = this.props.stock.quote;
+  chartColor(data) {
     let first, last;
-    switch (range) {
-      case "1D":
-        return (previousClose <= latestPrice) ? ("#21ce99") : ("#f45531");
-      case "1W":
-        first = this.props.stock.historicalData.slice(-4)[0].close;
-        last = latestPrice;
-        return (first <= last) ? ("#21ce99") : ("#f45531");
-      case "1M":
-      case "3M":
-      case "1Y":
-      case "5Y":
-        first = this.props.stock.historicalData[0].close;
-        last = this.props.stock.historicalData.slice(-1)[0].close;
-        return (first <= last) ? ("#21ce99") : ("#f45531");
-      default:
-        return null;
+
+    first = data[0]["Price"];
+    last = data[data.length - 1]["Price"];
+    return (first <= last) ? ("#21ce99") : ("#f45531");
+  }
+
+  priceChange(data) {
+    let first, last;
+    first = data[0]['Price'];
+    last = data[data.length - 1]['Price'];
+    if (last - first > 0) {
+      return `+$${(last - first).toFixed(2)}`;
+    } else {
+      return `-$${((last - first) * -1).toFixed(2)}`;
     }
   }
 
-  widthSelector(range) {
-    switch (range) {
-      case "1D":
-        return (((this.props.stock.chart.length) / 390) * 675);
-      default:
-        return 675;
+  percentChange(data) {
+    let first, last;
+    first = data[0]['Price'];
+    last = data[data.length - 1]['Price'];
+
+    if (last - first > 0) {
+      return `(${(((last - first) / last) * 100).toFixed(2)}%)`;
+    } else {
+      return `(-${((((last - first) / last) * 100) * -1).toFixed(2)}%)`;
     }
   }
 
-  priceChange(range) {
-    const { change, latestPrice } = this.props.stock.quote;
-    const { historicalData } = this.props.stock
-    let start, end, difference;
-    switch (range) {
-      case "1D":
-        return (change < 0) ? (`-$${(change * -1).toFixed(2)}`) : (`+$${change.toFixed(2)}`);
-      case "1W":
-        start = historicalData.slice(-4)[0].close;
-        end = latestPrice;
-        difference = end - start;
-        return (difference < 0) ? (`-$${(difference * -1).toFixed(2)}`) : (`+$${difference.toFixed(2)}`);
-      case "1M":
-      case "3M":
-      case "1Y":
-      case "5Y":
-        start = historicalData[0].close;
-        end = historicalData[historicalData.length - 1].close;
-        difference = end - start;
-        return (difference < 0) ? (`-$${(difference * -1).toFixed(2)}`) : (`+$${difference.toFixed(2)}`);
-      default:
-        return ("");
-    }
-  }
+  rangeSelector(data) {
+    let values = data.map(dataPoint => parseFloat(dataPoint['Price']));
+    let min = Math.min(...values)
+    let max = Math.max(...values)
 
-  percentChange(range) {
-    const { changePercent, latestPrice } = this.props.stock.quote;
-    const { historicalData } = this.props.stock;
-    let start, end, difference;
-    switch (range) {
-      case "1D":
-        return (changePercent < 0) ? (`(-${(changePercent * 100 * -1).toFixed(2)}%)`) : (`(${(changePercent * 100).toFixed(2)}%)`);
-      case "1W":
-        start = historicalData.slice(-4)[0].close;
-        end = latestPrice;
-        difference = ((end - start) / start);
-        return (difference < 0) ? (`(-${(difference * 100 * -1).toFixed(2)}%)`) : (`(${(difference * 100).toFixed(2)}%)`);
-      case "1M":
-      case "3M":
-      case "1Y":
-      case "5Y":
-        start = historicalData[0].close;
-        end = historicalData[historicalData.length - 1].close;
-        difference = ((end - start) / start);
-        return (difference < 0) ? (`(-${(difference * 100 * -1).toFixed(2)}%)`) : (`(${(difference * 100).toFixed(2)}%)`);
-      default:
-        return ("");
-    }
-  }
-
-  rangeSelector(range) {
-    const { low, high, latestPrice, previousClose } = this.props.stock.quote;
-    let values, min, max;
-
-    switch (range) {
-      case "1D":
-        const range = latestPrice > previousClose ? [previousClose, high] : [low, previousClose];
-        return range;
-      case "1W":
-        let week = this.props.stock.historicalData.slice(-4).map(dataPoint => dataPoint.close);
-        week.push(this.props.stock.quote.latestPrice);
-        min = Math.min(...week)
-        max = Math.max(...week)
-      case "1M":
-      case "3M":
-      case "1Y":
-      case "5Y":
-        values = this.props.stock.historicalData.map(dataPoint => dataPoint.close)
-        min = Math.min(...values)
-        max = Math.max(...values)
-        return [min, max]
-      default:
-        return null;
-    }
+    return [min, max];
   }
 
   render() {
@@ -261,7 +191,7 @@ class StockChart extends React.Component {
             ${currentPrice.toFixed(2)}
           </div>
           <div className="chart-header-change-value-stock-page">
-            {this.priceChange(this.props.range)}  {this.percentChange(this.props.range)}
+            {allData.priceChange}  {allData.percentChange}
           </div>
         </div>
         <div className="chart-actual-chart">
