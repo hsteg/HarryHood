@@ -27,9 +27,8 @@ class Stock extends React.Component {
 
   componentDidMount() {
     this.props.getStockObjectBySymbol(this.props.symbol)
-      .then(() => this.props.getStockDayChartAndInfo(this.props.symbol))
+      .then(() => this.props.getUserWatches(this.props.currentUser))
       .then(() => this.setState({ dataLoaded: true }));
-      this.props.getUserWatches(this.props.currentUser);
   }
 
   componentDidUpdate(prevProps) {

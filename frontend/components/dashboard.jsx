@@ -29,10 +29,10 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.getUserStocks(this.props.currentUser.id)
-    .then(() => this.getHistoricalStockData(this.props.stockSymbols))
-    .then(() => this.getUserWatches(this.props.currentUser.id))
-    .then(() => this.getUserHeldStocks(this.props.currentUser.id))
-    .then(() => this.displayDashboardNewslist())
+    .then(() => this.props.getHistoricalStockData(this.props.stockSymbols))
+    .then(() => this.props.getUserWatches(this.props.currentUser.id))
+    .then(() => this.props.getUserHeldStocks(this.props.currentUser.id))
+    // .then(() => this.displayDashboardNewslist())
     .then(() => this.setState({dataLoaded: true}));
     
   }

@@ -9,7 +9,7 @@ class StockNewslist extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getStockNews(this.props.stock.name);
+    this.props.getStockNews(this.props.stock.name, this.props.stock.symbol);
   }
 
   render() {
@@ -58,7 +58,7 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
   return {
-    getStockNews: (symbol) => dispatch(getStockNews(symbol)),
+    getStockNews: (name, symbol) => dispatch(getStockNews(name, symbol)),
   };
 };
  

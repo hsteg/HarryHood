@@ -1,6 +1,5 @@
 import * as APIUtil from '../util/stock_api_util';
-export const RECEIVE_FULL_STOCK_INFO = "RECEIVE_FULL_STOCK_INFO";
-export const RECEIVE_DAY_STOCK_GROUP_PRICE_DATA = "RECEIVE_DAY_STOCK_GROUP_PRICE_DATA";
+export const RECEIVE_INDIVIDUAL_STOCK_DAY_INFO = "RECEIVE_INDIVIDUAL_STOCK_DAY_INFO";
 export const START_LOADING_FULL_STOCK_INFO = "START_LOADING_FULL_STOCK_INFO";
 export const RECEIVE_USER_STOCK_OBJECT = "RECEIVE_USER_STOCK_OBJECT";
 export const START_LOADING_HISTORICAL_STOCK_DATA = "START_LOADING_HISTORICAL_STOCK_DATA";
@@ -17,39 +16,22 @@ export const RECEIVE_DASHBOARD_CHART_DATA = "RECEIVE_DASHBOARD_CHART_DATA";
 export const START_LOADING_DASHBOARD_CHART_DATA = "START_LOADING_DASHBOARD_CHART_DATA";
 export const FINISH_LOADING_DASHBOARD_CHART_DATA = "FINISH_LOADING_DASHBOARD_CHART_DATA";
 
-
-
-
 export const getStockObjectBySymbol = (symbol) => dispatch => {
-  dispatch(startLoadingFullStockInfo());
   return APIUtil.getStockObjectBySymbol(symbol).then(
     stockObject => {
-      return dispatch(receiveStockObject(stockObject));
+      APIUtil.getStockDayChartAndInfo(symbol).then(
+        stockData => {
+          dispatch(receiveIndividualStockDayInfo(stockObject, stockData));
+        }
+      )
     }
   );
 };
 
-// export const getDashboardChartData = (stocks) => dispatch => {
-//   const symbols = Object.values(stocks).map(stock => stock.symbol).join(',');
-//   dispatch(startLoadingHistoricalStockData());
-//   return APIUtil.getDashboardChartData(symbols).then(
-//     stockData => {
-//       // new Promise(function(resolve, reject){
-
-//       // })
-//       dispatch(receiveHistoricalStockData(stockData));
-//       // setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
-//     }
-//   );
-// };
-
 export const getHistoricalStockData = (symbols) => dispatch => {
-  // dispatch(startLoadingHistoricalStockData());
-  debugger
   return APIUtil.getHistoricalStockData(symbols).then(
     stockData => {
       dispatch(receiveHistoricalStockData(stockData));
-      // setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
     }
   );
 };
@@ -68,20 +50,20 @@ export const getUserStocks = (user) => dispatch => {
   );
 };
 
-export const getStockDayChartAndInfo = (stock) => dispatch => {
+export const getStockDayChartAndInfo = (symbols) => dispatch => {
   dispatch(startLoadingFullStockInfo());
-  return APIUtil.getStockDayChartAndInfo(stock).then(
+  return APIUtil.getStockDayChartAndInfo(symbols).then(
     stock => {
       return dispatch(receiveFullStockInfo(stock));
     },
   );
 };
 
-export const getStockNews = (symbol) => dispatch => {
+export const getStockNews = (name, symbol) => dispatch => {
   dispatch(startLoadingStockNews());
-  return APIUtil.getStockNews(symbol).then(
+  return APIUtil.getStockNews(name).then(
     news => {
-      return dispatch(receiveStockNews(news));
+      return dispatch(receiveStockNews(news, symbol));
     }
   );
 };
@@ -94,14 +76,6 @@ export const getDashboardNews = (stocks) => dispatch => {
     }
   );
 };
-
-// export const getDayStocksPriceData = (stocks) => dispatch => {
-//   return APIUtil.getDayStocksPriceData(stocks).then(
-//     stocks => {
-//       return dispatch(receiveDayStockGroupPriceData(stocks));
-//     },
-//   );
-// };
 
 export const getStockSearchResults = (search) => dispatch => {
   return APIUtil.getStockSearchResults(search).then(
@@ -129,17 +103,11 @@ export const receiveHistoricalStockData = (stockData) => {
   };
 };
 
-const receiveFullStockInfo = (stock) => {
+const receiveIndividualStockDayInfo = (stockObject, stockData) => {
   return {
-    type: RECEIVE_FULL_STOCK_INFO,
-    stock
-  };
-};
-
-const receiveDayStockGroupPriceData = (stocks) => {
-  return {
-    type: RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
-    stocks
+    type: RECEIVE_INDIVIDUAL_STOCK_DAY_INFO,
+    stockObject,
+    stockData
   };
 };
 
@@ -149,12 +117,6 @@ export const startLoadingFullStockInfo = () => {
   };
 };
 
-const receiveStockObject = (stockObject) => {
-  return {
-    type: RECEIVE_USER_STOCK_OBJECT,
-    stockObject
-  };
-};
 
 export const startLoadingHistoricalStockData = () => {
   return {
@@ -182,10 +144,11 @@ const receiveDashboardStocks = (stocks, stockData) => {
   };
 };
 
-const receiveStockNews = (news) => {
+const receiveStockNews = (news, symbol) => {
   return {
     type: RECEIVE_STOCK_NEWS,
-    news
+    news, 
+    symbol
   };
 };
 
@@ -213,10 +176,3 @@ export const finishLoadingDashboardChartData = () => {
     type: FINISH_LOADING_DASHBOARD_CHART_DATA,
   };
 };
-
-// const receiveDashboardChartData = (stockData) => {
-//   return {
-//     type: RECEIVE_DASHBOARD_CHART_DATA,
-//     stockData
-//   }
-// }

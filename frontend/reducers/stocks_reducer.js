@@ -1,6 +1,5 @@
 import {
-  RECEIVE_FULL_STOCK_INFO,
-  RECEIVE_DAY_STOCK_GROUP_PRICE_DATA,
+  RECEIVE_INDIVIDUAL_STOCK_DAY_INFO,
   RECEIVE_USER_STOCK_OBJECT,
   RECEIVE_HISTORICAL_STOCK_DATA,
   RECEIVE_DASHBOARD_STOCKS,
@@ -12,42 +11,43 @@ const stocksReducer = (state = {}, action) => {
   Object.freeze(state);
   let newState = merge({}, state);
   let marriage = {};
-  let stockIds;
+  let stocks;
   switch (action.type) {
-    case RECEIVE_FULL_STOCK_INFO:
-      stockIds = Object.values(newState);
-      stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stock));
-      return marriage;
-    case RECEIVE_DAY_STOCK_GROUP_PRICE_DATA:
-      stockIds = Object.values(newState);
-      stockIds.forEach(stock => marriage[stock.id] = Object.assign(stock, action.stocks[stock.symbol]))
-      return marriage;
+    case RECEIVE_INDIVIDUAL_STOCK_DAY_INFO:
+      stocks = Object.values(newState).filter(stock => (stock.symbol in action.stockData));
+      if (stocks.length === 1) {
+        newState[stocks[0].id] = stockData[stocks[0].symbol];
+      } else {
+        let stockDataObject = Object.values(action.stockData)[0];
+        let newStockObject = Object.values(action.stockObject)[0];
+        //think I can use object.assign here
+        newStockObject.quote = stockDataObject.quote;
+        newStockObject.company = stockDataObject.company;
+        newStockObject.chart = stockDataObject.chart;
+        newStockObject.stats = stockDataObject.stats;
+        newState[newStockObject.id] = newStockObject;
+      }
+      return newState;
     case RECEIVE_USER_STOCK_OBJECT:
       return action.stockObject;
     case RECEIVE_HISTORICAL_STOCK_DATA:
-      stockIds = Object.values(newState);
-      if(stockIds.length > 1) {
-        stockIds.forEach(stock => {
-          marriage[stock.id] = stock;
-          marriage[stock.id].historicalData = action.stockData[stock.symbol].chart;
-        });
-      } else {
-        stockIds.forEach(stock => {
-          marriage[stock.id] = stock;
-          marriage[stock.id].historicalData = action.stockData;
-        });
+      stocks = Object.values(newState);
+      for(let i = 0; i < stocks.length; i++) {
+        if (stocks[i].symbol in action.stockData) {
+          stocks[i].historicalData = action.stockData[stocks[i].symbol].chart;
+        } else {
+          continue;
+        }
       }
-      return marriage;
+      return newState;
     case RECEIVE_DASHBOARD_STOCKS:
-      debugger
       Object.values(action.stocks).forEach(stock => marriage[stock.id] = Object.assign({ id: stock.id, symbol: stock.symbol }, action.stockData[stock.symbol]))
       return marriage;
     case RECEIVE_STOCK_NEWS:
-      let stockWithNews = Object.values(newState)[0];
-      stockWithNews.news = action.news.articles;
-      const obj = {};
-      obj[stockWithNews.id] = stockWithNews;
-      return obj;
+      stocks = Object.values(newState).filter(stock => (stock.symbol === action.symbol));
+      stocks[0].news = action.news.articles;
+      newState[stocks[0].id] = stocks[0];
+      return newState;
     default:
       return newState;
   }
