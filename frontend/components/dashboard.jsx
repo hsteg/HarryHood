@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getHistoricalStockData, getStockDayChartAndInfo, getUserStocks } from '../actions/stock_actions';
+import { getHistoricalStockData, getUserStocks } from '../actions/stock_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
 import { getUserHeldStocks } from '../actions/session_actions';
 import DashboardWatchlist from './dashboard_watchlist';
@@ -162,7 +162,6 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
   return {
-    getStockDayChartAndInfo: (stocks) => dispatch(getStockDayChartAndInfo(stocks)),
     getHistoricalStockData: (stocks) => dispatch(getHistoricalStockData(stocks)),
     getUserWatches: (user) => dispatch(getUserWatches(user)),
     getUserStocks: (stockIds) => dispatch(getUserStocks(stockIds)),
