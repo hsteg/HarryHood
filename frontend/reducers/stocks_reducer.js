@@ -39,6 +39,7 @@ const stocksReducer = (state = {}, action) => {
       }
       return marriage;
     case RECEIVE_DASHBOARD_STOCKS:
+      debugger
       Object.values(action.stocks).forEach(stock => marriage[stock.id] = Object.assign({ id: stock.id, symbol: stock.symbol }, action.stockData[stock.symbol]))
       return marriage;
     case RECEIVE_STOCK_NEWS:

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getStockInfo, getStockObjectBySymbol } from '../actions/stock_actions';
+import { getStockDayChartAndInfo, getStockObjectBySymbol } from '../actions/stock_actions';
 import { getUserWatches, createUserWatch, removeUserWatch } from '../actions/user_watch_actions';
 import Navbar from './navbar';
 import StockChart from './stock_chart';
@@ -27,7 +27,7 @@ class Stock extends React.Component {
 
   componentDidMount() {
     this.props.getStockObjectBySymbol(this.props.symbol)
-      .then(() => this.props.getStockInfo(this.props.symbol))
+      .then(() => this.props.getStockDayChartAndInfo(this.props.symbol))
       .then(() => this.setState({ dataLoaded: true }));
       this.props.getUserWatches(this.props.currentUser);
   }
@@ -37,7 +37,7 @@ class Stock extends React.Component {
     if (prevProps.match.params.symbol !== this.props.match.params.symbol) {
       this.setState({ dataLoaded: false })
       this.props.getStockObjectBySymbol(this.props.symbol)
-        .then(() => this.props.getStockInfo(this.props.symbol))
+        .then(() => this.props.getStockDayChartAndInfo(this.props.symbol))
         .then(() => this.setState({ dataLoaded: true }));
     }
   }
@@ -130,7 +130,7 @@ const msp = (state, ownProps) => {
 
 const mdp = (dispatch) => {
   return {
-    getStockInfo: (stock) => dispatch(getStockInfo(stock)),
+    getStockDayChartAndInfo: (stock) => dispatch(getStockDayChartAndInfo(stock)),
     getStockObjectBySymbol: (symbol) => dispatch(getStockObjectBySymbol(symbol)),
     getUserWatches: (user) => dispatch(getUserWatches(user)),
     createUserWatch: (user, stock) => dispatch(createUserWatch(user, stock)),

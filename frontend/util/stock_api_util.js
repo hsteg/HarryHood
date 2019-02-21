@@ -1,25 +1,26 @@
-export const getStockInfo = (symbol) => {
+export const getStockDayChartAndInfo = (symbols) => {
   return $.ajax({
     method: "GET",
-    url: `https://api.iextrading.com/1.0/stock/${symbol}/batch?types=quote,company,stats,chart&range=1d&chartInterval=5`,
+    url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote,company,stats,chart&range=1d`
+
   });
 };
 
-export const getDayStocksPriceData = (symbols) => {
-  return $.ajax({ 
-    method: "GET",
-    url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote,chart&range=1d`,
-  });
-};
+// export const getDayStocksPriceData = (symbols) => {
+//   return $.ajax({ 
+//     method: "GET",
+//     url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote,chart&range=1d`,
+//   });
+// };
 
-export const getHistoricalStockData = (symbol, period) => {
-  return $.ajax({ 
-    method: "GET",
-    url: `https://api.iextrading.com/1.0/stock/${symbol}/chart/${period}`,
-  });
-};
+// export const getHistoricalStockData = (symbol, period) => {
+//   return $.ajax({ 
+//     method: "GET",
+//     url: `https://api.iextrading.com/1.0/stock/${symbol}/chart/${period}`,
+//   });
+// };
 
-export const getDashboardChartData = (symbols) => {
+export const getHistoricalStockData = (symbols) => {
   return $.ajax({
     method: "GET",
     url: `https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=chart&range=5y`

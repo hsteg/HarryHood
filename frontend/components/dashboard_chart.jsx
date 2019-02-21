@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getUserPortfolioSnapshots } from '../actions/session_actions';
-import { getDashboardChartData, finishLoadingDashboardChartData } from '../actions/stock_actions';
+import { getHistoricalStockData } from '../actions/stock_actions';
 import { LineChart, Line, YAxis, ReferenceLine, Tooltip, XAxis } from 'recharts';
 
 
@@ -15,12 +14,14 @@ class DashboardChart extends React.Component {
     this.priceChange = this.priceChange.bind(this);
     this.percentChange = this.percentChange.bind(this);
     this.oneDayChartData = this.oneDayChartData.bind(this);
-
+    this.state = {
+      dataLoaded: false,
+    }
   }
 
   componentDidMount() {
-    this.props.getDashboardChartData(this.props.stocks).then(() => {
-      this.props.finishLoadingDashboardChartData()});
+    this.props.getHistoricalStockData(this.props.stockSymbols)
+    .then(() => this.setState({ dataLoaded: true }));
   }
 
   parseChartData() {
@@ -274,10 +275,8 @@ const msp = (state) => {
 };
 
 const mdp = (dispatch) => {
-  return {
-    getUserPortfolioSnapshots: (userId) => dispatch(getUserPortfolioSnapshots(userId)),
-    getDashboardChartData: (stocks) => dispatch(getDashboardChartData(stocks)),
-    finishLoadingDashboardChartData: () => dispatch(finishLoadingDashboardChartData()),
+  return {   
+    getHistoricalStockData: (stocks) => dispatch(getHistoricalStockData(stocks)),
   };
 };
 

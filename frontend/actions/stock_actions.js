@@ -29,23 +29,24 @@ export const getStockObjectBySymbol = (symbol) => dispatch => {
   );
 };
 
-export const getDashboardChartData = (stocks) => dispatch => {
-  const symbols = Object.values(stocks).map(stock => stock.symbol).join(',');
-  dispatch(startLoadingHistoricalStockData());
-  return APIUtil.getDashboardChartData(symbols).then(
-    stockData => {
-      // new Promise(function(resolve, reject){
+// export const getDashboardChartData = (stocks) => dispatch => {
+//   const symbols = Object.values(stocks).map(stock => stock.symbol).join(',');
+//   dispatch(startLoadingHistoricalStockData());
+//   return APIUtil.getDashboardChartData(symbols).then(
+//     stockData => {
+//       // new Promise(function(resolve, reject){
 
-      // })
-      dispatch(receiveHistoricalStockData(stockData));
-      // setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
-    }
-  );
-};
+//       // })
+//       dispatch(receiveHistoricalStockData(stockData));
+//       // setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
+//     }
+//   );
+// };
 
-export const getHistoricalStockData = (symbol, period) => dispatch => {
-  dispatch(startLoadingHistoricalStockData());
-  return APIUtil.getHistoricalStockData(symbol, period).then(
+export const getHistoricalStockData = (symbols) => dispatch => {
+  // dispatch(startLoadingHistoricalStockData());
+  debugger
+  return APIUtil.getHistoricalStockData(symbols).then(
     stockData => {
       dispatch(receiveHistoricalStockData(stockData));
       // setTimeout(() => dispatch(finishLoadingDashboardChartData()), 0);
@@ -58,7 +59,7 @@ export const getUserStocks = (user) => dispatch => {
   return APIUtil.getUserStocks(user).then(
     stocks => {
       const symbols = Object.values(stocks).map(stock => stock.symbol).join(',');
-      return APIUtil.getDayStocksPriceData(symbols).then(
+      return APIUtil.getStockDayChartAndInfo(symbols).then(
         stockData => {
           return dispatch(receiveDashboardStocks(stocks, stockData));
         }
@@ -67,9 +68,9 @@ export const getUserStocks = (user) => dispatch => {
   );
 };
 
-export const getStockInfo = (stock) => dispatch => {
+export const getStockDayChartAndInfo = (stock) => dispatch => {
   dispatch(startLoadingFullStockInfo());
-  return APIUtil.getStockInfo(stock).then(
+  return APIUtil.getStockDayChartAndInfo(stock).then(
     stock => {
       return dispatch(receiveFullStockInfo(stock));
     },
@@ -94,13 +95,13 @@ export const getDashboardNews = (stocks) => dispatch => {
   );
 };
 
-export const getDayStocksPriceData = (stocks) => dispatch => {
-  return APIUtil.getDayStocksPriceData(stocks).then(
-    stocks => {
-      return dispatch(receiveDayStockGroupPriceData(stocks));
-    },
-  );
-};
+// export const getDayStocksPriceData = (stocks) => dispatch => {
+//   return APIUtil.getDayStocksPriceData(stocks).then(
+//     stocks => {
+//       return dispatch(receiveDayStockGroupPriceData(stocks));
+//     },
+//   );
+// };
 
 export const getStockSearchResults = (search) => dispatch => {
   return APIUtil.getStockSearchResults(search).then(

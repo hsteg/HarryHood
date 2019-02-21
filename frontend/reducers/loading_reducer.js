@@ -19,13 +19,13 @@ import { RECEIVE_USER_HELD_STOCKS, START_LOADING_USER_HELD_STOCKS, RECEIVE_USER_
 const initialState = {
   stockDataLoading: false,
   dashboardStocksLoading: false,
-  historicalStockDataLoading: true,
+  historicalStockDataLoading: false,
   userWatchListLoading: false,
   userTransactionsLoading: false,
   userHeldStocksLoading: false,
-  userPortfolioDataLoading: true,
+  userPortfolioDataLoading: false,
   stockNewsLoading: false,
-  dashboardNewsLoading: true,
+  dashboardNewsLoading: false,
 };
 
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getDayStocksPriceData, getUserStocks, getDashboardChartData } from '../actions/stock_actions';
+import { getHistoricalStockData, getStockDayChartAndInfo, getUserStocks } from '../actions/stock_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
-import { getUserHeldStocks, getUserPortfolioSnapshots } from '../actions/session_actions';
+import { getUserHeldStocks } from '../actions/session_actions';
 import DashboardWatchlist from './dashboard_watchlist';
 import DashboardUserStockList from './dashboard_user_stocks';
 import Navbar from './navbar';
@@ -18,6 +18,7 @@ class Dashboard extends React.Component {
       watchListValue: "currentPrice", 
       range: "1D",
       newsStocks: "",
+      dataLoaded: false,
     } 
     this.displayUserStockList = this.displayUserStockList.bind(this);
     this.displayUserWatchList = this.displayUserWatchList.bind(this);
@@ -27,10 +28,13 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUserStocks(this.props.currentUser.id).then(() => this.displayDashboardNewslist());
-    this.props.getUserPortfolioSnapshots(this.props.currentUser.id);
-    this.props.getUserHeldStocks(this.props.currentUser.id);
-    this.props.getUserWatches(this.props.currentUser.id);
+    this.props.getUserStocks(this.props.currentUser.id)
+    .then(() => this.getHistoricalStockData(this.props.stockSymbols))
+    .then(() => this.getUserWatches(this.props.currentUser.id))
+    .then(() => this.getUserHeldStocks(this.props.currentUser.id))
+    .then(() => this.displayDashboardNewslist())
+    .then(() => this.setState({dataLoaded: true}));
+    
   }
 
 
@@ -143,6 +147,7 @@ class Dashboard extends React.Component {
 }
 
 const msp = (state) => {
+  const stockSymbols = Object.values(state.entities.stocks).map(stock => stock.symbol).join(',');
   return {
     currentUser: state.entities.users[state.session.id],
     stocks: state.entities.stocks,
@@ -151,17 +156,17 @@ const msp = (state) => {
     loading: state.ui.loading,
     portfolioSnapshots: state.session.portfolioSnapshots,
     news: state.ui.news,
+    stockSymbols: stockSymbols,
   };
 };
 
 const mdp = (dispatch) => {
   return {
-    getDayStocksPriceData: (stocks) => dispatch(getDayStocksPriceData(stocks)),
+    getStockDayChartAndInfo: (stocks) => dispatch(getStockDayChartAndInfo(stocks)),
+    getHistoricalStockData: (stocks) => dispatch(getHistoricalStockData(stocks)),
     getUserWatches: (user) => dispatch(getUserWatches(user)),
     getUserStocks: (stockIds) => dispatch(getUserStocks(stockIds)),
     getUserHeldStocks: (userId) => dispatch(getUserHeldStocks(userId)),
-    getUserPortfolioSnapshots: (userId) => dispatch(getUserPortfolioSnapshots(userId)),
-    getDashboardChartData: (stocks) => dispatch(getDashboardChartData(stocks))
   };
 }
 
