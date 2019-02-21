@@ -58,6 +58,7 @@ export const getStockNews = (name, symbol) => dispatch => {
 };
 
 export const getDashboardNews = (stocks) => dispatch => {
+  debugger
   dispatch(startLoadingDashboardNews());
   return APIUtil.getDashboardNews(stocks).then(
     news => {

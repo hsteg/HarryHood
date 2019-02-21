@@ -25,7 +25,7 @@ const initialState = {
   userHeldStocksLoading: false,
   userPortfolioDataLoading: false,
   stockNewsLoading: false,
-  dashboardNewsLoading: false,
+  dashboardNewsLoading: true,
 };
 
 

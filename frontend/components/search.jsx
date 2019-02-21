@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getStockSearchResults, clearUserSearchResults } from '../actions/stock_actions';
 import { Link } from 'react-router-dom';
 
-
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -41,10 +40,6 @@ class SearchBar extends React.Component {
     });
     return (this.props.searchResults !== {}) ?  searchResults : (<div className="empty-search"></div>) ;
   }
-
-
-
-
 
   render() {
     return (
