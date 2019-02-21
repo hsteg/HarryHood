@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { LineChart, Line, YAxis, ReferenceLine, Tooltip, XAxis } from 'recharts';
-import { getHistoricalStockData, finishLoadingDashboardChartData } from '../actions/stock_actions';
+import { getHistoricalStockData } from '../actions/stock_actions';
 
 class StockChart extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class StockChart extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range).then(() => this.props.finishLoadingDashboardChartData());
+    this.props.getHistoricalStockData(this.props.stock.symbol, this.props.range);
   }
 
   componentDidUpdate(prevProps) {
@@ -163,7 +163,7 @@ class StockChart extends React.Component {
   widthSelector(range) {
     switch (range) {
       case "1D":
-        return (((this.props.stock.chart.length) / 78) * 675);
+        return (((this.props.stock.chart.length) / 390) * 675);
       default:
         return 675;
     }
@@ -289,7 +289,6 @@ const msp = (state, ownProps) => {
 const mdp = (dispatch) => {
   return {
     getHistoricalStockData: (symbol, period) => dispatch(getHistoricalStockData(symbol, period)),
-    finishLoadingDashboardChartData: () => dispatch(finishLoadingDashboardChartData()),
   };
 };
 

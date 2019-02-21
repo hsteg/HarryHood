@@ -34,7 +34,7 @@ class DashboardChart extends React.Component {
           data: chartData,
           color: this.chartColor(chartData),
           range: this.chartRange(chartData),
-          width: (((chartData.length) / 390) * 675),
+          width: (((chartData.length) / (390)) * 675),
           dataKey: "Time",
           refColor: "transparent",
           change: this.priceChange(chartData),
