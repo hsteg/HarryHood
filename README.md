@@ -2,7 +2,8 @@
 ## HarryHood
 [Live Site](https://harryhood.herokuapp.com/)
 
-![screenshot](./tree/master/app/assets/images/readme/toplevelscreenshot.png?raw=true)
+![screenshot](./app/assets/images/readme/toplevelscreenshot.png?raw=true)
+  
 
 ## About
 This project is a full-stack, single-page stock investment app baseed on Robinhood, mimicking their nighttime styling.  
