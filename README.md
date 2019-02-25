@@ -2,7 +2,7 @@
 ## HarryHood
 [Live Site](https://harryhood.herokuapp.com/)
 
-![screenshot](./app/assets/images/readme/toplevelscreenshot.png?raw=true)
+![screenshot](./app/assets/images/readme/toplevelscreenshot2.png?raw=true)
   
 
 ## About
