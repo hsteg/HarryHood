@@ -6,7 +6,7 @@
   
 
 ## About
-This project is a full-stack, single-page stock investment app baseed on Robinhood, mimicking their nighttime styling.  
+HarryHood is a full-stack, single-page stock investment app based on Robinhood, mimicking their nighttime styling.  
 
 ## Technologies
 Frontend: React/Redux
