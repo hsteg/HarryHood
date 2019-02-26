@@ -14,14 +14,6 @@ class DashboardChart extends React.Component {
     this.priceChange = this.priceChange.bind(this);
     this.percentChange = this.percentChange.bind(this);
     this.oneDayChartData = this.oneDayChartData.bind(this);
-    this.state = {
-      dataLoaded: false,
-    }
-  }
-
-  componentDidMount() {
-    this.props.getHistoricalStockData(this.props.stockSymbols)
-    .then(() => this.setState({ dataLoaded: true }));
   }
 
   parseChartData() {
@@ -241,6 +233,7 @@ class DashboardChart extends React.Component {
 
     const allData = this.parseChartData();
     const lastDataPoint = allData.data[allData.data.length - 1]['Value'];
+
     return (
       <div className="dashboard-chart">
         <div className="chart-header-container">

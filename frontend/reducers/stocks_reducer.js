@@ -16,16 +16,11 @@ const stocksReducer = (state = {}, action) => {
     case RECEIVE_INDIVIDUAL_STOCK_DAY_INFO:
       stocks = Object.values(newState).filter(stock => (stock.symbol in action.stockData));
       if (stocks.length === 1) {
-        newState[stocks[0].id] = stockData[stocks[0].symbol];
+        newState[stocks[0].id] = Object.assign(stocks[0], action.stockData[stocks[0].symbol]);
       } else {
         let stockDataObject = Object.values(action.stockData)[0];
         let newStockObject = Object.values(action.stockObject)[0];
-        //think I can use object.assign here
-        newStockObject.quote = stockDataObject.quote;
-        newStockObject.company = stockDataObject.company;
-        newStockObject.chart = stockDataObject.chart;
-        newStockObject.stats = stockDataObject.stats;
-        newState[newStockObject.id] = newStockObject;
+        newState[newStockObject.id] = Object.assign(newStockObject, stockDataObject);
       }
       return newState;
     case RECEIVE_USER_STOCK_OBJECT:

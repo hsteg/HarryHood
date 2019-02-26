@@ -22,7 +22,7 @@ const initialState = {
   historicalStockDataLoading: false,
   userWatchListLoading: false,
   userTransactionsLoading: false,
-  userHeldStocksLoading: false,
+  userHeldStocksLoading: true,
   userPortfolioDataLoading: false,
   stockNewsLoading: false,
   dashboardNewsLoading: true,
@@ -41,7 +41,7 @@ const loadingReducer = (state = initialState, action) => {
     case RECEIVE_HISTORICAL_STOCK_DATA:
       return Object.assign({}, state, { historicalStockDataLoading: false })
     case FINISH_LOADING_DASHBOARD_CHART_DATA:
-      return Object.assign({}, state, { historicalStockDataLoading: false })
+      return Object.assign({}, state, { dashboardStocksLoading: false })
     case START_LOADING_USER_WATCHES:
       return Object.assign({}, state, { userWatchListLoading: true })
     case RECEIVE_USER_WATCHES:

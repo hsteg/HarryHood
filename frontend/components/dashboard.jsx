@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getHistoricalStockData, getUserStocks } from '../actions/stock_actions';
 import { getUserWatches } from '../actions/user_watch_actions';
@@ -18,7 +17,6 @@ class Dashboard extends React.Component {
       watchListValue: "currentPrice", 
       range: "1D",
       newsStocks: "",
-      dataLoaded: false,
     } 
     this.displayUserStockList = this.displayUserStockList.bind(this);
     this.displayUserWatchList = this.displayUserWatchList.bind(this);
@@ -32,8 +30,7 @@ class Dashboard extends React.Component {
     .then(() => this.props.getHistoricalStockData(this.props.stockSymbols)
     .then(() => this.props.getUserWatches(this.props.currentUser.id)
     .then(() => this.props.getUserHeldStocks(this.props.currentUser.id)
-    .then(() => this.displayDashboardNewslist()
-    .then(() => this.setState({dataLoaded: true})))))); 
+    .then(() => this.displayDashboardNewslist())))); 
   }
 
   displayUserStockList(){
@@ -42,7 +39,7 @@ class Dashboard extends React.Component {
     const numUserStocksInState = Object.keys(this.props.stocks);
 
     const arrEq = numHeldStocks.map(key => numUserStocksInState.includes(key) ? true : false );
-
+    
     if ( userHeldStocksLoading || dashboardStocksLoading ) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
@@ -54,8 +51,13 @@ class Dashboard extends React.Component {
 
   displayUserWatchList(){
     const { userWatchListLoading, dashboardStocksLoading } = this.props.loading;
-    const notEnoguhStocks = Object.values(this.props.stocks).length < Object.values(this.props.userWatches).length
-    if ( userWatchListLoading || dashboardStocksLoading || notEnoguhStocks) {
+    
+    const watchedStocks = Object.values(this.props.userWatches).map(watch => (watch.stock_id).toString());
+    const stocksInState = Object.keys(this.props.stocks);
+
+    const arrEq = watchedStocks.map(key => stocksInState.includes(key) ? true : false );
+    
+    if ( userWatchListLoading || dashboardStocksLoading || arrEq.includes(false)) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
       return (<DashboardWatchlist watches={this.props.userWatches} stocks={this.props.stocks} watchListValue={this.state.watchListValue} />);
@@ -68,7 +70,7 @@ class Dashboard extends React.Component {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
       // if(this.props.portfolioSnapshots.length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
-      return (<DashboardChart currentUser={this.props.currentUser} dateRange={this.state.range} chartData={this.props.portfolioSnapshots} />);
+      return (<DashboardChart currentUser={this.props.currentUser} dateRange={this.state.range} />);
     }
   }
 
@@ -88,7 +90,7 @@ class Dashboard extends React.Component {
     this.setState({ range: e.currentTarget.innerText });
   }
 
-  render() {
+  render() {  
     return (
       <div className="dashboard-main">
         <div className="header-container">
