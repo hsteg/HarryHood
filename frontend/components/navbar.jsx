@@ -35,7 +35,7 @@ class Navbar extends React.Component {
     return (
       <div className="loggedin-navbar">
         <div className="loggedin-nav-logo-search">
-          <img className="loggedin-nav-logo" src={window.logoURL} />
+          <Link to="/"><img className="loggedin-nav-logo" src={window.logoURL} /></Link>
           <div className="loggedin-nav-searchbar-container">
             <div className="loggedin-nav-searchbar">
               <SearchBar />
