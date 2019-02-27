@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getStockSearchResults, clearUserSearchResults } from '../actions/stock_actions';
 import { Link } from 'react-router-dom';
+// import { debounce } from 'lodash';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class SearchBar extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.results = this.results.bind(this);
     this.clearSearchResults = this.clearSearchResults.bind(this);
+    // this._debouncedSearch = this._debouncedSearch.bind(this);
   }
 
   handleInput(e) {
@@ -24,9 +26,10 @@ class SearchBar extends React.Component {
         document.querySelector('.search-bar-container').addEventListener('click', function (e) {
           e.stopPropagation();
         }, true);
-        
-        searchBarContainer.classList.add("box-shadow");
+
         this.props.getStockSearchResults(this.state.searchVal);
+
+        searchBarContainer.classList.add("box-shadow");
       } else {
         searchBarContainer.classList.remove("box-shadow");
         this.props.clearUserSearchResults();
