@@ -12,12 +12,19 @@ class SearchBar extends React.Component {
 
     this.handleInput = this.handleInput.bind(this);
     this.results = this.results.bind(this);
+    this.clearSearchResults = this.clearSearchResults.bind(this);
   }
 
   handleInput(e) {
     this.setState({ searchVal: e.currentTarget.value }, () => {
       const searchBarContainer = document.querySelector(".search-bar-container");
       if (this.state.searchVal.length > 0) {
+        document.addEventListener('click', this.clearSearchResults, { once: true, useCapture: false });
+
+        document.querySelector('.search-bar-container').addEventListener('click', function (e) {
+          e.stopPropagation();
+        }, true);
+        
         searchBarContainer.classList.add("box-shadow");
         this.props.getStockSearchResults(this.state.searchVal);
       } else {
@@ -25,6 +32,12 @@ class SearchBar extends React.Component {
         this.props.clearUserSearchResults();
       }
     });
+  }
+
+  clearSearchResults() {
+    document.querySelector('.search-bar').value = ''; 
+    this.setState({searchVal: ''});
+    this.props.clearUserSearchResults();
   }
 
   componentWillUnmount() {

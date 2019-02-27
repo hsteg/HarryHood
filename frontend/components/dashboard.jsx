@@ -51,10 +51,8 @@ class Dashboard extends React.Component {
 
   displayUserWatchList(){
     const { userWatchListLoading, dashboardStocksLoading } = this.props.loading;
-    
     const watchedStocks = Object.values(this.props.userWatches).map(watch => (watch.stock_id).toString());
     const stocksInState = Object.keys(this.props.stocks);
-
     const arrEq = watchedStocks.map(key => stocksInState.includes(key) ? true : false );
     
     if ( userWatchListLoading || dashboardStocksLoading || arrEq.includes(false)) {
@@ -69,7 +67,6 @@ class Dashboard extends React.Component {
     if ( dashboardStocksLoading || userHeldStocksLoading || Object.keys(this.props.stocks).length < Object.keys(this.props.heldStocks).length ) {
       return (<img className="right-col-loading-img" src={window.loadingIMG} />);
     } else {
-      // if(this.props.portfolioSnapshots.length === 0) { return (<img className="right-col-loading-img" src={window.loadingIMG} />);}
       return (<DashboardChart currentUser={this.props.currentUser} dateRange={this.state.range} />);
     }
   }
