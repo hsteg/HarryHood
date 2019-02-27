@@ -48,7 +48,15 @@ class SearchBar extends React.Component {
   }
 
   results() {
-    const searchResults = Object.values(this.props.searchResults).map(result => { return (
+    const searchResults = Object.values(this.props.searchResults).sort(function(a, b) {
+      let firstSymbol = a.symbol;
+      let secondSymbol = b.symbol;
+      if (firstSymbol < secondSymbol) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }).map(result => { return (
       <Link to={`/stock/${result.symbol}`} className="search-result" key={result.id}>
         <div className="search-result-symbol">{result.symbol}</div>
         <div className="search-result-name">{result.name}</div>
