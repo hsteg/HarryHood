@@ -21,7 +21,7 @@ class StockNewslist extends React.Component {
 
     const newsItems = news.map(newsItem => {
       return (
-      <a href={newsItem.url} className="stock-news-list-item" key={newsItem.url}>
+      <a href={newsItem.url} className="stock-news-list-item" key={newsItem.url} target="_blank">
 
         <div className="news-list-item-image">
           <img src={newsItem.urlToImage} />
