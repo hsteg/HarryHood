@@ -27,6 +27,9 @@ class Splash extends React.Component {
                 <a href="https://github.com/hsteg">GitHub</a>
               </div>
               <div className="splash-navbar-left-link-item">
+                <a href="http://angel.co/hsteg">AngelList</a>
+              </div>
+              <div className="splash-navbar-left-link-item">
                 <a href="http://dev.harrisonsteg.com">Personal Site</a>
               </div>
             </div>
